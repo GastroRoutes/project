@@ -37,7 +37,7 @@ class App extends Component {
       .logout()
       .then(() => this.setState({ ...this.state, user: null }));
   };
-
+  // función que devuelve el valor del back al front
   restaurants = (rest)=>{
     console.log(rest)
     console.log("Estoy en app y soy la función restaurants!!!!!!!")
@@ -61,7 +61,7 @@ class App extends Component {
     return (
       
       <div className="App">
-        <InputYelp restaurant={this.restaurant} handleFormSubmit={this.handleFormSubmit} handleChange={this.handleChange}></InputYelp>
+        <InputYelp restaurants={this.restaurants} handleFormSubmit={this.handleFormSubmit} handleChange={this.handleChange}></InputYelp>
         {welcome}
         
         <Message user={this.state.user} />
