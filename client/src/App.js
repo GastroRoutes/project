@@ -5,7 +5,7 @@ import Login from "./components/auth/Login";
 import Message from "./components/Message";
 import AuthService from "./components/auth/AuthService";
 import { Route, Link } from "react-router-dom";
-
+import InputYelp from './components/routes/yelp'
 class App extends Component {
   constructor() {
     super();
@@ -18,7 +18,7 @@ class App extends Component {
 
     this.fetchUser();
   }
-
+  // mantener al usuario loggeado incluso al refrescar ¿?
   fetchUser = () => {
     this.authService
       .loggedin()
@@ -50,8 +50,11 @@ class App extends Component {
     );
 
     return (
+      
       <div className="App">
+        <InputYelp></InputYelp>
         {welcome}
+        
         <Message user={this.state.user} />
         <Route
           path="/signup"

@@ -8,4 +8,6 @@ router.get('/', (req, res, next) => {
 
 router.use('/api/auth', require('./auth'));
 
+router.use('/yelp', require('./yelp'));
+
 module.exports = router;

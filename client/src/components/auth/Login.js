@@ -4,7 +4,7 @@ import AuthService from './AuthService';
 export default class Login extends Component {
   constructor() {
     super();
-
+    
     this.state = {
       username: '',
       password: ''
@@ -15,7 +15,7 @@ export default class Login extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-
+    
     const {username, password} = this.state;
 
     this.authService.login({username, password})
@@ -25,7 +25,7 @@ export default class Login extends Component {
   handleChange = (e) => {
     const {name, value} = e.target;
 
-    this.setState({[name]: value});
+    this.setState({[name]: value}); 
   }
 
   render() {
