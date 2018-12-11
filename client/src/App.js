@@ -6,16 +6,19 @@ import Message from "./components/Message";
 import AuthService from "./components/auth/AuthService";
 import { Route, Link } from "react-router-dom";
 import InputYelp from './components/routes/yelp'
+const axios = require('axios')
+
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      user: null
+      user: null,
+      restaurant: null
     };
 
     this.authService = new AuthService();
-
+    this.inputYelp = new InputYelp()
     this.fetchUser();
   }
   // mantener al usuario loggeado incluso al refrescar ¿?
@@ -35,6 +38,12 @@ class App extends Component {
       .then(() => this.setState({ ...this.state, user: null }));
   };
 
+  restaurants = (rest)=>{
+    console.log(rest)
+    console.log("Estoy en app y soy la función restaurants!!!!!!!")
+
+  }
+
   render() {
     const welcome = this.state.user ? (
       <div>
@@ -52,7 +61,7 @@ class App extends Component {
     return (
       
       <div className="App">
-        <InputYelp></InputYelp>
+        <InputYelp restaurant={this.restaurant} handleFormSubmit={this.handleFormSubmit} handleChange={this.handleChange}></InputYelp>
         {welcome}
         
         <Message user={this.state.user} />

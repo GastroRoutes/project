@@ -1,36 +1,59 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from "axios";
 
 class InputYelp extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
+        this.service = axios.create({
+            baseURL: "http://localhost:5000/yelp",
+            withCredentials: true
+          })
         this.state = {
-            restaurant: null
+            restaurant: ''
         }
     }
+    getRestaurants = (restaurants) => {
+        return this.service.post('/yelp', restaurants)
+        .then(()=> console.log("soy la info de la api y estoy en yelp.js"))
+        .then(response => response.data)
 
-    handleFormSubmit = (e) =>{
-        e.preventDefault()
-        axios.get(`http://localhost:5000/yelp?q=${e.target.value}`)
-        .then(resApi => {
-          this.setState({
-            restaurant: resApi
-          })
-        })
-        .catch( e => console.log(e) )
-      };
+      }
+    
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        
+        const {restaurant} = this.state;
+         this.getRestaurants({restaurant})
+        .then(restaurant => this.props.restaurants(restaurant));
+      }
+      
+    // handleFormSubmit = (e, state) =>{
+        
+    //     e.preventDefault()
+    //     const {restaurant} = this.state
 
+    //     this.props.restaurant('/yelp', state)
+    //     .then(response =>response.data)
+
+    //     console.log(restaurant)
+    //     axios.get(`http://localhost:5000/yelp`, {restaurant},  {withCredentials: true})
+    //     .then(resApi => {
+    //       this.setState({ restaurant: resApi, })
+    //     })
+    //     .catch( e => console.log(e))
+    //   };
 
       handleChange = (e) => {
         const {name, value} = e.target;
         this.setState({[name]: value})
       } 
+ 
 
       render(){
 
           return (
           <div>
-              <form onSubmit={e => this.handleFormSubmit(e)}>
+              <form onSubmit={e => this.handleFormSubmit(e, this.props.state)}>
               <input type="text" name="restaurant" onChange={e => this.handleChange(e)} />
               </form>
           </div>

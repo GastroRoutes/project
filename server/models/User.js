@@ -6,9 +6,9 @@ const userSchema = new Schema(
     username: String,
     password: String,
     pictureUrl: String,
-    email: { type: String, required: true, unique: true },
-    city: String,
-    routes: [{ type: Schema.Types.ObjectId, ref: "Routes" }]
+    // email: { type: String, required: true, unique: true },
+    // city: String,
+    // routes: [{ type : Schema.Types.ObjectId, ref: "Routes" }]
   },
   {
     timestamps: {

@@ -11,11 +11,11 @@ const bcryptSalt = 10;
 
 authRoutes.post("/login", function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { return res.status(500).json({message: "Error login"}) }
-    if (!user) { return res.status(500).json({message: "Error login"}) }
+    if (err) { return res.status(500).json({message: "Error login 1"}) }
+    if (!user) { return res.status(500).json({message: "Error login 2"}) }
 
     req.logIn(user, function(err) {
-      if (err) { return res.status(500).json({message: "Error login"}) }
+      if (err) { return res.status(500).json({message: "Error login 3"}) }
       return res.status(200).json(user);
     });
   })(req, res, next);
@@ -49,7 +49,7 @@ authRoutes.post("/signup", uploadCload.single("photo"), (req, res, next) => {
 
     newUser.save((err, user) => {
       if (err) {
-        res.status(500).json({ message: "Something went wrong" });
+        res.status(500).json({ message: err });
       } else {
         req.login(user, (err) => {
 
