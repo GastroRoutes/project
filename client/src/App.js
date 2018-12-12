@@ -5,8 +5,8 @@ import Login from "./components/auth/Login";
 import Message from "./components/Message";
 import AuthService from "./components/auth/AuthService";
 import { Route, Link } from "react-router-dom";
-import InputYelp from './components/routes/yelp'
-const axios = require('axios')
+import InputYelp from './components/Profile/CreateRoutes/Yelp/yelp'
+
 
 class App extends Component {
   constructor() {
@@ -38,10 +38,8 @@ class App extends Component {
       .then(() => this.setState({ ...this.state, user: null }));
   };
   // función que devuelve el valor del back al front
-  restaurants = (rest)=>{
-    console.log(rest)
-    console.log("Estoy en app y soy la función restaurants!!!!!!!")
-
+  restaurants = (restaurant)=>{
+    this.setState({ ...this.state, restaurant: restaurant });
   }
 
   render() {
@@ -57,13 +55,18 @@ class App extends Component {
         <Link to="/login">Login</Link>
       </div>
     );
+    const showRestaurants = this.state.restaurant ? (
+      <div>{this.state.restaurant}</div>
+    ):(
+      <div>Search a restaurant!</div>
+    )
 
     return (
       
       <div className="App">
         <InputYelp restaurants={this.restaurants} handleFormSubmit={this.handleFormSubmit} handleChange={this.handleChange}></InputYelp>
+        {showRestaurants}
         {welcome}
-        
         <Message user={this.state.user} />
         <Route
           path="/signup"
