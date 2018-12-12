@@ -16,10 +16,10 @@ class InputYelp extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-
     const { restaurant } = this.state;
-    this.getRestaurants({ restaurant }).then(restaurant =>
+    this.getRestaurants({ restaurant }).then(restaurant =>{
       this.props.restaurants(restaurant)
+    }
     );
   };
 
@@ -30,7 +30,12 @@ class InputYelp extends Component {
   // Función que envía los datos al back, a la ruta /yelp
   getRestaurants = restaurants => {
     return this.service.post("/yelp", restaurants)
-    .then(response => response.data.businesses[0].name);
+    .then(receivedRestaurants => {
+      
+      receivedRestaurants.forEach(e =>{
+        console.log(e.data.businesses)
+      })
+    })
   };
 
   render() {
