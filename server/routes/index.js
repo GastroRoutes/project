@@ -9,5 +9,8 @@ router.get('/', (req, res, next) => {
 router.use('/api/auth', require('./auth'));
 
 router.use('/yelp', require('./yelp'));
+router.use('/editProfile', require('./profile'));
+
+router.use('/tracks', require('./tracks'));
 
 module.exports = router;

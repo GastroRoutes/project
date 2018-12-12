@@ -23,18 +23,18 @@ authRoutes.post("/login", function(req, res, next) {
 
 
 authRoutes.post("/signup", uploadCload.single("photo"), (req, res, next) => {
-  const { username, password } = req.body;
-  const pictureUrl = req.file.url;
+  const { username, password, email } = req.body;
+  // const pictureUrl = req.file.url;
 
   
-  if (username === "" || password === "") {
-    res.status(500).json({ message: "Indicate username and password" });
+  if (username === "" || password === "" || email === "") {
+    res.status(500).json({ message: "Todos los campos requeridos" });
     return;
   }
 
-  User.findOne({ username }, "username", (err, user) => {
+  User.findOne({ email }, "email", (err, user) => {
     if (user !== null) {
-      res.status(500).json({ message: "The username already exists" })
+      res.status(500).json({ message: "El email ya existe" })
       return;
     }
 
@@ -43,8 +43,9 @@ authRoutes.post("/signup", uploadCload.single("photo"), (req, res, next) => {
 
     const newUser = new User({
       username,
+      email,
       password: hashPass,
-      pictureUrl
+      // pictureUrl
     });
 
     newUser.save((err, user) => {

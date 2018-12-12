@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class CreateRoutes extends Component {
+export default class RankingPosition extends Component {
   render() {
     return (
       <div>
-        "create routes view"
+        Posicion en el Ranking
       </div>
     )
   }

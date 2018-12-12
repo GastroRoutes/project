@@ -39,6 +39,7 @@ class App extends Component {
   };
   // función que devuelve el valor del back al front
   restaurants = (restaurant)=>{
+    console.log(restaurant)
     this.setState({ ...this.state, restaurant: restaurant });
   }
 

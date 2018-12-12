@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    username: String,
-    password: String,
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true},
     pictureUrl: String,
-    // email: { type: String, required: true, unique: true },
     // city: String,
-    // routes: [{ type : Schema.Types.ObjectId, ref: "Routes" }]
+    createdTrack: [{ type : Schema.Types.ObjectId, ref: "Tracks" }]
   },
   {
     timestamps: {

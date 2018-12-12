@@ -47,10 +47,10 @@ let restaurants = [
 let user = [
   {
     username: "test",
+    email: "test@test.com",
     password: "123",
     pictureUrl: null,
-    email: "test@test.com",
-    city: "Madrid",
+    // city: "Madrid",
     // routes: [{ type: Routes.Types.ObjectId, ref: "Routes" }]
   }
 ];

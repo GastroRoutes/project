@@ -7,9 +7,10 @@ export default class Signup extends Component {
     super();
 
     this.state = {
-      username: '',
+      username : '',
+      email: '',
       password: '',
-      photo: '',
+      // photo: '',
       redirect: false
     }
 
@@ -19,23 +20,23 @@ export default class Signup extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const {username, password, photo} = this.state;
+    const {username , email, password} = this.state;
 
-    this.authService.signup({username, password, photo})
+    this.authService.signup({username, email, password })
     .then(user => {
       this.props.getUser(user)
-      this.setState({username: '', password: '', photo: '', redirect: true})
+      this.setState({username : '', email: '', password: '',redirect: true})
     });
   }
 
   handleChange = (e) => {
     const {name, value} = e.target;
 
-    if(name === "photo") {
-      this.setState({...this.state, photo: e.target.files[0]})
-    } else {
+    // if(name === "photo") {
+    //   this.setState({...this.state, photo: e.target.files[0]})
+    // } else {
       this.setState({...this.state, [name]: value});
-    }
+    // }
   }
 
   render() {
@@ -47,14 +48,18 @@ export default class Signup extends Component {
       <div>
         <h2>Signup</h2>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Username</label>
+          <label>Nombre de usuario</label>
           <input type="text" name="username" onChange={e => this.handleChange(e)} />
 
-          <label>Password</label>
+          <label>Email</label>
+          <input type="email" name="email" onChange={e => this.handleChange(e)} />
+
+          <label>Contraseña</label>
           <input type="password" name="password" onChange={e => this.handleChange(e)} />
 
-          <label>Photo</label>
-          <input type="file" name="photo" onChange={e => this.handleChange(e)} />
+
+          {/* <label>Photo</label>
+          <input type="file" name="photo" onChange={e => this.handleChange(e)} /> */}
 
           <input type="submit" value="Signup"/>
         </form>
