@@ -6,7 +6,6 @@ import Message from "./components/Message";
 import AuthService from "./components/auth/AuthService";
 import { Route, Link } from "react-router-dom";
 import InputYelp from './components/routes/yelp'
-const axios = require('axios')
 
 class App extends Component {
   constructor() {
