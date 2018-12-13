@@ -20,7 +20,7 @@ class InputYelp extends Component {
     this.getRestaurants({ restaurant })
     .then(restaurant =>{
       console.log(restaurant)
-      this.props.restaurants(restaurant.name)
+      this.props.getRestaurant(restaurant.name) /// hay que tratarlo. Llega como array
     }
     );
   };

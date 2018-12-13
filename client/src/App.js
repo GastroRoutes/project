@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import Signup from "./components/auth/Signup";
-import Login from "./components/auth/Login";
 import Message from "./components/Message";
-import AuthService from "./components/auth/AuthService";
-import { Route, Link } from "react-router-dom";
-import InputYelp from './components/Profile/CreateRoutes/Yelp/yelp'
-
-
+import AuthService from "./components/Home/auth/AuthService";
+import { Route, Link, Redirect } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Profile from "./components/Profile/Profile";
+import InputYelp from "./components/Profile/CreateRoutes/Yelp/yelp";
 class App extends Component {
   constructor() {
     super();
@@ -18,7 +16,7 @@ class App extends Component {
     };
 
     this.authService = new AuthService();
-    this.inputYelp = new InputYelp()
+    this.inputYelp = new InputYelp();
     this.fetchUser();
   }
   // mantener al usuario loggeado incluso al refrescar ¿?
@@ -38,42 +36,35 @@ class App extends Component {
       .then(() => this.setState({ ...this.state, user: null }));
   };
   // función que devuelve el valor del back al front
-  restaurants = (restaurant)=>{
-    console.log(restaurant)
+  getRestaurants = restaurant => {
+    console.log(restaurant);
     this.setState({ ...this.state, restaurant: restaurant });
-  }
+  };
 
   render() {
+
     const welcome = this.state.user ? (
       <div>
-        <p>Hola {this.state.user.username}</p>
+        <Route
+          path="/profile"
+          render={() => <Profile restaurant={this.state.restaurant} getRestaurant={this.getRestaurants} />}
+        />
         <button onClick={this.logout}>Logout</button>
       </div>
     ) : (
-      <div>
-        <p>No user</p>
-        <Link to="/">Home</Link> - <Link to="/signup">Signup</Link> -{" "}
-        <Link to="/login">Login</Link>
-      </div>
+      <Route
+        path="/"
+        render={() => (
+          <Home getUser={this.getUser} fetchUser={this.fetchUser} />
+        )}
+      />
     );
-    const showRestaurants = this.state.restaurant ? (
-      <div>{this.state.restaurant}</div>
-    ):(
-      <div>Search a restaurant!</div>
-    )
+
 
     return (
-      
       <div className="App">
-        <InputYelp restaurants={this.restaurants} handleFormSubmit={this.handleFormSubmit} handleChange={this.handleChange}></InputYelp>
-        {showRestaurants}
         {welcome}
         <Message user={this.state.user} />
-        <Route
-          path="/signup"
-          render={() => <Signup getUser={this.getUser} />}
-        />
-        <Route path="/login" render={() => <Login getUser={this.getUser} />} />
       </div>
     );
   }

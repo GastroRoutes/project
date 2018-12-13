@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
+import { Route, Redirect, Link } from "react-router-dom";
+// import Home from '../Home';
 
 export default class Login extends Component {
   constructor() {
@@ -7,7 +9,8 @@ export default class Login extends Component {
     
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      redirect: false
     }
 
     this.authService = new AuthService();
@@ -17,9 +20,18 @@ export default class Login extends Component {
     e.preventDefault();
     
     const {username, password} = this.state;
-
     this.authService.login({username, password})
-    .then(user => this.props.getUser(user));
+    .then(user => {
+
+// debugger
+      
+      this.setState({...this.state, redirect : true}, () => {
+        this.props.getUser(user)
+      })
+      
+    }) 
+
+
   }
 
   handleChange = (e) => {
@@ -29,7 +41,13 @@ export default class Login extends Component {
   }
 
   render() {
+      if(this.state.redirect){
+        console.log("entra")
+        return <Redirect to="/profile"/>
+      }
+    
     return (
+      
       <div>
         <h2>Login</h2>
         <form onSubmit={this.handleFormSubmit}>
@@ -39,7 +57,7 @@ export default class Login extends Component {
           <label>Password</label>
           <input type="password" name="password" onChange={e => this.handleChange(e)} />
 
-          <input type="submit" value="Login"/>
+         <input type="submit" value="Login"/>
         </form>
       </div>
     )
