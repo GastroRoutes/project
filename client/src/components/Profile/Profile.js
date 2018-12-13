@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import InputYelp from "./CreateRoutes/Yelp/yelp";
+import YourRoutes from "./YourRoutes/YourRoutes";
+
 
 export default class Profile extends Component {
   constructor(props){
@@ -17,6 +19,7 @@ export default class Profile extends Component {
       {console.log(this.props.restaurant)}
         <h1>User</h1>
         Contenedor de Perfil
+        <YourRoutes />
         <InputYelp
           getRestaurant={this.props.getRestaurant }
           handleFormSubmit={this.handleFormSubmit}
