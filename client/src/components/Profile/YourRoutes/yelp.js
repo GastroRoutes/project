@@ -20,7 +20,7 @@ class InputYelp extends Component {
     this.getRestaurants({ restaurant })
     .then(restaurant =>{
       console.log(restaurant)
-      this.props.getRestaurant(restaurant.name) /// hay que tratarlo. Llega como array
+      // this.props.getRestaurant(restaurant.name) /// hay que tratarlo. Llega como array
     }
     );
   }
@@ -29,11 +29,11 @@ class InputYelp extends Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
+
   // Función que envía los datos al back, a la ruta /yelp
   getRestaurants = restaurants => {
     return this.service.post("/yelp", restaurants)
     .then(response =>
-      // response)
         {
         return response.data.map((e)=>{
         return {e} 
@@ -48,6 +48,7 @@ class InputYelp extends Component {
           <input
             type="text"
             name="restaurant"
+            placeholder="BUSCAR RESTAURANTES"
             onChange={e => this.handleChange(e)}
           />
           {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}

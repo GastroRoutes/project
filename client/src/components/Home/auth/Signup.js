@@ -24,8 +24,9 @@ export default class Signup extends Component {
 
     this.authService.signup({username, email, password })
     .then(user => {
-      this.props.getUser(user)
-      this.setState({username : '', email: '', password: '',redirect: true})
+
+      this.setState({username : '', email: '', password: '',redirect: true},()=>
+      this.props.getUser(user) )
     });
   }
 
@@ -41,7 +42,7 @@ export default class Signup extends Component {
 
   render() {
     if(this.state && this.state.redirect) {
-      return <Redirect to="/" />
+      return <Redirect to="/profile" />
     }
 
     return (

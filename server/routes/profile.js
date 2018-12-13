@@ -4,8 +4,19 @@ const profileRouter = express.Router();
 const User = require("../models/User");
 const uploadCloud = require("../config/cloudinary");
 const { ensureLoggedIn } = require("connect-ensure-login");
+const Track = require("../models/Tracks")
 
+profileRouter.get("/", ensureLoggedIn(), (req, res, next) => {
 
+    Track.findById(req.track._id)
+      .populate('creatorID')
+      .then((user) => {
+        res.status(200).json({ user })
+        console.log(user)
+      })
+      .catch(err => console.log(err));
+  });
+  
 profileRouter.post("/details", ensureLoggedIn(), (req, res, next) => {
   const { _id } = req.user;
   let { username, email } = req.body;
