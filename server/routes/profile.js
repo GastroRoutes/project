@@ -9,7 +9,7 @@ const { ensureLoggedIn } = require("connect-ensure-login");
 profileRouter.post("/details", ensureLoggedIn(), (req, res, next) => {
   const { _id } = req.user;
   let { username, email } = req.body;
-console.log(username)
+
   if (username === "") username = req.user.username;
   if (email === "") email = req.user.email;
 
