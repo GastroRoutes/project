@@ -47,7 +47,7 @@ class App extends Component {
       <div>
         <Route
           path="/profile"
-          render={() => <Profile restaurant={this.state.restaurant} getRestaurant={this.getRestaurants} />}
+          render={() => <Profile user ={this.state.user} restaurant={this.state.restaurant} getRestaurant={this.getRestaurants} />}
         />
         <button onClick={this.logout}>Logout</button>
       </div>
