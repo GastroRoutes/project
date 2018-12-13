@@ -4,8 +4,8 @@ import Message from "./components/Message";
 import AuthService from "./components/Home/auth/AuthService";
 import { Route, Link, Redirect } from "react-router-dom";
 import Home from "./components/Home/Home";
-import Profile from "./components/Profile/Profile";
-import InputYelp from "./components/Profile/CreateRoutes/Yelp/yelp";
+import Profile from "./components/Profile/ProfileContainer/ProfileContainer";
+import InputYelp from "./components/Profile/YourRoutes/yelp";
 class App extends Component {
   constructor() {
     super();

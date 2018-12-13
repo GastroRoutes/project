@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import InputYelp from "./CreateRoutes/Yelp/yelp";
+import InputYelp from "../YourRoutes/yelp";
 // import YourRoutes from "./YourRoutes/YourRoutes";
 
 
