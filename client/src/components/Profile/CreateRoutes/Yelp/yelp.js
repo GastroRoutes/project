@@ -23,7 +23,7 @@ class InputYelp extends Component {
       this.props.getRestaurant(restaurant.name) /// hay que tratarlo. Llega como array
     }
     );
-  };
+  }
 
   handleChange = e => {
     const { name, value } = e.target;
