@@ -25,9 +25,8 @@ export default class Signup extends Component {
     this.authService.signup({username, email, password })
     .then(user => {
 
-      this.setState({username : '', email: '', password: '',redirect: true}, () =>{
-        this.props.getUser(user)
-      })
+      this.setState({username : '', email: '', password: '',redirect: true},()=>
+      this.props.getUser(user) )
     });
   }
 

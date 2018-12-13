@@ -7,9 +7,22 @@ const { ensureLoggedIn } = require("connect-ensure-login");
 const Track = require("../models/Tracks")
 
 
+trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
+
+    User.findById(req.user._id)
+      .populate('createdTrack')
+      .then((track) => {
+          console.log(track.createdTrack)
+        res.status(200).json({ track })
+        console.log(track)
+      })
+      .catch(err => console.log(err));
+  });
+  
+
 trackRouter.post("/createTrack", ensureLoggedIn(), (req, res, next) => {
     const { _id } = req.user;
-  
+    console.log("Hola desde track")
     const { routesName, category, routesType, routesPhoto, creatorID} = req.body;
   
     const newTrack = new Track({

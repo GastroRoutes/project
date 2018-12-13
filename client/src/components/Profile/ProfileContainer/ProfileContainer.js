@@ -41,6 +41,12 @@ export default class Profile extends Component {
     return (
       <div>
       <h2>Hola {this.state.user.username}</h2>
+      <YourRoutes
+          getRoute={this.props.getRoute}
+          getRestaurant={this.props.getRestaurant}
+          handleFormSubmit={this.handleFormSubmit}
+          handleChange={this.handleChange}
+        />
       <form onSubmit={e=> this.handleFormSubmit(e)}>
         <input type="text" name="username" value={this.state.user.username} onChange={e => this.handleChange(e)} />
 

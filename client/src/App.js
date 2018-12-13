@@ -12,9 +12,10 @@ class App extends Component {
 
     this.state = {
       user: null,
-      restaurant: null
+      restaurant: null,
+      route: null
     };
-
+    
     this.authService = new AuthService();
     this.inputYelp = new InputYelp();
     this.fetchUser();
@@ -41,13 +42,18 @@ class App extends Component {
     this.setState({ ...this.state, restaurant: restaurant });
   };
 
+  getRoute = route => {
+    console.log("Soy una ruta" + route)
+    this.setState({...this.state, route: route})
+  }
+
   render() {
 
     const welcome = this.state.user ? (
       <div>
         <Route
           path="/profile"
-          render={() => <Profile user ={this.state.user} restaurant={this.state.restaurant} getRestaurant={this.getRestaurants} />}
+          render={() => <Profile user ={this.state.user} getRoute={this.getRoute} restaurant={this.state.restaurant} getRestaurant={this.getRestaurants} />}
         />
         <button onClick={this.logout}>Logout</button>
       </div>
