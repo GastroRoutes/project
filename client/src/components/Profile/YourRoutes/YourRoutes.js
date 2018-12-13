@@ -107,11 +107,6 @@ export default class YourRoutes extends Component {
             onChange={e => this.handleChange(e)}
           /> */}
 
-          <InputYelp
-          getRestaurant={this.props.getRestaurant}
-          handleFormSubmit={this.handleFormSubmit}
-          handleChange={this.handleChange}
-        />
         <input type="submit"/>
           {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
           <br/>
@@ -119,6 +114,11 @@ export default class YourRoutes extends Component {
           <br/>
           <h1>Actualizar rutas</h1>
         </form>
+        <InputYelp
+        getRestaurant={this.props.getRestaurant}
+        handleFormSubmit={this.handleFormSubmit}
+        handleChange={this.handleChange}
+      />
         <form onSubmit={e => this.handleFormSubmitUpdate(e)}>
           <input
             type="text"
