@@ -8,7 +8,7 @@ const Track = require("../models/Tracks")
 
 
 trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
-
+console.log("entro en tracks")
     User.findById(req.user._id)
       .populate('createdTrack')
       .then((track) => {
@@ -36,6 +36,7 @@ trackRouter.post("/createTrack", ensureLoggedIn(), (req, res, next) => {
   
     newTrack.save()
       .then(track => {
+        //Busco por ID y hago push con semantica de mongo
       User.update({ _id }, { $push: { createdTrack: track._id } })
       res.status(200).json(track)
     });
