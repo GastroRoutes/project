@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import InputYelp from "../YourRoutes/yelp";
-
+import Map from "../../Map/Map"
 export default class YourRoutes extends Component {
   constructor(props) {
     super(props);
@@ -78,7 +78,7 @@ export default class YourRoutes extends Component {
   render() {
     return (
       <div>
-        
+        <Map></Map>
         <h3>{this.state.routesName}</h3>
            <h1>Crear rutas</h1>
         <form onSubmit={e => this.handleFormSubmit(e)}>
