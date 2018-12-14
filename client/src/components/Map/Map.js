@@ -23,15 +23,6 @@ export default class MapBox extends Component {
   //Component didmount: establecer la peticion get de axios a mapbox api documentation
  
   render() {
-<<<<<<< HEAD
-    const TOKEN = "pk.eyJ1Ijoiam9yZ2VkZXZlc2EiLCJhIjoiY2pwbjU2NjBjMGZlZzQ5cnRkbHViNXd0OSJ9.6d4S51WJKkxfVJ8rEOKvBw"
-    return (
-      <ReactMapGL mapboxApiAccessToken={TOKEN}
-        {...this.state.viewport}
-        onViewportChange={(viewport)  => this.setState({viewport})}
-      />
-    );
-=======
       return (
         <Map
           style={styles.dark}
@@ -54,7 +45,6 @@ export default class MapBox extends Component {
         </Map>
       );
     }
->>>>>>> 8140fb6baff808912dc434961d1b29c5c5a2016e
   }
 
   
