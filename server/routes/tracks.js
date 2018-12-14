@@ -8,7 +8,7 @@ const Track = require("../models/Tracks")
 
 
 trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
-
+console.log("entro en tracks")
     User.findById(req.user._id)
       .populate('createdTrack')
       .then((track) => {

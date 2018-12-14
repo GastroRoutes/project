@@ -3,3 +3,7 @@ width:50%;
 height: 40%;
 margin: 300px;
 }
+.mapboxgl-canvas{
+    position: relative !important;
+    
+}
