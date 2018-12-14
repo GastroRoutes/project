@@ -11,12 +11,15 @@ const yelp = require('yelp-fusion');
 const client = yelp.client(process.env.API_KEY_YELP);
 
 router.post('/yelp', (req,res)=>{
+  console.log(req.body.term.term)
+  console.log(req.body.term.location)
 //recogemos el objeto restaurante del front enviado desde yelp.js (funcion get.restaurant())
     client.search({
-        term: req.body.restaurant,
-        location: 'Madrid'
+        term: req.body.term,
+        location: req.body.term.location
       }).then(response => {
         res.status(200).json(response.jsonBody.businesses)
+        console.log(response.jsonBody.businesses)
       }).catch(e => {
         console.log(e);
       });

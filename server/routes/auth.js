@@ -12,10 +12,10 @@ const bcryptSalt = 10;
 authRoutes.post("/login", function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return res.status(500).json({message: "Error login 1"}) }
-    if (!user) { return res.status(500).json({message: "Error login 2"}) }
+    if (!user) { return res.status(500).json({message: "El usuario no existe"}) }
 
     req.logIn(user, function(err) {
-      if (err) { return res.status(500).json({message: "Error login 3"}) }
+      if (err) { return res.status(500).json({message: "Error al realizar el login"}) }
       return res.status(200).json(user);
     });
   })(req, res, next);

@@ -19,7 +19,7 @@ super()
   };
 
   render() {
-    const TOKEN = ""
+    const TOKEN = "pk.eyJ1Ijoiam9yZ2VkZXZlc2EiLCJhIjoiY2pwbjU2NjBjMGZlZzQ5cnRkbHViNXd0OSJ9.6d4S51WJKkxfVJ8rEOKvBw"
     return (
       <ReactMapGL mapboxApiAccessToken={TOKEN}
         {...this.state.viewport}

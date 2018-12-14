@@ -43,6 +43,7 @@ trackRouter.post("/createTrack", ensureLoggedIn(), (req, res, next) => {
   });
   
   trackRouter.post("/:id/delete", (req, res, next) => {
+      console.log("Estoy en delete, en back")
     Track.findByIdAndRemove(req.params.id)
       .then((track) => res.status(200).json(track)) 
       .catch(error => next(error));
@@ -53,11 +54,11 @@ trackRouter.post("/createTrack", ensureLoggedIn(), (req, res, next) => {
         routesName, category, routesType, routesPhoto, creatorID
     } = req.body;
   
-    if (routesName === "") routesName = req.EventUser.routesName;
-    if (category === "") category = req.EventUser.category;
-    if (routesType === "") routesType = req.EventUser.routesType;
-    // if (routesPhoto === "") place = req.EventUser.routesPhoto;
-    if (creatorID === "") creatorID = req.EventUser.creatorID;
+    if (routesName === "") routesName = req.Track.routesName;
+    if (category === "") category = req.Track.category;
+    if (routesType === "") routesType = req.Track.routesType;
+    // if (routesPhoto === "") place = req.Track.routesPhoto;
+    if (creatorID === "") creatorID = req.Track.creatorID;
   
     const { id } = req.params;
   
@@ -65,7 +66,7 @@ trackRouter.post("/createTrack", ensureLoggedIn(), (req, res, next) => {
       { _id: id },
       {
         $set: {
-            routesName, category, routesType, routesPhoto, creatorID
+            routesName, category, routesType,
         }
       }
     )

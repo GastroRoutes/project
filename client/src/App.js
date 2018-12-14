@@ -12,7 +12,7 @@ class App extends Component {
 
     this.state = {
       user: null,
-      restaurant: null,
+      restaurant: "",
       route: null
     };
     
@@ -38,12 +38,14 @@ class App extends Component {
   };
   // función que devuelve el valor del back al front
   getRestaurants = restaurant => {
+    console.log("·soy la función restaurantes y tengo esto: ")
     console.log(restaurant);
     this.setState({ ...this.state, restaurant: restaurant });
   };
 
-  getRoute = route => {
-    console.log("Soy una ruta" + route)
+  createRoutes = route => {
+    console.log("función: createRoutes. Recibe: ")
+    console.log(route)
     this.setState({...this.state, route: route})
   }
 
@@ -53,7 +55,7 @@ class App extends Component {
       <div>
         <Route
           path="/profile"
-          render={() => <Profile user ={this.state.user} getRoute={this.getRoute} restaurant={this.state.restaurant} getRestaurant={this.getRestaurants} />}
+          render={() => <Profile user ={this.state.user} createRoutes={this.createRoutes} restaurants={this.state.restaurant} getRestaurants={this.getRestaurants} />}
         />
         <button onClick={this.logout}>Logout</button>
       </div>

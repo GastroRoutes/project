@@ -10,7 +10,8 @@ export default class Profile extends Component {
       withCredentials: true
     });
     this.state = {
-        user : this.props.user
+        user : this.props.user,
+        userRoutes: this.props.user
     };
   }
 
@@ -42,8 +43,10 @@ export default class Profile extends Component {
       <div>
       <h2>Hola {this.state.user.username}</h2>
       <YourRoutes
-          getRoute={this.props.getRoute}
-          getRestaurant={this.props.getRestaurant}
+          userRoutes={this.userRoutes}
+          createRoutes={this.props.createRoutes}
+          getRestaurants={this.props.getRestaurants}
+          restaurants={this.props.restaurants}
           handleFormSubmit={this.handleFormSubmit}
           handleChange={this.handleChange}
         />

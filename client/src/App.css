@@ -33,5 +33,7 @@
 
 form {
   padding: 10px;
-  border: 1px solid red;
+  border: none;
+  border-bottom: 2px;
+
 }
