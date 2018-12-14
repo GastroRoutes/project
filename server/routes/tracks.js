@@ -36,7 +36,8 @@ trackRouter.post("/createTrack", ensureLoggedIn(), (req, res, next) => {
   
     newTrack.save()
       .then(track => {
-      User.update({ _id }, { $push: { createdTrack: track._id } })
+      User.findByIdAndUpdate( _id , { $push: { createdTrack: track._id } })
+      .then()
       res.status(200).json(track)
     });
   });

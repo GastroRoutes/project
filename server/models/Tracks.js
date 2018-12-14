@@ -10,7 +10,7 @@ category:  String,
 routesType : String, enum : ["created", "shared", "public", "private"],
 routesPhoto: { type: String },
 date: {type: String},
-// restaurants: [{type: Restaurants.Types.ObjectId, ref: 'Restaurants'}],
+// restaurants: [{type: Schema.Types.ObjectId, ref: 'Restaurants'}],
 creatorID: { type: Schema.Types.ObjectId, ref: 'User' },
 },
 {
