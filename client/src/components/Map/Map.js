@@ -1,58 +1,54 @@
-import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
-import React, { Component } from "react";
+import React from "react"
+import { compose, withProps } from "recompose"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
-const Map = ReactMapboxGl({
-  accessToken:
-    "pk.eyJ1IjoiZGRpZXpyIiwiYSI6ImNqb3ZuMGZ3cjFqa2YzcWxrYjBtNjJzaG4ifQ.cCFZkl39Hov3D-Ujeq74Cg"
-});
-const Zoom = [10];
-const mapStyle = { height: "100vh", width: "100vw", display: "flex" };
-const styles = { dark: "mapbox://styles/mapbox/light-v9" };
-const center = [-3.70379, 40.416775];
 
-export default class MapBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const MyMapComponent = compose(
+  withProps({
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyB8NzS5RBf23YH2cAwWi8t0HlpwPfqB6no&v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />,
+  }),
+  withScriptjs,
+  withGoogleMap
+)((props) =>
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+  >
+    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} onClick={props.onMarkerClick} />}
+  </GoogleMap>
+)
+
+class MyFancyComponent extends React.PureComponent {
+  state = {
+    isMarkerShown: false,
   }
 
+  componentDidMount() {
+    this.delayedShowMarker()
+  }
 
+  delayedShowMarker = () => {
+    setTimeout(() => {
+      this.setState({ isMarkerShown: true })
+    }, 3000)
+  }
 
-  //Component didmount: establecer la peticion get de axios a mapbox api documentation
+  handleMarkerClick = () => {
+    this.setState({ isMarkerShown: false })
+    this.delayedShowMarker()
+  }
 
   render() {
     return (
-      <Map
-        style={styles.dark}
-        zoom={Zoom}
-        containerStyle={mapStyle}
-        center={center}
-      >
-        <Layer
-          type="symbol"
-          id="marker"
-          layout={{ "icon-image": "marker-15", "icon-size": 1.25 }}
-        >
-          <Feature coordinates={[-3.70379, 40.416775]} />
-        </Layer>
-        <Layer
-          type="symbol"
-          id="marker2"
-          layout={{ "icon-image": "marker-15", "icon-size": 1.25 }}
-        >
-          <Feature coordinates={[-3.698237699999936, 40.3932277]} />
-        </Layer>
-        <Popup
-          coordinates={[-3.698237699999936, 40.3932277]}
-          offset={{
-            "bottom-left": [12, -38],
-            bottom: [0, -38],
-            "bottom-right": [-12, -38]
-          }}
-        >
-          <h1>Popup</h1>
-        </Popup>
-      </Map>
-    );
+      <MyMapComponent
+        isMarkerShown={this.state.isMarkerShown}
+        onMarkerClick={this.handleMarkerClick}
+      />
+    )
   }
 }
+
+export default MyFancyComponent;
