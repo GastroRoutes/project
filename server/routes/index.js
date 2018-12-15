@@ -13,4 +13,6 @@ router.use('/editProfile', require('./profile'));
 
 router.use('/tracks', require('./tracks'));
 
+router.use('/mapDirections', require('./mapDirections'));
+
 module.exports = router;

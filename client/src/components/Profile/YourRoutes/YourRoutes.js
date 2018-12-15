@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import InputYelp from "../YourRoutes/yelp";
-import MyFancyComponent from "../../Map/Map";
+// import MyFancyComponent from "../../Map/Map";
+import MapTest from "../../Map/MapTest";
+
 import { div } from "gl-matrix/src/gl-matrix/vec2";
+
+
 export default class YourRoutes extends Component {
   constructor(props) {
     super(props);
@@ -207,7 +211,8 @@ export default class YourRoutes extends Component {
             </div>
           );
         })}
-       <MyFancyComponent />
+       {/* <MyFancyComponent /> */}
+       <MapTest />
       </div>
     );
   }
