@@ -1,0 +1,17 @@
+img{
+width: 50%;
+
+}
+
+#restaurantsContainer{
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-right: 0;
+    margin: 0 10%;
+}
+
+#restaurantContainer{
+    width: 25%;
+}

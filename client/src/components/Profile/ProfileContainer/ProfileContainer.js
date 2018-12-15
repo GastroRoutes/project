@@ -42,20 +42,20 @@ export default class Profile extends Component {
     return (
       <div>
       <h2>Hola {this.state.user.username}</h2>
+
       <YourRoutes
           userRoutes={this.userRoutes}
           createRoutes={this.props.createRoutes}
-          getRestaurants={this.props.getRestaurants}
-          restaurants={this.props.restaurants}
           handleFormSubmit={this.handleFormSubmit}
           handleChange={this.handleChange}
         />
+
       <form onSubmit={e=> this.handleFormSubmit(e)}>
-        <input type="text" name="username" value={this.state.user.username} onChange={e => this.handleChange(e)} />
+        <input type="text" name="username" value={this.state.user.username} autoComplete="off" onChange={e => this.handleChange(e)} />
 
-        <input type="email" name="email" value={this.state.user.email} onChange={e => this.handleChange(e)} />
+        <input type="email" name="email" value={this.state.user.email} autoComplete="off" onChange={e => this.handleChange(e)} />
 
-        <input type="text" name="createdAt" value={this.state.user.created_at} onChange={e => this.handleChange(e)} />
+        <input type="text" name="createdAt" value={this.state.user.created_at} autoComplete="off" onChange={e => this.handleChange(e)} />
 
         {/* <input type="password" name="password" value= {this.state.user.password} onChange={e => this.handleChange(e)} /> */}
 
