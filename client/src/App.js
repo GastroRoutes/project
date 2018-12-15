@@ -36,7 +36,18 @@ class App extends Component {
       .logout()
       .then(() => this.setState({ ...this.state, user: null }));
   };
-  // función que devuelve el valor del back al front
+
+
+//  La función getRestaurants() de abajo
+//  va mejor en yourRoutes, ya que es el 
+//  único  sitio done se va a llamar (tiene 
+//  más sentido que pasarsela al app, luego que el 
+//  app se la pase al profileContainer y luego a YourRoutes
+//   !Y eso que yourRoutes es padre de yelp, donde se 
+//  llama a getRestaurants(), función que es del abuelo
+//   de yourRestaurants y, por tanto, visabuelo de yelp. 
+//  ((((( básicamente por eso peta  ))))
+
   getRestaurants = restaurant => {
     console.log("·soy la función restaurantes y tengo esto: ")
     console.log(restaurant);
@@ -44,7 +55,7 @@ class App extends Component {
   };
 
   createRoutes = route => {
-    console.log("función: createRoutes. Recibe: ")
+    console.log("función: createRoutes. Recibe: (siguiente console.log")
     console.log(route)
     this.setState({...this.state, route: route})
   }

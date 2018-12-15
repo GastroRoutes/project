@@ -132,19 +132,19 @@ export default class YourRoutes extends Component {
           <input
             type="text"
             name="routesName"
-            onChange={e => this.handleChange(e)}
+            onChange={e => this.handleChangeCREATE(e)}
             placeholder="Nombre de la ruta"
           />
           <input
             type="text"
             name="category"
-            onChange={e => this.handleChange(e)}
+            onChange={e => this.handleChangeCREATE(e)}
             placeholder="Categoría"
           />
           <input
             type="text"
             name="routesType"
-            onChange={e => this.handleChange(e)}
+            onChange={e => this.handleChangeCREATE(e)}
             placeholder="Tipo de ruta"
           />
           <br/>
