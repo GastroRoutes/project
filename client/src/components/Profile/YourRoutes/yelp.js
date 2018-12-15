@@ -23,12 +23,11 @@ class InputYelp extends Component {
     const { term, location} = this.state.restaurant;
     this.getRestaurants( {term, location })
     .then(restaurant =>{
-      
+      console.log(restaurant)
       this.props.getRestaurants(restaurant)
       this.setState({...this.state, })
       // this.props.getRestaurant(restaurant.name) /// hay que tratarlo. Llega como array
-    }
-    );
+    });
   }
 
   handleChange = e => {

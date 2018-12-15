@@ -12,7 +12,6 @@ class App extends Component {
 
     this.state = {
       user: null,
-      restaurant: "",
       route: null
     };
     
@@ -38,22 +37,6 @@ class App extends Component {
   };
 
 
-//  La función getRestaurants() de abajo
-//  va mejor en yourRoutes, ya que es el 
-//  único  sitio done se va a llamar (tiene 
-//  más sentido que pasarsela al app, luego que el 
-//  app se la pase al profileContainer y luego a YourRoutes
-//   !Y eso que yourRoutes es padre de yelp, donde se 
-//  llama a getRestaurants(), función que es del abuelo
-//   de yourRestaurants y, por tanto, visabuelo de yelp. 
-//  ((((( básicamente por eso peta  ))))
-
-  getRestaurants = restaurant => {
-    console.log("·soy la función restaurantes y tengo esto: ")
-    console.log(restaurant);
-    this.setState({ ...this.state, restaurant: restaurant });
-  };
-
   createRoutes = route => {
     console.log("función: createRoutes. Recibe: (siguiente console.log")
     console.log(route)
@@ -66,7 +49,7 @@ class App extends Component {
       <div>
         <Route
           path="/profile"
-          render={() => <Profile user ={this.state.user} createRoutes={this.createRoutes} restaurants={this.state.restaurant} getRestaurants={this.getRestaurants} />}
+          render={() => <Profile user ={this.state.user} createRoutes={this.createRoutes} />}
         />
         <button onClick={this.logout}>Logout</button>
       </div>

@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const router  = express.Router();
-const axios = require('axios')
 
 'use strict';
 
@@ -15,7 +14,7 @@ router.post('/yelp', (req,res)=>{
   console.log(req.body.term.location)
 //recogemos el objeto restaurante del front enviado desde yelp.js (funcion get.restaurant())
     client.search({
-        term: req.body.term,
+        term: req.body.term.term,
         location: req.body.term.location
       }).then(response => {
         res.status(200).json(response.jsonBody.businesses)
