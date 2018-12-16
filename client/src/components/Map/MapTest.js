@@ -7,7 +7,7 @@ import {
   withGoogleMap,
   GoogleMap,
   DirectionsRenderer,
-  Polyline
+  
 } from "react-google-maps";
 
 
@@ -17,7 +17,7 @@ const MapWithADirectionsRenderer = compose(
     googleMapURL:
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyB8NzS5RBf23YH2cAwWi8t0HlpwPfqB6no&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: <div style={{ height: `600px` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,
@@ -26,22 +26,28 @@ const MapWithADirectionsRenderer = compose(
     componentDidMount() {
       const DirectionsService = new google.maps.DirectionsService();
 
-      DirectionsService.route(
-        {
-          origin: new google.maps.LatLng(43.3579649, -5.8733862),
-          destination: new google.maps.LatLng(40.41465, -3.7004),
-          travelMode: google.maps.TravelMode.DRIVING
-        },
-        (result, status) => {
-          if (status === google.maps.DirectionsStatus.OK) {
-            this.setState({
-              directions: result
-            });
-          } else {
-            console.error(`error fetching directions ${result}`);
-          }
+
+      DirectionsService.route({
+        origin: new google.maps.LatLng(40.4893538, -3.6827461),
+        destination: new google.maps.LatLng(43.3579649, -5.8733862),
+        travelMode: google.maps.TravelMode.DRIVING,
+        waypoints: [
+             {
+                location: new google.maps.LatLng(42.5735672, -5.5671588)
+             },
+             {
+                location: new google.maps.LatLng(42.3499677,-3.6822051)
+             }
+        ]
+     }, (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+           this.setState({
+              directions: result,
+           });
+        } else {
+          console.error(`error fetching directions ${result}`);
         }
-      );
+     });
     }
   })
 )(props => (
