@@ -17,10 +17,11 @@ profileRouter.get("/", ensureLoggedIn(), (req, res, next) => {
       .catch(err => console.log(err));
   });
   
-profileRouter.post("/details", ensureLoggedIn(), (req, res, next) => {
+profileRouter.post("/details", uploadCloud.single("photo"), ensureLoggedIn(), (req, res, next) => {
+  // console.log(req.file.url)
   const { _id } = req.user;
   let { username, email } = req.body;
-
+  // let {pictureUrl} = req.file.url;
   if (username === "") username = req.user.username;
   if (email === "") email = req.user.email;
 
@@ -33,22 +34,22 @@ profileRouter.post("/details", ensureLoggedIn(), (req, res, next) => {
     })
     .catch(err => console.log(err));
 });
-profileRouter.post(
-  "/photo",
-  ensureLoggedIn(),
-  uploadCloud.single("photo"),
-  (req, res, next) => {
-    const { _id } = req.user;
-    let imgPath = req.file.url;
-    User.findByIdAndUpdate(
-      { _id },
-      { $set: { imgPath } } // , imgPath
-    )
-      .then(() => {
-        res.status(200).json(user);
-    })
-      .catch(err => console.log(err));
-  }
-);
+// profileRouter.post(
+//   "/photo",
+//   ensureLoggedIn(),
+//   uploadCloud.single("photo"),
+//   (req, res, next) => {
+//     const { _id } = req.user;
+    
+//     User.findByIdAndUpdate(
+//       { _id },
+//       { $set: { imgPath } } // , imgPath
+//     )
+//       .then(() => {
+//         res.status(200).json(user);
+//     })
+//       .catch(err => console.log(err));
+//   }
+// );
 
 module.exports = profileRouter;

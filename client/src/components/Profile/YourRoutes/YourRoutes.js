@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./YourRoutes.css";
-import InputYelp from "../YourRoutes/yelp";
+
 // import MyFancyComponent from "../../Map/Map";
 import MapTest from "../../Map/MapTest";
 
@@ -52,13 +52,13 @@ export default class YourRoutes extends Component {
     });
   };
   
-  handleChangeCREATE = e => {
-    const { name, value } = e.target;
-    let newRoute = this.state.createRoutes;
-    newRoute[name] = value;
-    console.log(newRoute);
-    this.setState({ ...this.state, createRoutes: newRoute });
-  };
+  // handleChangeCREATE = e => {
+  //   const { name, value } = e.target;
+  //   let newRoute = this.state.createRoutes;
+  //   newRoute[name] = value;
+  //   console.log(newRoute);
+  //   this.setState({ ...this.state, createRoutes: newRoute });
+  // };
   
   getRoute = route => {
     return this.service.post("/createTrack", route).then(response =>
@@ -114,25 +114,24 @@ export default class YourRoutes extends Component {
       this.setState({ ...this.state, restaurant: restaurant });
     };
 
+
     // componentDidMount() {
     //   this.getRestaurants();
     //   console.log(this.getRestaurants())
     // }
+
     render() {
 
       const restaurants = this.state.restaurant? (this.state.restaurant.map((restaurant)=>{
         return (
-          
-
           <div id="restaurantContainer">
           {console.log(restaurant.e)}
           <h3>{restaurant.e.name}</h3> 
-          <img src={restaurant.e.image_url}/>
+          <img src={restaurant.e.image_url} alt="restaurante"/>
           <p>{restaurant.e.location.address1}</p> 
           <p>{restaurant.e.price}</p>
           <button>Añadir parada</button>
           </div>
-  
         )
       }
       )
@@ -142,21 +141,12 @@ export default class YourRoutes extends Component {
         <div>
         <h1>Tus rutas</h1>
         <h3>{this.state.routesName}</h3>
-        <h1>Crear rutas</h1>
-        
-
-        <InputYelp
-          getRestaurants={this.getRestaurants}
-          restaurants={this.props.restaurants}
-          handleFormSubmit={this.handleFormSubmit}
-          handleChange={this.handleChange}
-          />
 
           <div id="restaurantsContainer">
           {restaurants}
           </div>
 
-        <form onSubmit={e => this.handleFormSubmit(e)}>
+        {/* <form onSubmit={e => this.handleFormSubmit(e)}>
           <input
             type="text"
             name="routesName"
@@ -180,7 +170,7 @@ export default class YourRoutes extends Component {
           />
           <br/>
              <input value="Crear ruta" type="submit" />
-        </form>
+        </form> */}
 
         <br />
         <br />

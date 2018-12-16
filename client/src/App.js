@@ -6,6 +6,7 @@ import { Route, Link, Redirect } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/ProfileContainer/ProfileContainer";
 import InputYelp from "./components/Profile/YourRoutes/yelp";
+import NavBar from "./components/Navbar/NavBar";
 class App extends Component {
   constructor() {
     super();
@@ -43,15 +44,19 @@ class App extends Component {
     this.setState({...this.state, route: route})
   }
 
+
+
   render() {
 
     const welcome = this.state.user ? (
       <div>
+        <NavBar logout={this.logout}></NavBar>
+        
         <Route
           path="/profile"
           render={() => <Profile user ={this.state.user} createRoutes={this.createRoutes} />}
         />
-        <button onClick={this.logout}>Logout</button>
+        
       </div>
     ) : (
       <Route
@@ -65,6 +70,7 @@ class App extends Component {
 
     return (
       <div className="App">
+      
         {welcome}
         <Message user={this.state.user} />
       </div>
