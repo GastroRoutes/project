@@ -28,7 +28,7 @@ const MapWithADirectionsRenderer = compose(
 
 
       DirectionsService.route({
-        origin: new google.maps.LatLng(40.4893538, -3.6827461),
+        origin: new google.maps.LatLng(40.4166968528883, -3.70159499259034),
         destination: new google.maps.LatLng(43.3579649, -5.8733862),
         travelMode: google.maps.TravelMode.DRIVING,
         waypoints: [
