@@ -106,15 +106,6 @@ export default class YourRoutes extends Component {
         return response;
       });
     };
-    
-
-    // Función que recibe los datos de yelp.js
-    getRestaurants = restaurant => {
-      console.log("·soy la función restaurantes y tengo esto: ")
-      console.log(restaurant);
-      this.setState({ ...this.state, restaurant: restaurant });
-    };
-
 
     // componentDidMount() {
     //   this.getRestaurants();
@@ -123,56 +114,12 @@ export default class YourRoutes extends Component {
 
     render() {
 
-      const restaurants = this.state.restaurant? (this.state.restaurant.map((restaurant)=>{
-        return (
-          <div id="restaurantContainer">
-          {console.log(restaurant.e)}
-          <h3>{restaurant.e.name}</h3> 
-          <img src={restaurant.e.image_url} alt="restaurante"/>
-          <p>{restaurant.e.location.address1}</p> 
-          <p>{restaurant.e.price}</p>
-          <button>Añadir parada</button>
-          </div>
-        )
-      }
-      )
-       ) : (<h2>No hay restaurantes</h2>)
-      
+
       return (
         <div>
+        <hr  />
         <h1>Tus rutas</h1>
         <h3>{this.state.routesName}</h3>
-
-          <div id="restaurantsContainer">
-          {restaurants}
-          </div>
-
-        {/* <form onSubmit={e => this.handleFormSubmit(e)}>
-          <input
-            type="text"
-            name="routesName"
-            onChange={e => this.handleChangeCREATE(e)}
-            placeholder="Nombre de la ruta"
-            autoComplete="off"
-          />
-          <input
-            type="text"
-            name="category"
-            onChange={e => this.handleChangeCREATE(e)}
-            placeholder="Categoría"
-            autoComplete="off"
-          />
-          <input
-            type="text"
-            name="routesType"
-            onChange={e => this.handleChangeCREATE(e)}
-            placeholder="Tipo de ruta"
-            autoComplete="off"
-          />
-          <br/>
-             <input value="Crear ruta" type="submit" />
-        </form> */}
-
         <br />
         <br />
         <br />

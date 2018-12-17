@@ -27,6 +27,7 @@ const MapWithADirectionsRenderer = compose(
   withGoogleMap,
   lifecycle({
     componentDidMount() {
+      
       const DirectionsService = new google.maps.DirectionsService();
 
 
