@@ -54,9 +54,9 @@ trackRouter.post("/createTrack", ensureLoggedIn(), (req, res, next) => {
         routesName, category, routesType, routesPhoto, creatorID
     } = req.body;
   
-    if (routesName === "") routesName = req.Track.routesName;
-    if (category === "") category = req.Track.category;
-    if (routesType === "") routesType = req.Track.routesType;
+    if (routesName === "" || routesName === undefined) routesName = req.Track.routesName;
+    if (category === "" || category === undefined) category = req.Track.category;
+    if (routesType === "" || routesType === undefined) routesType = req.Track.routesType;
     // if (routesPhoto === "") place = req.Track.routesPhoto;
     if (creatorID === "") creatorID = req.Track.creatorID;
   

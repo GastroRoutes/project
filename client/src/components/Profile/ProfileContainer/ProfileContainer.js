@@ -3,17 +3,20 @@ import axios from "axios";
 import YourRoutes from "../YourRoutes/YourRoutes";
 import CreateRoutes from "../CreateRoutes/CreateRoutes";
 import { div } from "gl-matrix/src/gl-matrix/vec2";
+import "./Profile.css"
+
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.service = axios.create({
-      baseURL: "http://localhost:5000/editProfile",
+      baseURL: "http://localhost:5000/editProfile" ,
       withCredentials: true
     });
     this.state = {
       user: this.props.user,
       userRoutes: this.props.user,
-      createRoutesToggle: null
+      createRoutesToggle: null,
+      showUpdateProfileButton: null
     };
   }
 
@@ -24,40 +27,57 @@ export default class Profile extends Component {
   };
 
   handleChange = e => {
-    const { name, value } = e.target;
     const user = { ...this.state.user };
-    // console.log(e.target.value)
-    console.log(this.state.user);
-    user[name] = value;
+    const { name, value } = e.target;
+    if(name === "photo") {
+      user[name] = e.target.files[0]
 
-    this.setState({ ...this.state, user });
+      this.setState({...this.state, user})
+      console.log(this.state.user);
+    } else {
+      user[name] = value;
+      this.setState({ ...this.state, user });
+    }
   };
 
   updateProfile = user => {
-    return this.service
-      .post("/details", user)
-      .then(response => console.log(response));
-  };
+    // return this.service
+    //   .post("/details", user)
+    //   .then(response => console.log(response));
+    const formData = new FormData();
+    Object.keys(user).forEach(key => formData.append(key, user[key]));
+
+    return this.service.post('/details', formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+  })
+  .then(response => console.log(response.data))
+}
   createRouteButton = () => {
     this.state.createRoutesToggle
       ? this.setState({ ...this.state, createRoutesToggle: null })
-      : // this.setState({...this.state, createRoutes: null})
-       ( this.setState({ ...this.state, createRoutesToggle: true }))
+      : this.setState({ ...this.state, createRoutesToggle: true });
   };
-  createRoutes = route => {
-    this.setState({...this.state, createRoutesToggle: null})
-  }
 
+  createRoutes = route => {
+    this.setState({ ...this.state, createRoutesToggle: null });
+  };
+
+  showUpdateProfileButton = () => {
+    this.state.showUpdateProfileButton
+      ? this.setState({ ...this.state, showUpdateProfileButton: null })
+      : this.setState({ ...this.state, showUpdateProfileButton: true });
+  };
+  
   render() {
-    //       const createRoute = this.state.createRoutes? (
-    // ):(  <button onClick={this.createRouteButton}>Crear Ruta</button>)
     const createRoutesOrShowRoutes = this.state.createRoutesToggle ? (
       <div>
         <button onClick={this.createRouteButton}>Tus rutas</button>
         <CreateRoutes
           createRoutes={this.createRoutes}
           getRoutes={this.getRoutes}
-          state = {this.state}
+          state={this.state}
         />
       </div>
     ) : (
@@ -71,10 +91,10 @@ export default class Profile extends Component {
         />
       </div>
     );
-    return (
-      <div>
-        <h1>{this.state.user.username}</h1>
 
+    const showUpdateProfile = this.state.showUpdateProfileButton ? (
+      <div>
+        <button onClick={this.showUpdateProfileButton}>Volver</button>
         <form onSubmit={e => this.handleFormSubmit(e)}>
           <input
             type="text"
@@ -92,23 +112,24 @@ export default class Profile extends Component {
             onChange={e => this.handleChange(e)}
           />
 
-          <input
-            type="text"
-            name="createdAt"
-            value={this.state.user.created_at}
-            autoComplete="off"
-            onChange={e => this.handleChange(e)}
-          />
-          {/* <input type="password" name="password" value= {this.state.user.password} onChange={e => this.handleChange(e)} /> */}
 
           <input
             type="file"
             name="photo"
             onChange={e => this.handleChange(e)}
           />
-
           <input type="submit" value="Update Profile" />
         </form>
+      </div>
+    ) : (
+      <button onClick={this.showUpdateProfileButton}>Editar perfil</button>
+    );
+    return (
+      <div>
+        <h1>{this.state.user.username}</h1>
+        <img id="profile-photo"src={this.state.user.imgPath} alt=""/>
+        {showUpdateProfile}
+
         {createRoutesOrShowRoutes}
         {/* {createRoute} */}
       </div>
