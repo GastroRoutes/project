@@ -49,10 +49,6 @@ app.use(cors({
 
 app.use('/', require('./routes/index'));
 
-app.use((req, res) => {
-  // res.sendFile(`${__dirname}/public/index.html`);
-});
-
 
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
