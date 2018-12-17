@@ -7,7 +7,7 @@ export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.service = axios.create({
-      baseURL: "http://localhost:5000/editProfile",
+      baseURL: `${process.env.REACT_APP_API_URL}/editProfile`,
       withCredentials: true
     });
     this.state = {

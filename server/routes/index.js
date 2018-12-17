@@ -8,11 +8,11 @@ router.get('/', (req, res, next) => {
 
 router.use('/api/auth', require('./auth'));
 
-router.use('/yelp', require('./yelp'));
-router.use('/editProfile', require('./profile'));
+router.use('/api/yelp', require('./yelp'));
+router.use('/api/editProfile', require('./profile'));
 
-router.use('/tracks', require('./tracks'));
+router.use('/api/tracks', require('./tracks'));
 
-router.use('/mapDirections', require('./mapDirections'));
+router.use('/api/mapDirections', require('./mapDirections'));
 
 module.exports = router;

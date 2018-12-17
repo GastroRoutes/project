@@ -7,6 +7,7 @@ import Home from "./components/Home/Home";
 import Profile from "./components/Profile/ProfileContainer/ProfileContainer";
 import InputYelp from "./components/Profile/YourRoutes/yelp";
 import NavBar from "./components/Navbar/NavBar";
+
 class App extends Component {
   constructor() {
     super();

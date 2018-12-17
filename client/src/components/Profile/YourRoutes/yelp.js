@@ -5,7 +5,7 @@ class InputYelp extends Component {
   constructor(props) {
     super(props);
     this.service = axios.create({
-      baseURL: "http://localhost:5000/yelp",
+      baseURL:`${process.env.REACT_APP_API_URL}/yelp`,
       withCredentials: true
     });
     this.state = {
@@ -16,8 +16,8 @@ class InputYelp extends Component {
 
     };
 
+    console.log(process.env.REACT_APP_API_URL)
   }
-
   handleFormSubmit = e => {
     e.preventDefault();
     const { term, location} = this.state.restaurant;
@@ -43,6 +43,7 @@ class InputYelp extends Component {
     return this.service.post("/yelp", {term, location})
     .then(response =>
         {
+          console.log(response)
         return response.data.map((e)=>{
         return {e} 
            })

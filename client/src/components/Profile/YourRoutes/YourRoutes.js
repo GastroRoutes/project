@@ -6,14 +6,14 @@ import "./YourRoutes.css";
 import MapTest from "../../Map/MapTest";
 import TestMapasBorrar from "../../Map/TestMapasBorrar";
 
-import { div } from "gl-matrix/src/gl-matrix/vec2";
+// import { div } from "gl-matrix/src/gl-matrix/vec2";
 
 
 export default class YourRoutes extends Component {
   constructor(props) {
     super(props);
     this.service = axios.create({
-      baseURL: "http://localhost:5000/tracks",
+      baseURL: `${process.env.REACT_APP_API_URL}/tracks`,
       withCredentials: true
     });
 
