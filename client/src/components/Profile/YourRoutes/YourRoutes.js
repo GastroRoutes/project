@@ -4,6 +4,7 @@ import "./YourRoutes.css";
 
 // import MyFancyComponent from "../../Map/Map";
 import MapTest from "../../Map/MapTest";
+import TestMapasBorrar from "../../Map/TestMapasBorrar";
 
 import { div } from "gl-matrix/src/gl-matrix/vec2";
 
@@ -232,7 +233,11 @@ export default class YourRoutes extends Component {
           );
         })}
        {/* <MyFancyComponent /> */}
-       <MapTest />
+       { <MapTest /> }
+
+
+{/* Borrar componente TestMapasBorrar y archivo una vez echas las pruebas */}
+       {<TestMapasBorrar />} 
       </div>
     );
   }

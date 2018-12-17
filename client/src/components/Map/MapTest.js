@@ -1,13 +1,16 @@
 /* eslint-disable no-undef */
 /* global google */
 import React, { Component } from "react";
+import { FaAnchor } from "react-icons/fa";
+
 import { compose, withProps, lifecycle } from "recompose";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   DirectionsRenderer,
-  
+  InfoWindow,
+  Marker,
 } from "react-google-maps";
 
 
@@ -17,7 +20,7 @@ const MapWithADirectionsRenderer = compose(
     googleMapURL:
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyB8NzS5RBf23YH2cAwWi8t0HlpwPfqB6no&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `600px` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,
@@ -28,7 +31,7 @@ const MapWithADirectionsRenderer = compose(
 
 
       DirectionsService.route({
-        origin: new google.maps.LatLng(40.4166968528883, -3.70159499259034),
+        origin: new google.maps.LatLng(40.4893538, -3.6827461),
         destination: new google.maps.LatLng(43.3579649, -5.8733862),
         travelMode: google.maps.TravelMode.DRIVING,
         waypoints: [
@@ -57,6 +60,14 @@ const MapWithADirectionsRenderer = compose(
     defaultOptions={{ styles: demoFancyMapStyles }}
   >
     {props.directions && <DirectionsRenderer directions={props.directions} />}
+    <Marker
+      position={{ lat: -34.397, lng: 150.644 }}
+      onClick={props.onToggleOpen}
+    >
+      {props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
+        <FaAnchor />
+      </InfoWindow>}
+    </Marker>
   </GoogleMap>
 ));
 
