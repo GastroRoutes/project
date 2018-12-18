@@ -18,7 +18,6 @@ export default class AllRoutes extends Component {
     this.service.get("/allRoutes")
     .then(response => {
       this.setState({ ...this.state, allRoutes: response.data.track });
-      console.log(response)
       
     })
 
@@ -26,9 +25,9 @@ export default class AllRoutes extends Component {
 
   followTrack = (e, id) => {
     e.preventDefault()
-    console.log(id)
     return this.service.post(`/${id}/followRoutes`, id) //le paso la id del track
-    .then( ()=> {
+    .then((response)=> {
+      console.log(response)
      this.props.getUser()
     });
   }

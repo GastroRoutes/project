@@ -10,6 +10,7 @@ profileRouter.get("/", ensureLoggedIn(), (req, res, next) => {
 
     Track.findById(req.track._id)
       .populate('creatorID')
+      .populate('savedRoutes')
       .then((user) => {
         res.status(200).json({ user })
         console.log(user)
