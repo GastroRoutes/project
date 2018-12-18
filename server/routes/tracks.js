@@ -9,15 +9,15 @@ const Restaurants = require("../models/Restaurants");
 trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
   User.findById(req.user._id)
     //.populate("createdTrack")
-    .populate( {
-      path: 'createdTrack',
-      model: 'Tracks',
+    .populate({
+      path: "createdTrack",
+      model: "Tracks",
       populate: {
-        path: 'restaurants',
-        model: 'Restaurants'
+        path: "restaurants",
+        model: "Restaurants"
       }
     })
-    .populate('savedRoutes')
+    .populate("savedRoutes")
     .then(track => {
       // console.log(req.user)
       res.status(200).json({ track });
@@ -32,48 +32,66 @@ trackRouter.post(
     const { _id } = req.user;
     const { routesName, category, routesType, selectedRestaurants } = req.body;
     const image = req.file.url;
-    
 
     let totalRestaurants = JSON.parse(selectedRestaurants);
 
-    console.log('OJO DATA SERVER', totalRestaurants)
+    console.log("OJO DATA SERVER", totalRestaurants);
 
     let restaurantsArray = totalRestaurants.map(restaurant => {
-      return {restaurantName: restaurant.name}
-    })
+      return {
+        restaurantName: restaurant.name,
+        categories: restaurant.categories[0].alias,
+        restaurantPhoto: restaurant.photo,
+        rating: restaurant.rating,
+        review_count: restaurant.review_count,
+        price: restaurant.price,
+        phone: restaurant.phone,
+        url: restaurant.url,
+        coordinates: {
+          latitude: restaurant.coordinates.latitude,
+          longitude: restaurant.coordinates.longitude
+        },
 
-    console.log(restaurantsArray)
+        location: {
+          city: restaurant.location.city,
+          country: restaurant.location.country,
+          address: restaurant.location.address,
+          zip_code: restaurant.location.zip_code
+        }
+      };
+    });
+
+    console.log(restaurantsArray);
 
     Restaurants.insertMany(restaurantsArray, (err, insertedRestuants) => {
-      console.log('ojito inserted', insertedRestuants)
+      console.log("ojito inserted", insertedRestuants);
 
       let arrayOfIds = insertedRestuants.map(restaurant => {
         return restaurant._id;
-      })
-      console.log('el array de IDs es', arrayOfIds)
+      });
+      console.log("el array de IDs es", arrayOfIds);
 
       const newTrack = new Track({
         routesName: routesName,
         category: category,
         routesType: routesType,
-        image: image, 
+        image: image,
         restaurants: arrayOfIds
-  
+
         // restaurants,        /// recordad meterlo en la constante
       });
 
       newTrack.save().then(track => {
-        User.findByIdAndUpdate(_id, { createdTrack: track._id })
-        // console.log(track)
-        .then(user => user)
-        .then((user)=>{
-          Track.findById({_id:track._id},{user:user._id} )
-          .then(()=>res.status(200).json({track,user}))
-        })
+        User.findByIdAndUpdate(_id, { $push: { createdTrack: track._id } })
+          // console.log(track)
+          .then(user => user)
+          .then(user => {
+            Track.findById({ _id: track._id }, { user: user._id }).then(() =>
+              res.status(200).json({ track, user })
+            );
+          });
       });
-    })
-
-
+    });
   }
 );
 
@@ -123,7 +141,7 @@ trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
       User.find()
         .populate("savedRoutes")
         .then(user => {
-          console.log(user,track);
+          console.log(user, track);
           res.status(200).json({ track, savedRoutes: user.savedRoutes });
         });
     });
@@ -141,8 +159,8 @@ trackRouter.post("/:id/followRoutes", (req, res, next) => {
   console.log(_id);
 
   User.findByIdAndUpdate({ _id }, { $push: { savedRoutes: routeID } })
-  .populate('savedRoutes')
-    .then((user) => {
+    .populate("savedRoutes")
+    .then(user => {
       console.log();
       res.status(200).json(user);
     })

@@ -24,10 +24,12 @@ export default class YourRoutes extends Component {
         routesType: ""
       },
       userRoutes: [{}],
-      restaurant: null
+      restaurant: null,
+      sendRouteData: null,
     };
     this.routes = [];
     this.getUserRoutes();
+    console.log(this.state.userRoutes)
   }
   
   // PETICIÓN DE TODAS LAS RUTAS DEL USUARIO
@@ -111,16 +113,19 @@ export default class YourRoutes extends Component {
       });
     };
 
+    showRoutesDetails = (route)=>{
+      this.setState({...this.state, sendRouteData: route})
+    }
     // componentDidMount() {
-    //   this.getRestaurants();
-    //   console.log(this.getRestaurants())
-    // }
-
-    render() {
-      const userRoutes = 
+      //   this.getRestaurants();
+      //   console.log(this.getRestaurants())
+      // }
+      
+      render() {
+        const userRoutes = 
       this.state.userRoutes ? ( this.state.userRoutes.map(track => {
         return (
-          <div style={{ border: "1px solid blue" }} key={track._id}>
+          <div onClick={()=>this.showRoutesDetails(track)}style={{ border: "1px solid blue" }} key={track._id}>
             <h3>Name: {track.routesName}</h3>
             <p>Category: {track.category} </p>
 
@@ -186,11 +191,11 @@ export default class YourRoutes extends Component {
 {userRoutes}
        
        {/* <MyFancyComponent /> */}
-       { <MapTest /> }
+       { <MapTest sendRouteData={this.state.sendRouteData}/> }
 
 
 {/* Borrar componente TestMapasBorrar y archivo una vez echas las pruebas */}
-       {<TestMapasBorrar />} 
+       {/* {<TestMapasBorrar />}  */}
       </div>
     );
   }
