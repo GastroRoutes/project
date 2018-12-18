@@ -28,6 +28,7 @@ class App extends Component {
       .then(user => this.setState({ ...this.state, user }));
   };
 
+  //todo: setUser instead of getuser
   getUser = user => {
     this.setState({ ...this.state, user });
   };

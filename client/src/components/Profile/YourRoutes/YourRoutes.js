@@ -34,7 +34,7 @@ export default class YourRoutes extends Component {
   getUserRoutes = () => {
     return this.service.get("/")
     .then(response => {
-      // console.log(response.data.track.createdTrack);
+      console.log(response.data.track);
       let userRoutesArr = response.data.track.createdTrack;
       this.setState({ ...this.state, userRoutes: userRoutesArr });
       return response;

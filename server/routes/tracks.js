@@ -4,10 +4,19 @@ const User = require("../models/User");
 const uploadCloud = require("../config/cloudinary");
 const { ensureLoggedIn } = require("connect-ensure-login");
 const Track = require("../models/Tracks");
+const Restaurants = require("../models/Restaurants");
 
 trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
   User.findById(req.user._id)
-    .populate("createdTrack")
+    //.populate("createdTrack")
+    .populate( {
+      path: 'createdTrack',
+      model: 'Tracks',
+      populate: {
+        path: 'restaurants',
+        model: 'Restaurants'
+      }
+    })
     .populate('savedRoutes')
     .then(track => {
       // console.log(req.user)
@@ -21,26 +30,50 @@ trackRouter.post(
   [ensureLoggedIn(), uploadCloud.single("photo")],
   (req, res, next) => {
     const { _id } = req.user;
-    const { routesName, category, routesType } = req.body;
+    const { routesName, category, routesType, selectedRestaurants } = req.body;
     const image = req.file.url;
-    const newTrack = new Track({
-      routesName: routesName,
-      category: category,
-      routesType: routesType,
-      image: image
+    
 
-      // restaurants,        /// recordad meterlo en la constante
-    });
+    let totalRestaurants = JSON.parse(selectedRestaurants);
 
-    newTrack.save().then(track => {
-      User.findByIdAndUpdate(_id, { createdTrack: track._id })
-      // console.log(track)
-      .then(user => user)
-      .then((user)=>{
-        Track.findById({_id:track._id},{user:user._id} )
-        .then(()=>res.status(200).json({track,user}))
+    console.log('OJO DATA SERVER', totalRestaurants)
+
+    let restaurantsArray = totalRestaurants.map(restaurant => {
+      return {restaurantName: restaurant.name}
+    })
+
+    console.log(restaurantsArray)
+
+    Restaurants.insertMany(restaurantsArray, (err, insertedRestuants) => {
+      console.log('ojito inserted', insertedRestuants)
+
+      let arrayOfIds = insertedRestuants.map(restaurant => {
+        return restaurant._id;
       })
-    });
+      console.log('el array de IDs es', arrayOfIds)
+
+      const newTrack = new Track({
+        routesName: routesName,
+        category: category,
+        routesType: routesType,
+        image: image, 
+        restaurants: arrayOfIds
+  
+        // restaurants,        /// recordad meterlo en la constante
+      });
+
+      newTrack.save().then(track => {
+        User.findByIdAndUpdate(_id, { createdTrack: track._id })
+        // console.log(track)
+        .then(user => user)
+        .then((user)=>{
+          Track.findById({_id:track._id},{user:user._id} )
+          .then(()=>res.status(200).json({track,user}))
+        })
+      });
+    })
+
+
   }
 );
 

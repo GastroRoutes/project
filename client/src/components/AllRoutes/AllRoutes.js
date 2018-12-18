@@ -24,12 +24,17 @@ export default class AllRoutes extends Component {
   };
 
   followTrack = (e, id) => {
+    // debugger
     e.preventDefault()
     return this.service.post(`/${id}/followRoutes`, id) //le paso la id del track
     .then((response)=> {
       console.log(response)
-     this.props.getUser()
-    });
+      // this.props.getUser()
+      if (response.data.followed){
+        this.setState({...this.state, showGreenTickOk: true})
+      }
+    })
+
   }
 
   render() {
