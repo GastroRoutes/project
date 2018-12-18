@@ -123,7 +123,7 @@ trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
       User.find()
         .populate("savedRoutes")
         .then(user => {
-          console.log(user,track)
+          console.log(user,track);
           res.status(200).json({ track, savedRoutes: user.savedRoutes });
         });
     });
