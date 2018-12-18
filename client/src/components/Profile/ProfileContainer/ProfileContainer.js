@@ -18,7 +18,7 @@ export default class Profile extends Component {
       createRoutesToggle: null,
       showUpdateProfileButton: null
     };
-    console.log(this.state.user.savedRoutes)
+console.log(this.state.user.savedRoutes)
   }
 
   handleFormSubmit = e => {

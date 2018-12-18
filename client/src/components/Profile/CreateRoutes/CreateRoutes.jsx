@@ -8,9 +8,10 @@ export default class CreateRoutes extends Component {
       createRoutes: {
         routesName: "",
         category: "",
-        routesType: ""
+        routesType: "", 
       },
-      restaurant: null
+      restaurant: null, 
+      restaurants: []
     };
 
     this.service = axios.create({
@@ -31,14 +32,6 @@ export default class CreateRoutes extends Component {
     });
   };
 
-  // handleChangeCREATE = e => {
-  //   const { name, value } = e.target;
-  //   let newRoute = this.state.createRoutes;
-  //   newRoute[name] = value;
-  //   console.log(newRoute);
-  //   this.setState({ ...this.state, createRoutes: newRoute });
-  // };
-
   handleChangeCREATE = e => {
     let newRoute = this.state.createRoutes;
     const { name, value } = e.target;
@@ -57,6 +50,9 @@ export default class CreateRoutes extends Component {
 
   const formData = new FormData();
   Object.keys(route).forEach(key => formData.append(key, route[key]));
+  formData.append('selectedRestaurants', JSON.stringify(this.state.restaurants))
+
+  console.log('vamos a enviar también los restaurantes', this.state.restaurants)
 
   return this.service.post('/createTrack', formData, {
       headers: {
@@ -73,6 +69,15 @@ return response;
     this.setState({ ...this.state, restaurant: restaurant });
   };
 
+  addRestaurant = restaurant => {
+    console.log('hola pistachitos', restaurant);
+    const restaurants = [...this.state.restaurants];
+
+    restaurants.push(restaurant.e);
+
+    this.setState({...this.state, restaurants})
+  }
+
   render() {
     const restaurants = this.state.restaurant ? (
       this.state.restaurant.map(restaurant => {
@@ -82,13 +87,23 @@ return response;
             <img src={restaurant.e.image_url} alt="restaurante" />
             <p>{restaurant.e.location.address1}</p>
             <p>{restaurant.e.price}</p>
-            <button>Añadir parada</button>
+            <button onClick={() => this.addRestaurant(restaurant)}>Añadir parada</button>
           </div>
         );
       })
     ) : (
       <h2>No hay restaurantes</h2>
     );
+
+    let selectedRestaurants = 'No hay pistachitos seleccionados'
+
+    console.log(this.state)
+
+    if (this.state.restaurants.length) {
+      selectedRestaurants = this.state.restaurants.map(restaurant => {
+        return <p>{restaurant.name}</p>
+      })
+    }
 
     return (
       <div>
@@ -123,6 +138,10 @@ return response;
             name="photo"
             onChange={e => this.handleChangeCREATE(e)}
           />
+
+          <p>Restaurantes</p>
+
+          {selectedRestaurants}
 
           <br />
           <input value="Crear ruta" type="submit" />

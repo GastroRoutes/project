@@ -13,9 +13,12 @@ import {
   Marker,
 } from "react-google-maps";
 
-
+// const sendRouteData = this.props.sendRouteData.restaurants;
+// console.log(sendRouteData);
 const demoFancyMapStyles = require("./demoFancyMapStyles.json");
+
 const MapWithADirectionsRenderer = compose(
+  
   withProps({
     googleMapURL:
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyB8NzS5RBf23YH2cAwWi8t0HlpwPfqB6no&v=3.exp&libraries=geometry,drawing,places",
@@ -27,22 +30,23 @@ const MapWithADirectionsRenderer = compose(
   withGoogleMap,
   lifecycle({
     componentDidMount() {
-      
+      const restaurants = this.props.sendRouteData.restaurants;
       const DirectionsService = new google.maps.DirectionsService();
 
 
       DirectionsService.route({
-        origin: new google.maps.LatLng(40.4893538, -3.6827461),
-        destination: new google.maps.LatLng(43.3579649, -5.8733862),
-        travelMode: google.maps.TravelMode.DRIVING,
-        waypoints: [
-             {
-                location: new google.maps.LatLng(42.5735672, -5.5671588)
-             },
-             {
-                location: new google.maps.LatLng(42.3499677,-3.6822051)
-             }
-        ]
+        origin: new google.maps.LatLng(restaurants[0].coordinates.latitude, restaurants[0].coordinates.longitude),
+        destination: new google.maps.LatLng(restaurants[restaurants.length-1].coordinates.latitude, restaurants[restaurants.length-1].coordinates.longitude),
+        travelMode: google.maps.TravelMode.WALKING,
+        waypoints: restaurants.map((restaurant,index) =>{
+          if(index !== 0 || index !== restaurants.length-1){
+            return (
+              {
+                 location: new google.maps.LatLng(restaurant.coordinates.latitude,restaurant.coordinates.longitude)
+              }
+            )
+          }
+        })
      }, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
            this.setState({
@@ -55,6 +59,7 @@ const MapWithADirectionsRenderer = compose(
     }
   })
 )(props => (
+  
   <GoogleMap
     defaultZoom={7}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
@@ -72,13 +77,27 @@ const MapWithADirectionsRenderer = compose(
   </GoogleMap>
 ));
 
-export default class MapTest extends Component {
-  render() {
 
-    return (
-      <div>
-        <MapWithADirectionsRenderer />
-      </div>
-    );
+export default class MapTest extends Component {
+  constructor(props){
+    super(props)
+    this.state ={
+      data: this.props
+    }
+
+  }
+  
+  render() {
+    console.log(this.props)
+    if(this.props.sendRouteData){
+      return (
+        <div>
+          <MapWithADirectionsRenderer sendRouteData={this.props.sendRouteData}/>
+        </div>
+      );
+
+    }else{
+      return <p>Loading...</p>
+    }
   }
 }

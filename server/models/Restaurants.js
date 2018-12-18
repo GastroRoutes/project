@@ -12,10 +12,10 @@ price: String ,
 phone: String,
 url: String,
 
-address:
+coordinates:
 {
-lat: Number,
-lng: Number
+  latitude: Number,
+  longitude: Number
 },
 
 location: {

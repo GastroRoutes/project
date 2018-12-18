@@ -18,19 +18,23 @@ export default class AllRoutes extends Component {
     this.service.get("/allRoutes")
     .then(response => {
       this.setState({ ...this.state, allRoutes: response.data.track });
-      console.log(response)
       
     })
 
   };
 
   followTrack = (e, id) => {
+    // debugger
     e.preventDefault()
-    console.log(id)
     return this.service.post(`/${id}/followRoutes`, id) //le paso la id del track
-    .then( ()=> {
-     this.props.getUser()
-    });
+    .then((response)=> {
+      console.log(response)
+      // this.props.getUser()
+      if (response.data.followed){
+        this.setState({...this.state, showGreenTickOk: true})
+      }
+    })
+
   }
 
   render() {
