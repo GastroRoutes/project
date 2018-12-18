@@ -41,6 +41,8 @@ export default class YourRoutes extends Component {
     .catch(err => console.log(err))
   };
   
+
+
   // CREAR RUTAS
   handleFormSubmit = e => {
     e.preventDefault();
@@ -66,7 +68,7 @@ export default class YourRoutes extends Component {
     return this.service.post("/createTrack", route).then(response =>
       // response)
       {
-        // console.log(response)
+        // console.log(response)z
         return response;
       }
       );
@@ -94,7 +96,8 @@ export default class YourRoutes extends Component {
     };
         
     updateRoute = (route, id) => {
-      return this.service.post(`/${id}/update`, route).then(response => {
+      return this.service.post(`/${id}/update`, route)
+      .then(response => {
         return response;
       });
     };
@@ -114,8 +117,64 @@ export default class YourRoutes extends Component {
     // }
 
     render() {
+      const userRoutes = 
+      this.state.userRoutes ? ( this.state.userRoutes.map(track => {
+        return (
+          <div style={{ border: "1px solid blue" }} key={track._id}>
+            <h3>Name: {track.routesName}</h3>
+            <p>Category: {track.category} </p>
 
+            <img src={track.image} alt="image"/>
+            <form onSubmit={e => this.handleFormSubmitUPDATE(e, track._id)}>
+              <label>Actualizar rutas: </label>
 
+              <input
+                type="text"
+                name="routesName"
+                onChange={e => this.handleChangeUPDATE(e)}
+                placeholder="Nombre de la ruta"
+                autoComplete="off"
+              />
+              <input
+                type="text"
+                name="category"
+                onChange={e => this.handleChangeUPDATE(e)}
+                placeholder="Categoría"
+                autoComplete="off"
+              />
+              <input
+                type="text"
+                name="routesType"
+                onChange={e => this.handleChangeUPDATE(e)}
+                placeholder="Tipo de ruta"
+                autoComplete="off"
+              />
+
+              {/* <input
+          type="file"
+          name="Photo"
+          onChange={e => this.handleChangeUPDATE(e)}
+        /> */}
+        
+              <input type="submit" />
+              {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
+              <br />
+              <br />
+              <br />
+            </form>
+            {/* <img src={`${track.image_url}`} style={{ width: "10%" }} /> */}
+            <br />
+            <form onSubmit={(e) => this.deleteRoute(e, track._id)}>
+            <input
+              value="DELETE"
+              type="submit"
+            />
+            </form>
+            <br />
+            <br />
+          </div>
+        );
+      })) : ("no hay rutas")
       return (
         <div>
         <hr  />
@@ -124,62 +183,8 @@ export default class YourRoutes extends Component {
         <br />
         <br />
         <br />
-
-        {this.state.userRoutes.map(track => {
-          return (
-            <div style={{ border: "1px solid blue" }} key={track._id}>
-              <h3>Name: {track.routesName}</h3>
-              <p>Category: {track.category} </p>
-              <form onSubmit={e => this.handleFormSubmitUPDATE(e, track._id)}>
-                <label>Actualizar rutas: </label>
-
-                <input
-                  type="text"
-                  name="routesName"
-                  onChange={e => this.handleChangeUPDATE(e)}
-                  placeholder="Nombre de la ruta"
-                  autoComplete="off"
-                />
-                <input
-                  type="text"
-                  name="category"
-                  onChange={e => this.handleChangeUPDATE(e)}
-                  placeholder="Categoría"
-                  autoComplete="off"
-                />
-                <input
-                  type="text"
-                  name="routesType"
-                  onChange={e => this.handleChangeUPDATE(e)}
-                  placeholder="Tipo de ruta"
-                  autoComplete="off"
-                />
-
-                {/* <input
-            type="file"
-            name="Photo"
-            onChange={e => this.handleChangeUPDATE(e)}
-          /> */}
-
-                <input type="submit" />
-                {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
-                <br />
-                <br />
-                <br />
-              </form>
-              {/* <img src={`${track.image_url}`} style={{ width: "10%" }} /> */}
-              <br />
-              <form onSubmit={(e) => this.deleteRoute(e, track._id)}>
-              <input
-                value="DELETE"
-                type="submit"
-              />
-              </form>
-              <br />
-              <br />
-            </div>
-          );
-        })}
+{userRoutes}
+       
        {/* <MyFancyComponent /> */}
        { <MapTest /> }
 

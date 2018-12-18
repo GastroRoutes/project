@@ -16,7 +16,6 @@ class InputYelp extends Component {
 
     };
 
-    console.log(process.env.REACT_APP_API_URL)
   }
   handleFormSubmit = e => {
     e.preventDefault();
@@ -32,7 +31,7 @@ class InputYelp extends Component {
 
   handleChange = e => {
     const { name, value } = e.target;
-    console.log(name + value)
+
     let searchRestaurant = this.state.restaurant;
     searchRestaurant[name] = value;
     this.setState({...this.state, restaurant: searchRestaurant});
@@ -43,7 +42,6 @@ class InputYelp extends Component {
     return this.service.post("/yelp", {term, location})
     .then(response =>
         {
-          console.log(response)
         return response.data.map((e)=>{
         return {e} 
            })

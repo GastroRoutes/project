@@ -20,33 +20,54 @@ export default class CreateRoutes extends Component {
   }
   handleFormSubmit = e => {
     e.preventDefault();
-    const { routesName, category, routesType } = this.state.createRoutes;
-    this.getRoute({ routesName, category, routesType }).then(route => {
-      console.log(route);
+    const { routesName, category, routesType, photo } = this.state.createRoutes;
+    this.getRoute({ routesName, category, routesType, photo })
+    .then(route => {
+      console.log(route.data);
       //   let id = route.data._id;
-
       this.props.createRoutes(route.data);
       this.setState({ ...this.props.state, createRoutes: null });
       // this.setState({ ...this.state, id }); /// hay que tratarlo. Llega como array
     });
   };
 
+  // handleChangeCREATE = e => {
+  //   const { name, value } = e.target;
+  //   let newRoute = this.state.createRoutes;
+  //   newRoute[name] = value;
+  //   console.log(newRoute);
+  //   this.setState({ ...this.state, createRoutes: newRoute });
+  // };
+
   handleChangeCREATE = e => {
-    const { name, value } = e.target;
     let newRoute = this.state.createRoutes;
-    newRoute[name] = value;
-    console.log(newRoute);
-    this.setState({ ...this.state, createRoutes: newRoute });
+    const { name, value } = e.target;
+    if(name === "photo" ) {
+      newRoute[name] = e.target.files[0]
+      this.setState({...this.state, newRoute})
+      console.log(this.state.createRoutes);
+    } else {
+      newRoute[name] = value;
+      this.setState({ ...this.state, newRoute });
+    }
   };
+  
+
   getRoute = route => {
-    return this.service.post("/createTrack", route).then(response =>
-      // response)
-      {
-        console.log(response);
-        return response;
+
+  const formData = new FormData();
+  Object.keys(route).forEach(key => formData.append(key, route[key]));
+
+  return this.service.post('/createTrack', formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
       }
-    );
-  };
+})
+.then(response => {
+//  this.props.getUser(response.data)
+return response;
+})
+}
   // Función que recibe los datos de yelp.js
   getRestaurants = restaurant => {
     this.setState({ ...this.state, restaurant: restaurant });
@@ -96,6 +117,13 @@ export default class CreateRoutes extends Component {
             placeholder="Tipo de ruta"
             autoComplete="off"
           />
+
+          <input
+            type="file"
+            name="photo"
+            onChange={e => this.handleChangeCREATE(e)}
+          />
+
           <br />
           <input value="Crear ruta" type="submit" />
         </form>
