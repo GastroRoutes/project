@@ -1,5 +1,6 @@
 {
   "name": "server",
+  "engines" : { "node" : ">=8.10.0" },
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,7 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^3.0.2",
     "body-parser": "~1.18.2",
     "cloudinary": "^1.13.2",
     "connect-ensure-login": "^0.1.1",

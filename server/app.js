@@ -1,6 +1,4 @@
 require('dotenv').config();
-
-
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express      = require('express');
@@ -27,7 +25,7 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
-
+app.use(express.static(path.join(__dirname, 'public')))
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -51,13 +49,10 @@ app.use(cors({
 
 app.use('/', require('./routes/index'));
 
-app.use((req, res) => {
-  // res.sendFile(`${__dirname}/public/index.html`);
-});
-
-
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
   res.sendFile(__dirname + "/public/index.html");
 });
+
+
 module.exports = app;

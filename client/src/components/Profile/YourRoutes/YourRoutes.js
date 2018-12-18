@@ -40,7 +40,8 @@ export default class YourRoutes extends Component {
       let userRoutesArr = response.data.track.createdTrack;
       this.setState({ ...this.state, userRoutes: userRoutesArr });
       return response;
-    }).catch()
+    })
+    .catch(err => console.log(err))
   };
   
 
