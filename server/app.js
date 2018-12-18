@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express      = require('express');
@@ -15,9 +16,10 @@ const MongoStore = require('connect-mongo')(session);
 mongoose.Promise = Promise;
 mongoose
   .connect(process.env.DBURL)
-  .then(() => {
-    console.log(`Connected to Mongo in DB`)
-  }).catch(err => {
+  .then(x => {
+    console.log(`Connected to Mongo!`)
+  })
+  .catch(err => {
     console.error('Error connecting to mongo', err)
   });
 
@@ -53,4 +55,9 @@ app.use((req, res) => {
   // res.sendFile(`${__dirname}/public/index.html`);
 });
 
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 module.exports = app;
