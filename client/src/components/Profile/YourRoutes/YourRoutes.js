@@ -33,11 +33,12 @@ export default class YourRoutes extends Component {
   // PETICIÓN DE TODAS LAS RUTAS DEL USUARIO
   getUserRoutes = () => {
     return this.service.get("/").then(response => {
-      // console.log(response.data.track.createdTrack);
+       console.log(response.data);
       let userRoutesArr = response.data.track.createdTrack;
       this.setState({ ...this.state, userRoutes: userRoutesArr });
       return response;
-    });
+    })
+    .catch(err => console.log(err))
   };
   
   // CREAR RUTAS

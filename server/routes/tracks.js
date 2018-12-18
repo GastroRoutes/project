@@ -12,7 +12,7 @@ console.log("entro en tracks")
     User.findById(req.user._id)
       .populate('createdTrack')
       .then((track) => {
-          console.log(track.createdTrack)
+          console.log(track)
         res.status(200).json({ track })
         console.log(track)
       })
