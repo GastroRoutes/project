@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 import Message from "./components/Message";
 import AuthService from "./components/Home/auth/AuthService";
-import { Route, Link, Redirect } from "react-router-dom";
+import { Route, Link, Redirect, Switch } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/ProfileContainer/ProfileContainer";
 import InputYelp from "./components/Profile/YourRoutes/yelp";
 import NavBar from "./components/Navbar/NavBar";
-
+import AllRoutes from "./components/AllRoutes/AllRoutes"
 class App extends Component {
   constructor() {
     super();
@@ -52,12 +52,13 @@ class App extends Component {
     const welcome = this.state.user ? (
       <div>
         <NavBar logout={this.logout}></NavBar>
-        
+
         <Route
           path="/profile"
-          render={() => <Profile user ={this.state.user} createRoutes={this.createRoutes} />}
+          render={() => <Profile getUser={this.getUser} user ={this.state.user} createRoutes={this.createRoutes} />}
         />
-        
+        <Route path="/allRoutes" render={()=> <AllRoutes getUser={this.getUser}/>}></Route>
+
       </div>
     ) : (
       <Route
@@ -73,7 +74,7 @@ class App extends Component {
       <div className="App">
       
         {welcome}
-        <Message user={this.state.user} />
+
       </div>
     );
   }

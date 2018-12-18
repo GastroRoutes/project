@@ -8,7 +8,6 @@ const router  = express.Router();
 const yelp = require('yelp-fusion');
 
 const client = yelp.client(process.env.API_KEY_YELP);
-console.log(client)
 
 router.post('/yelp', (req,res)=>{
   console.log(req.body.term.term)

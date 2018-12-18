@@ -20,7 +20,6 @@
     "eject": "react-scripts eject",
     "build-dev": "dotenv -e .env.development react-scripts build",
     "build-prod": "dotenv -e .env.production react-scripts build"
-    
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -6,9 +6,10 @@ const userSchema = new Schema(
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true},
-    imgPath: { type: String, default: "https://profiles.utdallas.edu/img/default.png"},
+    imgPath:{ type: String, default: "https://profiles.utdallas.edu/img/default.png"},
     // city: String,
-    createdTrack: [{ type : Schema.Types.ObjectId, ref: "Tracks" }]
+    createdTrack: [{ type : Schema.Types.ObjectId, ref: "Tracks" }],
+    savedRoutes: [{ type : Schema.Types.ObjectId, ref: "Tracks" }]
   },
   {
     timestamps: {

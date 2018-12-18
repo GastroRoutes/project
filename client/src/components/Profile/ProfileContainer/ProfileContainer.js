@@ -18,6 +18,7 @@ export default class Profile extends Component {
       createRoutesToggle: null,
       showUpdateProfileButton: null
     };
+    console.log(this.state.user.savedRoutes)
   }
 
   handleFormSubmit = e => {
@@ -29,9 +30,8 @@ export default class Profile extends Component {
   handleChange = e => {
     const user = { ...this.state.user };
     const { name, value } = e.target;
-    if(name === "photo") {
+    if(name === "photo" ) {
       user[name] = e.target.files[0]
-
       this.setState({...this.state, user})
       console.log(this.state.user);
     } else {
@@ -41,9 +41,7 @@ export default class Profile extends Component {
   };
 
   updateProfile = user => {
-    // return this.service
-    //   .post("/details", user)
-    //   .then(response => console.log(response));
+    console.log(user)
     const formData = new FormData();
     Object.keys(user).forEach(key => formData.append(key, user[key]));
 
@@ -52,12 +50,15 @@ export default class Profile extends Component {
           "Content-Type": "multipart/form-data"
         }
   })
-  .then(response => console.log(response.data))
+  .then(response => {
+   this.props.getUser(response.data)
+  })
 }
   createRouteButton = () => {
     this.state.createRoutesToggle
       ? this.setState({ ...this.state, createRoutesToggle: null })
       : this.setState({ ...this.state, createRoutesToggle: true });
+      console.log(this.state.user)
   };
 
   createRoutes = route => {
@@ -69,12 +70,15 @@ export default class Profile extends Component {
       ? this.setState({ ...this.state, showUpdateProfileButton: null })
       : this.setState({ ...this.state, showUpdateProfileButton: true });
   };
-  
+
+
   render() {
+    
     const createRoutesOrShowRoutes = this.state.createRoutesToggle ? (
       <div>
         <button onClick={this.createRouteButton}>Tus rutas</button>
         <CreateRoutes
+        
           createRoutes={this.createRoutes}
           getRoutes={this.getRoutes}
           state={this.state}
@@ -127,7 +131,7 @@ export default class Profile extends Component {
     return (
       <div>
         <h1>{this.state.user.username}</h1>
-        <img id="profile-photo"src={this.state.user.imgPath} alt=""/>
+        <img id="profile-photo" src={this.state.user.imgPath} alt=""/>
         {showUpdateProfile}
 
         {createRoutesOrShowRoutes}
