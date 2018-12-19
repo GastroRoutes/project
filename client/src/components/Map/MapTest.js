@@ -32,7 +32,8 @@ const MapWithADirectionsRenderer = compose(
     componentDidMount() {
       let restaurants = this.props.sendRouteData.restaurants;
       const DirectionsService = new google.maps.DirectionsService();
-      // console.log(restaurants)
+
+      
       DirectionsService.route({
         origin: new google.maps.LatLng(restaurants[0].coordinates.latitude, restaurants[0].coordinates.longitude),
         destination: new google.maps.LatLng(restaurants[restaurants.length-1].coordinates.latitude, restaurants[restaurants.length-1].coordinates.longitude),
