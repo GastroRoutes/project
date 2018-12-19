@@ -17,7 +17,15 @@ trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
         model: "Restaurants"
       }
     })
-    .populate("savedRoutes")
+    .populate({
+      path: "savedRoutes",
+      model: "Tracks",
+      populate: {
+        path: "restaurants",
+        model: "Restaurants"
+      }
+    })
+    // .populate("savedRoutes")
     .then(track => {
       // console.log(req.user)
       res.status(200).json({ track });
@@ -30,7 +38,14 @@ trackRouter.post(
   [ensureLoggedIn(), uploadCloud.single("photo")],
   (req, res, next) => {
     const { _id } = req.user;
-    const { routesName, category, routesType, selectedRestaurants } = req.body;
+    const {
+      routesName,
+      category,
+      selectedRestaurants,
+      date,
+      hour,
+      duration
+    } = req.body;
     const image = req.file.url;
 
     let totalRestaurants = JSON.parse(selectedRestaurants);
@@ -74,7 +89,9 @@ trackRouter.post(
       const newTrack = new Track({
         routesName: routesName,
         category: category,
-        routesType: routesType,
+        date: date,
+        hour: hour,
+        duration: duration,
         image: image,
         restaurants: arrayOfIds
 

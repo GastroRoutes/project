@@ -3,7 +3,8 @@ import axios from "axios";
 import YourRoutes from "../YourRoutes/YourRoutes";
 import CreateRoutes from "../CreateRoutes/CreateRoutes";
 import { div } from "gl-matrix/src/gl-matrix/vec2";
-import "./Profile.css"
+import "./Profile.css";
+import SavedRoutes from "../YourRoutes/SavedRoutes/SavedRoutes";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -16,9 +17,10 @@ export default class Profile extends Component {
       user: this.props.user,
       userRoutes: this.props.user,
       createRoutesToggle: null,
-      showUpdateProfileButton: null
+      showUpdateProfileButton: null,
+      yourRoutes: true
     };
-console.log(this.state.user.savedRoutes)
+    console.log(this.state.user.savedRoutes);
   }
 
   handleFormSubmit = e => {
@@ -30,9 +32,9 @@ console.log(this.state.user.savedRoutes)
   handleChange = e => {
     const user = { ...this.state.user };
     const { name, value } = e.target;
-    if(name === "photo" ) {
-      user[name] = e.target.files[0]
-      this.setState({...this.state, user})
+    if (name === "photo") {
+      user[name] = e.target.files[0];
+      this.setState({ ...this.state, user });
       console.log(this.state.user);
     } else {
       user[name] = value;
@@ -41,24 +43,25 @@ console.log(this.state.user.savedRoutes)
   };
 
   updateProfile = user => {
-    console.log(user)
+    console.log(user);
     const formData = new FormData();
     Object.keys(user).forEach(key => formData.append(key, user[key]));
 
-    return this.service.post('/details', formData, {
+    return this.service
+      .post("/details", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
-  })
-  .then(response => {
-   this.props.getUser(response.data)
-  })
-}
+      })
+      .then(response => {
+        this.props.getUser(response.data);
+      });
+  };
   createRouteButton = () => {
     this.state.createRoutesToggle
       ? this.setState({ ...this.state, createRoutesToggle: null })
       : this.setState({ ...this.state, createRoutesToggle: true });
-      console.log(this.state.user)
+    console.log(this.state.user);
   };
 
   createRoutes = route => {
@@ -71,14 +74,34 @@ console.log(this.state.user.savedRoutes)
       : this.setState({ ...this.state, showUpdateProfileButton: true });
   };
 
+  changeRoutes = ()=>{
+    this.state.yourRoutes
+    ? this.setState({ ...this.state, yourRoutes: null })
+    : this.setState({ ...this.state, yourRoutes: true });
+};
 
   render() {
-    
+    const showRoutesType = this.state.yourRoutes ? (
+      <div>
+        <button onClick={this.changeRoutes}>Rutas Guardadas</button>
+        <YourRoutes
+          userRoutes={this.userRoutes}
+          createRoutes={this.props.createRoutes}
+          handleFormSubmit={this.handleFormSubmit}
+          handleChange={this.handleChange}
+        />
+      </div>
+    ) : (
+      <div>
+        <button onClick={this.changeRoutes}>Tus publicaciones</button>
+        <SavedRoutes user={this.state.user}/>  
+
+      </div>
+    )
     const createRoutesOrShowRoutes = this.state.createRoutesToggle ? (
       <div>
         <button onClick={this.createRouteButton}>Tus rutas</button>
         <CreateRoutes
-        
           createRoutes={this.createRoutes}
           getRoutes={this.getRoutes}
           state={this.state}
@@ -87,12 +110,7 @@ console.log(this.state.user.savedRoutes)
     ) : (
       <div>
         <button onClick={this.createRouteButton}>Crear Ruta</button>
-        <YourRoutes
-          userRoutes={this.userRoutes}
-          createRoutes={this.props.createRoutes}
-          handleFormSubmit={this.handleFormSubmit}
-          handleChange={this.handleChange}
-        />
+        {showRoutesType}
       </div>
     );
 
@@ -116,7 +134,6 @@ console.log(this.state.user.savedRoutes)
             onChange={e => this.handleChange(e)}
           />
 
-
           <input
             type="file"
             name="photo"
@@ -131,7 +148,7 @@ console.log(this.state.user.savedRoutes)
     return (
       <div>
         <h1>{this.state.user.username}</h1>
-        <img id="profile-photo" src={this.state.user.imgPath} alt=""/>
+        <img id="profile-photo" src={this.state.user.imgPath} alt="" />
         {showUpdateProfile}
 
         {createRoutesOrShowRoutes}

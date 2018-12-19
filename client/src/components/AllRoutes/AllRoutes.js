@@ -5,7 +5,8 @@ export default class AllRoutes extends Component {
   constructor() {
     super();
     this.state = {
-      allRoutes: null
+      allRoutes: null,
+      showGreenTickOk : null
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/tracks`,
@@ -32,12 +33,17 @@ export default class AllRoutes extends Component {
       // this.props.getUser()
       if (response.data.followed){
         this.setState({...this.state, showGreenTickOk: true})
+        console.log(this.state.showGreenTickOk)
+      }
+      else{
+        this.setState({...this.state, showGreenTickOk: true})
       }
     })
 
   }
 
   render() {
+
     const printAllRoutes = this.state.allRoutes ? (
       this.state.allRoutes.map(element => {
         return (
@@ -47,7 +53,11 @@ export default class AllRoutes extends Component {
             <h4>{element.category}</h4>
             {/* <p>{element.creatorID[0].username}</p> */}
             <img src={element.image} alt=""/>
-            <button onClick={e => this.followTrack(e, element._id)}></button>
+          {!this.state.showGreenTickOk ? (
+      <button onClick={e => this.followTrack(e, element._id)}>follow</button>
+    ) : (
+      <button style={{backgroundColor: "green"}}onClick={e => this.followTrack(e, element._id)}>follow</button>
+    )}
             <hr />
           </div>
         );

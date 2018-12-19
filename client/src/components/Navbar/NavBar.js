@@ -9,7 +9,7 @@ export default class NavBar extends Component {
 
             </div>
             <div>
-            <Link to="/profile"><img src="../../../public/perfil.png" alt="profile"/></Link> - 
+            <Link to="/profile"><img src="perfil.png" alt="profile"/></Link> - 
             <Link to="/allRoutes">AllRoutes</Link> -{" "}
             <img src="./logout.png" alt="logout"onClick={this.props.logout}/>
           

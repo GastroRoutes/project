@@ -7,9 +7,11 @@ const Restaurants = require("./Restaurants");
 const TracksSchema = new Schema({
 routesName: { type: String, required: true},
 category:  String,
-routesType : String, enum : ["created", "shared", "public", "private"],
+// routesType : String, enum : ["created", "shared", "public", "private"],
 routesPhoto: { type: String },
-date: {type: String},
+date: String,
+hour: String,
+duration: String,
 image: String,
 restaurants: [{type: Schema.Types.ObjectId, ref: 'Restaurants'}],
 creatorID: { type: Schema.Types.ObjectId, ref: 'User' },

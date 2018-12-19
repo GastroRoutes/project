@@ -4,7 +4,7 @@ import "./YourRoutes.css";
 
 // import MyFancyComponent from "../../Map/Map";
 import MapTest from "../../Map/MapTest";
-import TestMapasBorrar from "../../Map/TestMapasBorrar";
+// import TestMapasBorrar from "../../Map/TestMapasBorrar";
 
 // import { div } from "gl-matrix/src/gl-matrix/vec2";
 
@@ -36,7 +36,6 @@ export default class YourRoutes extends Component {
   getUserRoutes = () => {
     return this.service.get("/")
     .then(response => {
-      console.log(response.data.track);
       let userRoutesArr = response.data.track.createdTrack;
       this.setState({ ...this.state, userRoutes: userRoutesArr });
       return response;
@@ -71,7 +70,7 @@ export default class YourRoutes extends Component {
     return this.service.post("/createTrack", route).then(response =>
       // response)
       {
-        // console.log(response)z
+        // console.log(response)
         return response;
       }
       );
@@ -123,8 +122,9 @@ export default class YourRoutes extends Component {
       // }
       
       render() {
+        
         const userRoutes = 
-      this.state.userRoutes ? ( this.state.userRoutes.map(track => {
+      this.state.userRoutes ? ( this.state.userRoutes.map((track,index) => {
         return (
           <div onClick={()=>this.showRoutesDetails(track)}style={{ border: "1px solid blue" }} key={track._id}>
             <h3>Name: {track.routesName}</h3>

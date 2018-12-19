@@ -3,7 +3,7 @@ import InputYelp from "../YourRoutes/yelp";
 import axios from "axios";
 export default class CreateRoutes extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       createRoutes: {
         routesName: "",
@@ -21,8 +21,8 @@ export default class CreateRoutes extends Component {
   }
   handleFormSubmit = e => {
     e.preventDefault();
-    const { routesName, category, routesType, photo } = this.state.createRoutes;
-    this.getRoute({ routesName, category, routesType, photo })
+    const { routesName, category, photo, date, hour, duration } = this.state.createRoutes;
+    this.getRoute({ routesName, category, photo, date, hour, duration })
     .then(route => {
       console.log(route.data);
       //   let id = route.data._id;
@@ -92,7 +92,7 @@ return response;
         );
       })
     ) : (
-      <h2>No hay restaurantes</h2>
+      <div></div>
     );
 
     let selectedRestaurants = 'No hay pistachitos seleccionados'
@@ -125,11 +125,27 @@ return response;
             placeholder="Categoría"
             autoComplete="off"
           />
+          <label htmlFor="">Fecha: </label>
           <input
-            type="text"
-            name="routesType"
+            type="date"
+            name="date"
             onChange={e => this.handleChangeCREATE(e)}
-            placeholder="Tipo de ruta"
+            placeholder="Fecha"
+            autoComplete="off"
+          />
+          <label htmlFor="">Hora: </label>
+          <input
+            type="time"
+            name="hour"
+            onChange={e => this.handleChangeCREATE(e)}
+            placeholder="Hora de inicio"
+            autoComplete="off"
+          />
+                    <input
+            type="text"
+            name="duration"
+            onChange={e => this.handleChangeCREATE(e)}
+            placeholder="Duración"
             autoComplete="off"
           />
 

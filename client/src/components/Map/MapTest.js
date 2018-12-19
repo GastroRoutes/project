@@ -30,16 +30,44 @@ const MapWithADirectionsRenderer = compose(
   withGoogleMap,
   lifecycle({
     componentDidMount() {
-      const restaurants = this.props.sendRouteData.restaurants;
+      let restaurants = this.props.sendRouteData.restaurants;
       const DirectionsService = new google.maps.DirectionsService();
-
-
+      // console.log(restaurants)
       DirectionsService.route({
         origin: new google.maps.LatLng(restaurants[0].coordinates.latitude, restaurants[0].coordinates.longitude),
         destination: new google.maps.LatLng(restaurants[restaurants.length-1].coordinates.latitude, restaurants[restaurants.length-1].coordinates.longitude),
         travelMode: google.maps.TravelMode.WALKING,
-        waypoints: restaurants.map((restaurant,index) =>{
+        waypoints: restaurants.map((restaurant,index) => {
           if(index !== 0 || index !== restaurants.length-1){
+            console.log(restaurant)
+            return (
+              {
+                 location: new google.maps.LatLng(restaurant.coordinates.latitude,restaurant.coordinates.longitude)
+              }
+            )
+          }
+        })
+     }, (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+           this.setState({
+              directions: result,
+           });
+        } else {
+          console.error(`error fetching directions ${result}`);
+        }
+     });
+    },
+    componentDidUpdate(preProps) {
+      let restaurants = this.props.sendRouteData.restaurants;
+      const DirectionsService = new google.maps.DirectionsService();
+      // console.log(restaurants)
+      DirectionsService.route({
+        origin: new google.maps.LatLng(restaurants[0].coordinates.latitude, restaurants[0].coordinates.longitude),
+        destination: new google.maps.LatLng(restaurants[restaurants.length-1].coordinates.latitude, restaurants[restaurants.length-1].coordinates.longitude),
+        travelMode: google.maps.TravelMode.WALKING,
+        waypoints: restaurants.map((restaurant,index) => {
+          if(index !== 0 || index !== restaurants.length-1){
+            console.log(restaurant)
             return (
               {
                  location: new google.maps.LatLng(restaurant.coordinates.latitude,restaurant.coordinates.longitude)
@@ -288,6 +316,7 @@ const MapWithADirectionsRenderer = compose(
     
     }}
   >
+
     {props.directions && <DirectionsRenderer directions={props.directions} options= {{polylineOptions: { strokeColor: "orange"}}} />}
 
     <Marker
@@ -303,25 +332,24 @@ const MapWithADirectionsRenderer = compose(
 
 
 export default class MapTest extends Component {
-  constructor(props){
-    super(props)
-    this.state ={
-      data: this.props
-    }
+  // constructor(props){
+  //   super(props)
+    
 
-  }
+  // }
   
   render() {
-    console.log(this.props)
     if(this.props.sendRouteData){
+      // console.log(this.props.sendRouteData)
       return (
         <div>
           <MapWithADirectionsRenderer sendRouteData={this.props.sendRouteData}/>
         </div>
+
       );
 
     }else{
-      return <p>Loading...</p>
+      return <p></p>
     }
   }
 }
