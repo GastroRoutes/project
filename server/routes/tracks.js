@@ -56,7 +56,7 @@ trackRouter.post(
       return {
         restaurantName: restaurant.name,
         categories: restaurant.categories[0].alias,
-        restaurantPhoto: restaurant.photo,
+        restaurantPhoto: restaurant.restaurantPhoto,
         rating: restaurant.rating,
         review_count: restaurant.review_count,
         price: restaurant.price,

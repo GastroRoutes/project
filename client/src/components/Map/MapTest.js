@@ -32,22 +32,33 @@ const MapWithADirectionsRenderer = compose(
     componentDidMount() {
       let restaurants = this.props.sendRouteData.restaurants;
       const DirectionsService = new google.maps.DirectionsService();
-
       
-      DirectionsService.route({
-        origin: new google.maps.LatLng(restaurants[0].coordinates.latitude, restaurants[0].coordinates.longitude),
-        destination: new google.maps.LatLng(restaurants[restaurants.length-1].coordinates.latitude, restaurants[restaurants.length-1].coordinates.longitude),
-        travelMode: google.maps.TravelMode.WALKING,
-        waypoints: restaurants.map((restaurant,index) => {
-          if(index !== 0 || index !== restaurants.length-1){
-            console.log(restaurant)
-            return (
-              {
-                 location: new google.maps.LatLng(restaurant.coordinates.latitude,restaurant.coordinates.longitude)
-              }
-            )
+      let waypointsArr = []
+         restaurants.map((restaurant,index) => {
+           console.log(restaurant)
+          if((index !== 0) && (index !== (restaurants.length-1))){
+            waypointsArr.push({location: new google.maps.LatLng(restaurant.coordinates.latitude,restaurant.coordinates.longitude)})           
           }
         })
+        console.log(waypointsArr)
+        
+      DirectionsService.route({
+        origin: new google.maps.LatLng(restaurants[0].coordinates.latitude, restaurants[0].coordinates.longitude),
+         waypoints: waypointsArr,
+        // restaurants.map((restaurant,index) => {
+       
+        //   // if((index !== 0) || (index !== restaurants.length-1)){
+        //     // console.log(restaurant)
+        //     console.log("holaa",index, restaurant)
+        //     return (
+        //       {
+        //           location: new google.maps.LatLng(restaurant.coordinates.latitude,restaurant.coordinates.longitude)
+        //       }
+        //     )
+        //   // }
+        // }),
+        destination: new google.maps.LatLng(restaurants[restaurants.length-1].coordinates.latitude, restaurants[restaurants.length-1].coordinates.longitude),
+        travelMode: google.maps.TravelMode.WALKING,
      }, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
            this.setState({
@@ -58,24 +69,23 @@ const MapWithADirectionsRenderer = compose(
         }
      });
     },
+
     componentDidUpdate(preProps) {
       let restaurants = this.props.sendRouteData.restaurants;
+      let waypointsArr = []
+      restaurants.map((restaurant,index) => {
+        console.log(restaurant)
+       if((index !== 0) && (index !== (restaurants.length-1))){
+         waypointsArr.push({location: new google.maps.LatLng(restaurant.coordinates.latitude,restaurant.coordinates.longitude)})           
+       }
+     })
       const DirectionsService = new google.maps.DirectionsService();
       // console.log(restaurants)
       DirectionsService.route({
         origin: new google.maps.LatLng(restaurants[0].coordinates.latitude, restaurants[0].coordinates.longitude),
         destination: new google.maps.LatLng(restaurants[restaurants.length-1].coordinates.latitude, restaurants[restaurants.length-1].coordinates.longitude),
         travelMode: google.maps.TravelMode.WALKING,
-        waypoints: restaurants.map((restaurant,index) => {
-          if(index !== 0 || index !== restaurants.length-1){
-            console.log(restaurant)
-            return (
-              {
-                 location: new google.maps.LatLng(restaurant.coordinates.latitude,restaurant.coordinates.longitude)
-              }
-            )
-          }
-        })
+        waypoints: waypointsArr
      }, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
            this.setState({

@@ -15,3 +15,34 @@ width: 50%;
 #restaurantContainer{
     width: 25%;
 }
+
+#yourRoutes-container{
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+}
+#menu-routes-container{
+    border: 2px solid yellow;
+    width:20%;
+
+}
+
+#stops-container{
+    border: 2px solid red;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width:50%;
+    flex-wrap: wrap;
+    width: 50%
+}
+
+.each-stop-container{
+    border: 1px solid blue
+}
+
+.each-route-container{
+    border-bottom: 1px solid green;
+    width: 100%;
+
+}

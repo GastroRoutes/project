@@ -4,10 +4,9 @@ import "./YourRoutes.css";
 
 // import MyFancyComponent from "../../Map/Map";
 import MapTest from "../../Map/MapTest";
-// import TestMapasBorrar from "../../Map/TestMapasBorrar";
+import TestMapasBorrar from "../../Map/TestMapasBorrar";
 
 // import { div } from "gl-matrix/src/gl-matrix/vec2";
-
 
 export default class YourRoutes extends Component {
   constructor(props) {
@@ -25,25 +24,25 @@ export default class YourRoutes extends Component {
       },
       userRoutes: [{}],
       restaurant: null,
-      sendRouteData: null,
+      showRouteData: null
     };
     this.routes = [];
     this.getUserRoutes();
-    console.log(this.state.userRoutes)
+    console.log(this.state.userRoutes);
   }
-  
+
   // PETICIÓN DE TODAS LAS RUTAS DEL USUARIO
   getUserRoutes = () => {
-    return this.service.get("/")
-    .then(response => {
-      let userRoutesArr = response.data.track.createdTrack;
-      this.setState({ ...this.state, userRoutes: userRoutesArr });
-      return response;
-    })
-    .catch(err => console.log(err))
+    return this.service
+      .get("/")
+      .then(response => {
+        console.log(response.data.track);
+        let userRoutesArr = response.data.track.createdTrack;
+        this.setState({ ...this.state, userRoutes: userRoutesArr });
+        return response;
+      })
+      .catch(err => console.log(err));
   };
-  
-
 
   // CREAR RUTAS
   handleFormSubmit = e => {
@@ -57,7 +56,7 @@ export default class YourRoutes extends Component {
       this.getUserRoutes();
     });
   };
-  
+
   // handleChangeCREATE = e => {
   //   const { name, value } = e.target;
   //   let newRoute = this.state.createRoutes;
@@ -65,7 +64,7 @@ export default class YourRoutes extends Component {
   //   console.log(newRoute);
   //   this.setState({ ...this.state, createRoutes: newRoute });
   // };
-  
+
   getRoute = route => {
     return this.service.post("/createTrack", route).then(response =>
       // response)
@@ -73,130 +72,170 @@ export default class YourRoutes extends Component {
         // console.log(response)
         return response;
       }
-      );
-    };
+    );
+  };
 
-    
-    
-    // ACTUALIZAR RUTAS
-    handleFormSubmitUPDATE = (e, id) => {
-      e.preventDefault();
-      const { routesName, category, routesType } = this.state.createRoutes;
-      this.updateRoute({ routesName, category, routesType }, id).then(route => {
-        console.log(route.data.routesName);
-        this.getUserRoutes();
-        // this.props.getRoute(route.data.routesName) /// hay que tratarlo. Llega como array
-      });
-    };
-    
-    handleChangeUPDATE = e => {
-      const { name, value } = e.target;
-      let newRoute = this.state.createRoutes;
-      newRoute[name] = value;
-      console.log(newRoute);
-      this.setState({ ...this.state, createRoutes: newRoute });
-    };
-        
-    updateRoute = (route, id) => {
-      return this.service.post(`/${id}/update`, route)
-      .then(response => {
-        return response;
-      });
-    };
-    
-    // BORRAR RUTAS
-    deleteRoute = (e, id) => {
-      e.preventDefault();
-      return this.service.post(`/${id}/delete`, id).then(response => {
-        this.getUserRoutes();
-        return response;
-      });
-    };
+  // ACTUALIZAR RUTAS
+  handleFormSubmitUPDATE = (e, id) => {
+    e.preventDefault();
+    const { routesName, category, routesType } = this.state.createRoutes;
+    this.updateRoute({ routesName, category, routesType }, id).then(route => {
+      console.log(route.data.routesName);
+      this.getUserRoutes();
+      // this.props.getRoute(route.data.routesName) /// hay que tratarlo. Llega como array
+    });
+  };
 
-    showRoutesDetails = (route)=>{
-      this.setState({...this.state, sendRouteData: route})
-    }
-    // componentDidMount() {
-      //   this.getRestaurants();
-      //   console.log(this.getRestaurants())
-      // }
-      
-      render() {
-        
-        const userRoutes = 
-      this.state.userRoutes ? ( this.state.userRoutes.map((track,index) => {
-        return (
-          <div onClick={()=>this.showRoutesDetails(track)}style={{ border: "1px solid blue" }} key={track._id}>
-            <h3>Name: {track.routesName}</h3>
-            <p>Category: {track.category} </p>
+  handleChangeUPDATE = e => {
+    const { name, value } = e.target;
+    let newRoute = this.state.createRoutes;
+    newRoute[name] = value;
+    console.log(newRoute);
+    this.setState({ ...this.state, createRoutes: newRoute });
+  };
 
-            <img src={track.image} alt="image"/>
-            <form onSubmit={e => this.handleFormSubmitUPDATE(e, track._id)}>
-              <label>Actualizar rutas: </label>
+  updateRoute = (route, id) => {
+    return this.service.post(`/${id}/update`, route).then(response => {
+      return response;
+    });
+  };
 
-              <input
-                type="text"
-                name="routesName"
-                onChange={e => this.handleChangeUPDATE(e)}
-                placeholder="Nombre de la ruta"
-                autoComplete="off"
-              />
-              <input
-                type="text"
-                name="category"
-                onChange={e => this.handleChangeUPDATE(e)}
-                placeholder="Categoría"
-                autoComplete="off"
-              />
-              <input
-                type="text"
-                name="routesType"
-                onChange={e => this.handleChangeUPDATE(e)}
-                placeholder="Tipo de ruta"
-                autoComplete="off"
-              />
+  // BORRAR RUTAS
+  deleteRoute = (e, id) => {
+    e.preventDefault();
+    return this.service.post(`/${id}/delete`, id).then(response => {
+      this.getUserRoutes();
+      return response;
+    });
+  };
 
-              {/* <input
+  // showRoutesDetails = route => {
+  //   console.log("entra");
+  //   this.state.showRouteData
+  //     ? this.setState({ ...this.state, showRouteData: null })
+  //     : this.setState({ ...this.state, showRouteData: route });
+  // };
+  showRoutesDetails = route => {
+       this.setState({ ...this.state, showRouteData: route });
+  };
+
+  showAllYourRoutes = ()=>{
+    this.setState({...this.state, showRouteData: null})
+  }
+
+  render() {
+    console.log(this.state.showRouteData);
+
+    const userRoutes = this.state.userRoutes
+      ? this.state.userRoutes.map((track, index) => {
+          return (
+            <div
+              onClick={() => this.showRoutesDetails(track)}
+              style={{ border: "1px solid blue" }}
+              key={track._id}
+            >
+              <h3>Name: {track.routesName}</h3>
+              <p>Category: {track.category} </p>
+
+              <img src={track.image} alt="image" />
+              <form onSubmit={e => this.handleFormSubmitUPDATE(e, track._id)}>
+                <label>Actualizar rutas: </label>
+                <input
+                  type="text"
+                  name="routesName"
+                  onChange={e => this.handleChangeUPDATE(e)}
+                  placeholder="Nombre de la ruta"
+                  autoComplete="off"
+                />
+                <input
+                  type="text"
+                  name="category"
+                  onChange={e => this.handleChangeUPDATE(e)}
+                  placeholder="Categoría"
+                  autoComplete="off"
+                />
+                <input
+                  type="text"
+                  name="routesType"
+                  onChange={e => this.handleChangeUPDATE(e)}
+                  placeholder="Tipo de ruta"
+                  autoComplete="off"
+                />
+
+                {/* <input
           type="file"
           name="Photo"
           onChange={e => this.handleChangeUPDATE(e)}
         /> */}
-        
-              <input type="submit" />
-              {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
+
+                <input type="submit" />
+                {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
+                <br />
+                <br />
+                <br />
+              </form>
+              {/* <img src={`${track.image_url}`} style={{ width: "10%" }} /> */}
+              <br />
+              <form onSubmit={e => this.deleteRoute(e, track._id)}>
+                <input value="DELETE" type="submit" />
+              </form>
               <br />
               <br />
-              <br />
-            </form>
-            {/* <img src={`${track.image_url}`} style={{ width: "10%" }} /> */}
-            <br />
-            <form onSubmit={(e) => this.deleteRoute(e, track._id)}>
-            <input
-              value="DELETE"
-              type="submit"
-            />
-            </form>
-            <br />
-            <br />
-          </div>
-        );
-      })) : ("no hay rutas")
-      return (
-        <div>
-        <hr  />
+            </div>
+          );
+        })
+      : "no hay rutas";
+
+    const showRouteDetails = this.state.showRouteData;
+    const showRouteData = showRouteDetails ? (
+      <div id="yourRoutes-container">
+        <div id="menu-routes-container" >
+          {this.state.userRoutes.map(userRoute => {
+            return (
+              <div className="each-route-container" onClick={() => this.showRoutesDetails(userRoute)}>
+                <h3>{userRoute.routesName}</h3>
+                <h4>{userRoute.date}</h4>
+              </div>
+            );
+          })}
+          <button onClick={this.showAllYourRoutes}>
+            Mostrar todas tus rutas
+          </button>
+        </div>
+        <div id="stops-container">
+          {this.state.showRouteData.restaurants.map(
+            (restaurantOfRoute, index) => {
+              return (
+                <div className="each-stop-container">
+                  <img src={restaurantOfRoute.restaurantPhoto} />
+                  <h2>
+                    Parada {index + 1}: {restaurantOfRoute.restaurantName}
+                  </h2>
+                </div>
+              );
+            }
+          )}
+        </div>
+      </div>
+    ) : (
+      <div>{userRoutes}</div>
+    );
+
+    return (
+      <div>
+        <hr />
         <h1>Tus rutas</h1>
-        <h3>{this.state.routesName}</h3>
-        <br />
-        <br />
-        <br />
-{userRoutes}
-       
-       {/* <MyFancyComponent /> */}
-       { <MapTest sendRouteData={this.state.sendRouteData}/> }
 
+        <br />
+        <br />
+        <br />
 
-{/* Borrar componente TestMapasBorrar y archivo una vez echas las pruebas */}
-       {/* {<TestMapasBorrar />}  */}
+        {showRouteData}
+        {/* <MyFancyComponent /> */}
+        {<MapTest sendRouteData={this.state.showRouteData} />}
+
+        {/* Borrar componente TestMapasBorrar y archivo una vez echas las pruebas */}
+        {/* {<TestMapasBorrar />}  */}
       </div>
     );
   }
