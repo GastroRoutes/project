@@ -9,28 +9,34 @@ import { Route, Link } from "react-router-dom";
 import AuthService from "./auth/AuthService";
 // import { Route, Link } from "react-router-dom";
 
-
 export default class Home extends Component {
-constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.props.fetchUser();
-    this.AuthService = new AuthService()
-}
+    this.AuthService = new AuthService();
+  }
   render() {
     return (
-        
-        <div>
-            <h1>No user</h1>
-         <Route
+      <div class="mainImage">
+        <img src="/images/gif preload.gif" alt="" />
+        <div />
+        <h1>No user</h1>
+        <Route
           path="/signup"
-          render={() => <Signup getUser={this.props.getUser} fetchUser={this.props.fetchUser}/>}
+          render={() => (
+            <Signup
+              getUser={this.props.getUser}
+              fetchUser={this.props.fetchUser}
+            />
+          )}
         />
-        <Route path="/login" render={() => <Login getUser={this.props.getUser} />} />
-      <Link to="/">Home</Link> - 
-      <Link to="/signup">Signup</Link> -{" "}
-      <Link to="/login">Login</Link>
-        </div>
-
+        <Route
+          path="/login"
+          render={() => <Login getUser={this.props.getUser} />}
+        />
+        <Link to="/">Home</Link> -<Link to="/signup">Signup</Link> -{" "}
+        <Link to="/login">Login</Link>
+      </div>
     );
   }
 }
