@@ -51,7 +51,7 @@ class InputYelp extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={e => this.handleFormSubmit(e, this.props.state)}>
+        <form className="center-form-yelp" onSubmit={e => this.handleFormSubmit(e, this.props.state)}>
           <input
             type="text"
             name="term"

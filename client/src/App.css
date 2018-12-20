@@ -6,14 +6,17 @@ body{
   margin: 0;
   padding:0;
   font-family: Lato, Roboto, "Helvetica Neue", Helvetica, Arial;
+
 }
 form {
   padding: 10px;
   border: none;
   border-bottom: 2px;
 }
-
-input[type=text], input[type=email]{
+p,h1,h2,h3,h4,h5{
+  opacity: .5;
+}
+input[type=text], input[type=email], input[type=password], input[type=submit], input[type=date], input[type=time]{
   border: none;
   border-bottom: 1px solid rgba(0,0,0,0.2);
   margin : 1%;
@@ -22,16 +25,34 @@ input[type=text], input[type=email]{
   box-shadow: 1px 1px 5px rgba(255,255,255,0.1);
   border-radius: 20px;
   padding: 10px;
-}
 
-input[type=text]:focus, input[type=email]:focus{ 
+  /* hola pistachitos one more time */
+    box-shadow: 0px 2px 33px 0px rgba(0,0,0,0.1);
+    padding: 16px;
+    border-width: 0;
+    font-weight: 600;
+    font-size: 13px;
+    color: #bcbcbc!important;
+    text-align: left;
+}
+input[type=submit]{
+  color: #ff6100;
+  font-weight: bold;
+  border: 1px solid rgba(0,0,0,0.5);
+  width: 30%;
+}
+input[type=file]{
+  color: transparent;
+  font-weight: bold;
+  width: 30%;
+}
+input[type=text]:focus, input[type=email]:focus, input[type=password]{ 
   outline: 0px;
-  border-bottom: 1px solid rgba(0,0,0,0.6);
+  border-bottom: 1px solid #ff6100;
   transition:width 1s
-
 }
 
-input[type=text]:hover, input[type=email]:hover{
+input[type=text]:hover, input[type=email]:hover, input[type=password]{
   transition: 1s;
   animation-duration: 1s;
 
@@ -42,4 +63,89 @@ h2{
 }
 h1{
   font-size: 2em;
+}
+.form-container label {
+  text-transform: uppercase;
+  text-align: left;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  opacity: .5;
+}
+
+
+/* HOLA PISTACHITOS */
+button, input[type="submit"] {
+  background: #fff;
+    color: #7a47cc!important;
+    padding: 14px 38px!important;
+    font-size: 13px!important;
+    letter-spacing: 2px!important;
+    font-weight: 700!important;
+    text-transform: uppercase;
+    text-align: center;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    border-radius: 30px;
+    -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.15);
+    box-shadow: 0 10px 50px rgba(50,50,93,.15);
+    -webkit-animation: fadein 5s;
+    animation: fadein 5s;
+    cursor: pointer;
+    border: none;
+    width: fit-content;
+}
+
+button:active, input[type="submit"]:active {
+  outline: none;
+}
+
+
+
+button:hover, input[type="submit"]:hover {
+  background: #7a47cc;
+    color: #fff!important;
+    opacity: 1!important;
+    -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
+    box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
+}
+.center-form-yelp{
+
+  display: flex;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px;
+  width: 100%;
+  justify-content: center;
+}
+.center-form{
+
+    display: flex;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.form-inputs{
+  align-items: center;
+}
+
+input[type="file"]{
+  width: 12%;
+}
+
+.align-buttoms{
+ margin:0.5rem 5rem;
+}
+
+.routes-from-profile{
+  margin: -2rem 0;
+}
+
+.component-container{
+  width:100%;
 }

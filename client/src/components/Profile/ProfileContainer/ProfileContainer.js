@@ -83,8 +83,7 @@ export default class Profile extends Component {
   render() {
     const showRoutesType = this.state.yourRoutes ? (
       <div>
-        <button onClick={this.changeRoutes}>Rutas Guardadas</button>
-        
+        <button className="align-buttoms" onClick={this.changeRoutes}>Rutas Guardadas</button>
         <YourRoutes
           userRoutes={this.userRoutes}
           createRoutes={this.props.createRoutes}
@@ -100,7 +99,7 @@ export default class Profile extends Component {
     );
     const createRoutesOrShowRoutes = this.state.createRoutesToggle ? (
       <section className="routes-from-profile">
-        <button onClick={this.createRouteButton}>Tus rutas</button>
+        <button className="align-buttoms" onClick={this.createRouteButton}>Tus rutas</button>
         <CreateRoutes
           createRoutes={this.createRoutes}
           getRoutes={this.getRoutes}
@@ -109,7 +108,7 @@ export default class Profile extends Component {
       </section>
     ) : (
       <div>
-        <button onClick={this.createRouteButton}>Crear Ruta</button>
+        <button className="align-buttoms" onClick={this.createRouteButton}>Crear Ruta</button>
         {showRoutesType}
       </div>
     );
@@ -132,6 +131,12 @@ export default class Profile extends Component {
             autoComplete="off"
             onChange={e => this.handleChange(e)}
           />
+            <input
+            type="text"
+            name="taste"
+            autoComplete="off"
+            placeholder="Tus gustos"
+          />
           <input
             type="file"
             name="photo"
@@ -152,6 +157,7 @@ export default class Profile extends Component {
             {showUpdateProfile}
           </div>
         </div>
+          <hr className="big-hr"/>
 
         {createRoutesOrShowRoutes}
         {/* {createRoute} */}

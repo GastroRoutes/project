@@ -125,15 +125,12 @@ export default class YourRoutes extends Component {
       <div className="show-route-container">
         {this.state.userRoutes.map((track, index) => {
           return (
-            <div
-              className="yourRoutes-container"
-              onClick={() => this.showRoutesDetails(track)}
-              key={track._id}
-            >
+            <div className="yourRoutes-container" key={track._id}>
               <div>
                 <div
                   className="each-Route"
-                        style={{ backgroundImage: `url(${track.image})`}}
+                  onClick={() => this.showRoutesDetails(track)}
+                  style={{ backgroundImage: `url(${track.image})` }}
                 >
                   <div className="route-details">
                     <h3>{track.routesName}</h3>
@@ -174,17 +171,15 @@ export default class YourRoutes extends Component {
         /> */}
                 <input type="submit" />
                 {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
-                <br />
-                <br />
-                <br />
               </form>
               {/* <img src={`${track.image_url}`} style={{ width: "10%" }} /> */}
-              <br />
-              <form onSubmit={e => this.deleteRoute(e, track._id)}>
-                <input value="DELETE" type="submit" />
+
+              <form
+                className="form-delete"
+                onSubmit={e => this.deleteRoute(e, track._id)}
+              >
+                <input value="X" type="submit" />
               </form>
-              <br />
-              <br />
             </div>
           );
         })}
@@ -233,14 +228,8 @@ export default class YourRoutes extends Component {
     );
 
     return (
-      <div>
-        <hr />
+      <div className="yourRoutes-big-container">
         <h1>Tus rutas</h1>
-
-        <br />
-        <br />
-        <br />
-
         {showRouteData}
 
         {<MapTest sendRouteData={this.state.showRouteData} />}

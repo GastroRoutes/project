@@ -54,7 +54,7 @@ trackRouter.post(
 
     let totalRestaurants = JSON.parse(selectedRestaurants);
 
-    console.log("OJO DATA SERVER", totalRestaurants);
+
 
     let restaurantsArray = totalRestaurants.map(restaurant => {
       return {
@@ -113,7 +113,6 @@ trackRouter.post(
 );
 
 trackRouter.post("/:id/delete", (req, res, next) => {
-  console.log("Estoy en delete, en back");
   Track.findByIdAndRemove(req.params.id)
     .then(track => res.status(200).json(track))
     .catch(error => next(error));
@@ -171,13 +170,12 @@ trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
 trackRouter.post("/:id/followRoutes", (req, res, next) => {
   const routeID = req.params.id;
   const _id = req.user.id;
-  console.log(routeID);
-  console.log(_id);
+
 
   User.findByIdAndUpdate({ _id }, { $push: { savedRoutes: routeID } })
     .populate("savedRoutes")
     .then(user => {
-      console.log(track)
+
       res.status(200).json(user);
     })
     .catch(err => {

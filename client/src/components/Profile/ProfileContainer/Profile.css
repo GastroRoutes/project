@@ -7,9 +7,14 @@
 }
 #profile-photo{
     width: 20%;
+    object-fit: contain;
 }
 #profile-details-container{
     width: 60%;
     height: 60%;
     padding: 5%;
+}
+
+.big-hr{
+    width: 90% !important;
 }
