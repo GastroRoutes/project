@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./reset.css"
 import "./App.css";
 import Message from "./components/Message";
 import AuthService from "./components/Home/auth/AuthService";
@@ -8,6 +9,8 @@ import Profile from "./components/Profile/ProfileContainer/ProfileContainer";
 import InputYelp from "./components/Profile/YourRoutes/yelp";
 import NavBar from "./components/Navbar/NavBar";
 import AllRoutes from "./components/AllRoutes/AllRoutes"
+
+
 class App extends Component {
   constructor() {
     super();
