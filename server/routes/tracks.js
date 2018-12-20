@@ -25,6 +25,10 @@ trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
         model: "Restaurants"
       }
     })
+    .populate({
+      path: "creatorID",
+      model: "User",
+    })
     // .populate("savedRoutes")
     .then(track => {
       // console.log(req.user)
@@ -76,15 +80,13 @@ trackRouter.post(
       };
     });
 
-    console.log(restaurantsArray);
+
 
     Restaurants.insertMany(restaurantsArray, (err, insertedRestuants) => {
-      console.log("ojito inserted", insertedRestuants);
 
       let arrayOfIds = insertedRestuants.map(restaurant => {
         return restaurant._id;
       });
-      console.log("el array de IDs es", arrayOfIds);
 
       const newTrack = new Track({
         routesName: routesName,
@@ -93,19 +95,17 @@ trackRouter.post(
         hour: hour,
         duration: duration,
         image: image,
-        restaurants: arrayOfIds
-
-        // restaurants,        /// recordad meterlo en la constante
+        restaurants: arrayOfIds,
+        creatorID: _id
       });
 
       newTrack.save().then(track => {
         User.findByIdAndUpdate(_id, { $push: { createdTrack: track._id } })
-          // console.log(track)
-          .then(user => user)
+
           .then(user => {
-            Track.findById({ _id: track._id }, { user: user._id }).then(() =>
               res.status(200).json({ track, user })
-            );
+            // } 
+            // );
           });
       });
     });
@@ -149,7 +149,7 @@ trackRouter.post("/:id/update", (req, res, next) => {
 });
 
 trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
-  console.log("//////////////////////////////////////////    GET ALL ROUTES");
+
   // Promise.all()
   Track.find()
     .then(track => track)
@@ -158,7 +158,6 @@ trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
       User.find()
         .populate("savedRoutes")
         .then(user => {
-          console.log(user, track);
           res.status(200).json({ track, savedRoutes: user.savedRoutes });
         });
     });
@@ -178,7 +177,7 @@ trackRouter.post("/:id/followRoutes", (req, res, next) => {
   User.findByIdAndUpdate({ _id }, { $push: { savedRoutes: routeID } })
     .populate("savedRoutes")
     .then(user => {
-      console.log();
+      console.log(track)
       res.status(200).json(user);
     })
     .catch(err => {

@@ -74,16 +74,17 @@ export default class Profile extends Component {
       : this.setState({ ...this.state, showUpdateProfileButton: true });
   };
 
-  changeRoutes = ()=>{
+  changeRoutes = () => {
     this.state.yourRoutes
-    ? this.setState({ ...this.state, yourRoutes: null })
-    : this.setState({ ...this.state, yourRoutes: true });
-};
+      ? this.setState({ ...this.state, yourRoutes: null })
+      : this.setState({ ...this.state, yourRoutes: true });
+  };
 
   render() {
     const showRoutesType = this.state.yourRoutes ? (
       <div>
         <button onClick={this.changeRoutes}>Rutas Guardadas</button>
+        
         <YourRoutes
           userRoutes={this.userRoutes}
           createRoutes={this.props.createRoutes}
@@ -94,19 +95,18 @@ export default class Profile extends Component {
     ) : (
       <div>
         <button onClick={this.changeRoutes}>Tus publicaciones</button>
-        <SavedRoutes user={this.state.user}/>  
-
+        <SavedRoutes user={this.state.user} />
       </div>
-    )
+    );
     const createRoutesOrShowRoutes = this.state.createRoutesToggle ? (
-      <div>
+      <section className="routes-from-profile">
         <button onClick={this.createRouteButton}>Tus rutas</button>
         <CreateRoutes
           createRoutes={this.createRoutes}
           getRoutes={this.getRoutes}
           state={this.state}
         />
-      </div>
+      </section>
     ) : (
       <div>
         <button onClick={this.createRouteButton}>Crear Ruta</button>
@@ -125,7 +125,6 @@ export default class Profile extends Component {
             autoComplete="off"
             onChange={e => this.handleChange(e)}
           />
-
           <input
             type="email"
             name="email"
@@ -133,7 +132,6 @@ export default class Profile extends Component {
             autoComplete="off"
             onChange={e => this.handleChange(e)}
           />
-
           <input
             type="file"
             name="photo"
@@ -147,9 +145,13 @@ export default class Profile extends Component {
     );
     return (
       <div>
-        <h1>{this.state.user.username}</h1>
-        <img id="profile-photo" src={this.state.user.imgPath} alt="" />
-        {showUpdateProfile}
+        <div id="profile-details">
+          <img id="profile-photo" src={this.state.user.imgPath} alt="" />
+          <div id="profile-details-container">
+            <h1>{this.state.user.username}</h1>
+            {showUpdateProfile}
+          </div>
+        </div>
 
         {createRoutesOrShowRoutes}
         {/* {createRoute} */}
