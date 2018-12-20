@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./YourRoutes.css";
-
-// import MyFancyComponent from "../../Map/Map";
 import MapTest from "../../Map/MapTest";
-import TestMapasBorrar from "../../Map/TestMapasBorrar";
 
-// import { div } from "gl-matrix/src/gl-matrix/vec2";
+
 
 export default class YourRoutes extends Component {
   constructor(props) {
@@ -231,7 +228,7 @@ export default class YourRoutes extends Component {
         <br />
 
         {showRouteData}
-        {/* <MyFancyComponent /> */}
+
         {<MapTest sendRouteData={this.state.showRouteData} />}
 
         {/* Borrar componente TestMapasBorrar y archivo una vez echas las pruebas */}

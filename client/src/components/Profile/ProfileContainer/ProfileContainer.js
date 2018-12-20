@@ -125,7 +125,6 @@ export default class Profile extends Component {
             autoComplete="off"
             onChange={e => this.handleChange(e)}
           />
-
           <input
             type="email"
             name="email"
@@ -133,7 +132,6 @@ export default class Profile extends Component {
             autoComplete="off"
             onChange={e => this.handleChange(e)}
           />
-
           <input
             type="file"
             name="photo"
@@ -147,9 +145,11 @@ export default class Profile extends Component {
     );
     return (
       <div>
-        <h1>{this.state.user.username}</h1>
+      <div id="profile-details">
         <img id="profile-photo" src={this.state.user.imgPath} alt="" />
+        <h1>{this.state.user.username}</h1>
         {showUpdateProfile}
+      </div>
 
         {createRoutesOrShowRoutes}
         {/* {createRoute} */}

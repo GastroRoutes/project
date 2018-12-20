@@ -1,3 +1,9 @@
 #profile-photo{
     width: 20%;
 }
+
+#profile-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

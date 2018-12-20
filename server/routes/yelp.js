@@ -16,7 +16,6 @@ router.post('/yelp', (req,res)=>{
         location: req.body.term.location
       }).then(response => {
         res.status(200).json(response.jsonBody.businesses)
-        console.log(response.jsonBody.businesses)
       }).catch(e => {
         console.log(e);
       });
