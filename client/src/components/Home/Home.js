@@ -17,26 +17,51 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <div class="mainImage">
-        <img src="/images/gif preload.gif" alt="" />
-        <div />
-        <h1>No user</h1>
-        <Route
-          path="/signup"
-          render={() => (
-            <Signup
-              getUser={this.props.getUser}
-              fetchUser={this.props.fetchUser}
-            />
-          )}
-        />
-        <Route
-          path="/login"
-          render={() => <Login getUser={this.props.getUser} />}
-        />
-        <Link to="/">Home</Link> -<Link to="/signup">Signup</Link> -{" "}
-        <Link to="/login">Login</Link>
+<div>
+      <header>
+      <div class="background-image">
+      <img src="/images/barimg.png" alt=""/>
       </div>
+      <div class="register">
+        <div>
+          <Signup
+            getUser={this.props.getUser}
+            fetchUser={this.props.fetchUser}
+          />
+        </div>
+        <div>
+          <Route
+            path="/login"
+            render={() => <Login getUser={this.props.getUser} />}
+          />
+          <Link to="/">Home</Link> -<Link to="/signup">Signup</Link> -{" "}
+          <Link to="/login">Login</Link>
+        </div>
+        </div>
+      </header>
+      <section className="mainText">
+      <h3>Rutas gastronómicas por el mundo</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, iure optio velit hic necessitatibus recusandae! Velit dignissimos, veniam nobis eos accusamus recusandae ea asperiores sed, laborum repellat libero, ad quam!
+        </p>
+      </section>
+      <hr/>
+      <section class="carrusel-img">
+        <img src="/images/carrusel.png" alt=""/>
+      </section>
+      <hr/>
+      <section className="mainText">
+      <h3>Rutas gastronómicas por el mundo</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, iure optio velit hic necessitatibus recusandae! Velit dignissimos, veniam nobis eos accusamus recusandae ea asperiores sed, laborum repellat libero, ad quam!
+        </p>
+      </section>
+
+<footer>
+  Copyright 2018 Jorge Devesa & Ángel Terrón
+</footer>
+     </div>
+
     );
   }
 }
