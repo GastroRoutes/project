@@ -4,7 +4,27 @@ width: 100%;
 
 .register{
     position: absolute;
-    top:0;  
+    padding: 10px;
+    border-radius: 5px;
+    right: 13%;
+    margin-top: 11%;
+    font-size: 14px;
+    
+
+}
+.register button{
+    border-radius:  5px;
+    width: 10rem;
+    padding: .7rem 1rem;
+    text-align: center;
+    background-color: rgba(255,255,255);
+    margin: 1px;
+    
+}
+
+.register a{
+  text-decoration: none;
+    color: black;
 }
 
 .mainText {
@@ -12,6 +32,15 @@ width: 100%;
     margin: 5% auto;
     font-size: 20px;
     color: grey;
+    text-align: justify;
+}
+.register-buttons{
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    right: 13%;
+    margin-top: 11%;
+    font-size: 14px;
 }
 
 h3{
@@ -44,3 +73,10 @@ footer{
     justify-content: center;
     margin: 20px auto 0px;
 }
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+

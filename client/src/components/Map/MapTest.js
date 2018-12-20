@@ -329,15 +329,16 @@ const MapWithADirectionsRenderer = compose(
   >
 
     {props.directions && <DirectionsRenderer directions={props.directions} options= {{polylineOptions: { strokeColor: "orange"}}} />}
-
+{/* 
     <Marker
       position={{ lat: -34.397, lng: 150.644 }}
       onClick={props.onToggleOpen}
+      options={{icon:'../../../public/images/icono.jpg'}}
     >
       {props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
         <FaAnchor />
       </InfoWindow>}
-    </Marker>
+    </Marker> */}
   </GoogleMap>
 ));
 
