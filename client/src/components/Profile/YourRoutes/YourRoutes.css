@@ -1,30 +1,6 @@
-img{
-width: 50%;
-
-}
-
-#restaurantsContainer{
-    display: flex; 
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-right: 0;
-    margin: 0 10%;
-}
-
-#restaurantContainer{
-    width: 25%;
-}
-
-#yourRoutes-container{
-    display: flex;
-    justify-content: center;
-    border: 1px solid black;
-}
-#menu-routes-container{
+.menu-routes-container{
     border: 2px solid yellow;
-    width:20%;
-
+    width:0%
 }
 
 #stops-container{
@@ -34,9 +10,15 @@ width: 50%;
     flex-direction: column;
     width:50%;
     flex-wrap: wrap;
-    width: 50%
-}
 
+}
+.yourRoutes-container{
+    width: 30%;
+    border-radius: 15px;
+    border: 1px solid black;
+    margin: 0.3rem;
+    
+}
 .each-stop-container{
     border: 1px solid blue
 }
@@ -45,4 +27,43 @@ width: 50%;
     border-bottom: 1px solid green;
     width: 100%;
 
+}
+.show-route-container{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+.route-details{
+    background-color: rgba(255,255,255,0.9);
+    background-size: cover; 
+    margin: 1rem 3rem;
+    top:-5rem;
+    box-shadow: 3px 3px 8px black;
+    border-radius: 5px;
+}
+.each-Route{
+
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-top-left-radius: 15px;
+    border-top-right-radius:15px;;
+    
+
+}
+.form-container{
+    display: flex;
+    flex-direction: column;
+
+}
+h3{
+    margin:0;
+}
+p{
+    margin: 0;
+    padding: 0;
 }

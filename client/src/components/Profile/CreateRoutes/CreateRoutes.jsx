@@ -92,7 +92,7 @@ return response;
         );
       })
     ) : (
-      <div></div>
+      <div><h3>Aún no has añadido paradas</h3></div>
     );
 
     let selectedRestaurants = 'No hay pistachitos seleccionados'

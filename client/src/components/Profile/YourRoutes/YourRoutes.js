@@ -3,8 +3,6 @@ import axios from "axios";
 import "./YourRoutes.css";
 import MapTest from "../../Map/MapTest";
 
-
-
 export default class YourRoutes extends Component {
   constructor(props) {
     super(props);
@@ -113,29 +111,40 @@ export default class YourRoutes extends Component {
   //     : this.setState({ ...this.state, showRouteData: route });
   // };
   showRoutesDetails = route => {
-       this.setState({ ...this.state, showRouteData: route });
+    this.setState({ ...this.state, showRouteData: route });
   };
 
-  showAllYourRoutes = ()=>{
-    this.setState({...this.state, showRouteData: null})
-  }
+  showAllYourRoutes = () => {
+    this.setState({ ...this.state, showRouteData: null });
+  };
 
   render() {
     console.log(this.state.showRouteData);
 
-    const userRoutes = this.state.userRoutes
-      ? this.state.userRoutes.map((track, index) => {
+    const userRoutes = this.state.userRoutes ? (
+      <div className="show-route-container">
+        {this.state.userRoutes.map((track, index) => {
           return (
             <div
+              className="yourRoutes-container"
               onClick={() => this.showRoutesDetails(track)}
-              style={{ border: "1px solid blue" }}
               key={track._id}
             >
-              <h3>Name: {track.routesName}</h3>
-              <p>Category: {track.category} </p>
-
-              <img src={track.image} alt="image" />
-              <form onSubmit={e => this.handleFormSubmitUPDATE(e, track._id)}>
+              <div>
+                <div
+                  className="each-Route"
+                        style={{ backgroundImage: `url(${track.image})`}}
+                >
+                  <div className="route-details">
+                    <h3>{track.routesName}</h3>
+                    <p>Categoría: {track.category}</p>
+                  </div>
+                </div>
+              </div>
+              <form
+                className="form-container"
+                onSubmit={e => this.handleFormSubmitUPDATE(e, track._id)}
+              >
                 <label>Actualizar rutas: </label>
                 <input
                   type="text"
@@ -158,13 +167,11 @@ export default class YourRoutes extends Component {
                   placeholder="Tipo de ruta"
                   autoComplete="off"
                 />
-
                 {/* <input
           type="file"
           name="Photo"
           onChange={e => this.handleChangeUPDATE(e)}
         /> */}
-
                 <input type="submit" />
                 {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
                 <br />
@@ -180,16 +187,23 @@ export default class YourRoutes extends Component {
               <br />
             </div>
           );
-        })
-      : "no hay rutas";
+        })}
+      </div>
+    ) : (
+      "no hay rutas"
+    );
 
     const showRouteDetails = this.state.showRouteData;
     const showRouteData = showRouteDetails ? (
-      <div id="yourRoutes-container">
-        <div id="menu-routes-container" >
+      <div className="yourRoutes-container">
+        <div classNAme="menu-routes-container">
           {this.state.userRoutes.map(userRoute => {
+            console.log(userRoute);
             return (
-              <div className="each-route-container" onClick={() => this.showRoutesDetails(userRoute)}>
+              <div
+                className="each-route-container"
+                onClick={() => this.showRoutesDetails(userRoute)}
+              >
                 <h3>{userRoute.routesName}</h3>
                 <h4>{userRoute.date}</h4>
               </div>
