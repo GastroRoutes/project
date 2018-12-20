@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
 import { Route, Redirect, Link } from "react-router-dom";
-// import Home from '../Home';
 
 export default class Login extends Component {
   constructor() {
@@ -48,9 +47,9 @@ export default class Login extends Component {
     
     return (
       
-      <div>
+      <div class="register-container">
         <h2>Login</h2>
-        <form onSubmit={this.handleFormSubmit}>
+        <form onSubmit={this.handleFormSubmit} class="form">
           <label>Username</label>
           <input type="text" name="username" onChange={e => this.handleChange(e)} />
 
@@ -59,6 +58,9 @@ export default class Login extends Component {
 
          <input type="submit" value="Login"/>
         </form>
+        <div class="center-text">
+        <p>¿No tienes cuenta?</p><Link id="orange-text" to="/signup">Regístrate</Link>
+        </div>
       </div>
     )
   }

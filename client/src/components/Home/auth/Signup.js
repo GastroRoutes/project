@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
 import {Redirect} from "react-router-dom";
-
+import "./Signup.css";
+import { Link } from "react-router-dom";
 export default class Signup extends Component {
   constructor() {
     super();
@@ -46,9 +47,9 @@ export default class Signup extends Component {
     }
 
     return (
-      <div>
+      <div class="register-container">
         <h2>Signup</h2>
-        <form onSubmit={this.handleFormSubmit}>
+        <form onSubmit={this.handleFormSubmit} class="form">
           <label>Nombre de usuario</label>
           <input type="text" name="username" onChange={e => this.handleChange(e)} />
 
@@ -64,6 +65,9 @@ export default class Signup extends Component {
 
           <input type="submit" value="Signup"/>
         </form>
+        <div class="center-text">
+        <p>¿Tienes una cuenta?</p><Link id="orange-text" to="/login">Login</Link>
+        </div>
       </div>
     )
   }
