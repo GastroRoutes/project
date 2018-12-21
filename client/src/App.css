@@ -178,3 +178,8 @@ margin: 1%;
 .register-containerp{
   margin: 1%;
   }
+
+ .main-menu-flex{
+display: flex;
+flex-direction: row;
+  }

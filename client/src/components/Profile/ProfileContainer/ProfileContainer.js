@@ -154,6 +154,7 @@ export default class Profile extends Component {
           <img id="profile-photo" src={this.state.user.imgPath} alt="" />
           <div id="profile-details-container">
             <h1>{this.state.user.username}</h1>
+            <h4>{this.state.user.email}</h4>
             {showUpdateProfile}
           </div>
         </div>
