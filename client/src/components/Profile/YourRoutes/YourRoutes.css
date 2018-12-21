@@ -1,11 +1,12 @@
 .menu-routes-container{
-    border: 2px solid yellow;
-    width:0%
+    width:40%;
+    text-align: center;
+    padding-top: 1rem;
 }
 
 #stops-container{
-    border: 2px solid red;
-    padding: 0;
+    border-left: 2px solid lightgrey;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     width:50%;
@@ -31,6 +32,7 @@
     margin: 1.5rem;
     box-shadow: 0px 1px 6px 0px rgba(50, 50, 50, 0.2);
     transition: all 0.4s ease-in-out;
+
 }
 
 .yourRoutes-container:hover {
@@ -38,15 +40,41 @@
     transform: translate(0, -4px);
 }
 
+.menu-half-routes{
+width: 95%;
+background-color: white;
+border-radius: 15px;
+margin: 1.5rem auto;
+box-shadow: 0px 1px 6px 0px rgba(50, 50, 50, 0.2);
+transition: all 0.4s ease-in-out;
+display: flex;
+flex-direction: row;
+align-content: center;
+}
+.menu-half-routes:hover {
+    box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+    transform: translate(0, -4px);
+}
+
 .each-stop-container{
-    border: 1px solid blue
+    text-align: justify;
+    font-size: .8em;
+    text-align: center;
+
+}
+.each-stop-container img{
+width: 30px;
 }
 
 .each-route-container{
-    border-bottom: 1px solid green;
     width: 100%;
-
+    text-align: center;
+    font-size: .8em;
 }
+.each-route-container h5{
+    margin: 5px;
+}
+
 .show-route-container{
     width: 90%;
     display: flex;
@@ -96,7 +124,7 @@ label {
     font-weight: 600;
     text-transform: uppercase;
     font-size: 13px;
-    color: #bcbcbc!important;
+    color: #ff6100!important;
     text-align: left;
 }
 .yourRoutes-container input[type=submit], button{
@@ -110,3 +138,11 @@ p{
     padding: 0;
 }
 
+.map{
+width: 80%;
+margin: 0 auto;
+}
+.map:hover{
+    box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+    transform: translate(0, -4px);
+    }

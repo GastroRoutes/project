@@ -47,7 +47,7 @@ export default class Login extends Component {
     
     return (
       
-      <div class="register-container">
+      <div class="register-container adjust-login-container">
         <h2>Login</h2>
         <form onSubmit={this.handleFormSubmit} class="form">
           <label>Username</label>

@@ -36,25 +36,30 @@ input[type=text], input[type=email], input[type=password], input[type=submit], i
     text-align: left;
 }
 input[type=submit]{
-  color: #ff6100;
+  color: #ECB84C;
   font-weight: bold;
   border: 1px solid rgba(0,0,0,0.5);
   width: 30%;
 }
-input[type=file]{
-  color: transparent;
-  font-weight: bold;
-  width: 30%;
-}
+
 input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=submit]:focus, input[type=date]:focus, input[type=time]:focus, input[type=file]:focus{ 
   outline: none !important;
-
-  box-shadow: 0px 0px 5px #7a47cc;
+  box-shadow: 0px 0px 5px #ECB84C;
   /* -webkit-transition: .3s all ease; */
   animation: 1s;
   transition-duration: 1s;
 }
-
+input[type=file]{
+  max-width: 80% !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  overflow: hidden !important;
+  padding: 0.625rem 1.25rem !important;
+}
 /* input[type=text]:hover, input[type=email]:hover, input[type=password]{
   transition: 1s;
   animation-duration: 1s;
@@ -79,7 +84,7 @@ h1{
 button, input[type="submit"]{
   background: #fff;
     outline: none;
-    color: #7a47cc!important;
+    color: #ECB84C!important;
     padding: 14px 38px!important;
     font-size: 13px!important;
     letter-spacing: 2px!important;
@@ -104,15 +109,35 @@ button:active, input[type="submit"]:active {
 }
 
 button:hover, input[type="submit"]:hover {
-  background: #7a47cc;
+  background: #ECB84C;
   color: #fff!important;
   opacity: 1!important;
   -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
   box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
 }
-
+.input-fix{
+  background: #fff;
+    outline: none;
+    color: #ECB84C!important;
+    font-size: 13px!important;
+    letter-spacing: 2px!important;
+    font-weight: 700!important;
+    text-transform: uppercase;
+    text-align: center;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    border-radius: 30px;
+    -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.15);
+    box-shadow: 0 10px 50px rgba(50,50,93,.15);
+    -webkit-animation: fadein 5s;
+    animation: fadein 5s;
+    cursor: pointer;
+    border: none;
+    width: fit-content;
+}
 input[type="file"]{
-  width: 12%;
+  width: 8rem;
 }
 .center-form-yelp{
   display: flex;
@@ -122,8 +147,28 @@ input[type="file"]{
   width: 100%;
   justify-content: center;
 }
+.flex-row{
+  display: flex;
+  border: none;
+  border-bottom: 2px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.fix-button{
+  margin-top: 3rem !important;
+}
 .align-center{
   text-align: center;
+}
+hr{
+  margin: 0 auto;
+}
+.profile-hr{
+  margin: 0 auto;
+  max-width: 40%;
 }
 .center-form{
 
@@ -163,13 +208,16 @@ button{
 }
 .register-container{
     position: absolute;
-    padding: 10px;
+    padding: 1rem 3rem;
     border-radius: 5px;
     right: 13%;
-    margin-top: 11%;
+    margin-top: -2rem;
     font-size: 16px;
-    background-color: rgba(255,255,255, 0.6);
+    background-color: rgba(255,255,255, 0.9);
     text-align: center
+}
+.adjust-login-container{
+  right: -4rem;
 }
 .register-container p{
 margin: 1%;
@@ -179,7 +227,7 @@ margin: 1%;
 }
 
 #orange-text{
-  color: #7a47cc !important;
+  color: #ECB84C !important;
   font-weight: bold;
 }
 .register-containerp{
@@ -190,6 +238,30 @@ margin: 1%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.flex-space-between img{
+  width: 20px;
+}
+.flex-space-between a, h4, h5{
+  text-decoration: none;
+  opacity: .5%;
+  color: black;
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+
+}
+.logo{
+  height: 3rem !important;
+
+}
+.restaurant-detail-container{
+  margin-top: -1.2rem;
+  margin-bottom: 0.rem;
+  color: black;
+  opacity: 0.4%;
+}
+.flex-space-between h4{
+  font-size: 1.3rem;
 }
 .route-details{
   background-color: rgba(255,255,255,0.9);
@@ -207,7 +279,6 @@ margin: 1%;
   flex-direction: row;
   justify-content: flex-start;
   alignt-content: center;
-
 }
 
 .show-user-on-routes img{
@@ -222,3 +293,7 @@ margin: 1%;
   text-align:center;
   padding-bottom: 5%;
 }
+ .main-menu-flex{
+display: flex;
+flex-direction: row;
+  }

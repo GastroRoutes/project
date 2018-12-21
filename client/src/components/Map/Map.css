@@ -1,7 +1,10 @@
 #map{
 width:50%;
 height: 40%;
-margin: 300px;
+margin: 200px;
+border-radius: 10px;
+
+
 }
 .mapboxgl-canvas{
     position: relative !important;

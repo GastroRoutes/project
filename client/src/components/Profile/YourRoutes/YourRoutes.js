@@ -192,8 +192,9 @@ export default class YourRoutes extends Component {
 
     const showRouteDetails = this.state.showRouteData;
     const showRouteData = showRouteDetails ? (
-      <div className="yourRoutes-container">
-        <div classNAme="menu-routes-container">
+      <div className="menu-half-routes">
+        <div className="menu-routes-container">
+          <h3>Rutas:</h3>
           {this.state.userRoutes.map(userRoute => {
             console.log(userRoute);
             return (
@@ -201,8 +202,12 @@ export default class YourRoutes extends Component {
                 className="each-route-container"
                 onClick={() => this.showRoutesDetails(userRoute)}
               >
-                <h3>{userRoute.routesName}</h3>
-                <h4>{userRoute.date}</h4>
+                <h4>{userRoute.routesName}</h4>
+                <h5>Categoría :{userRoute.category}</h5>
+                <h5>Duración: {userRoute.duration}</h5>
+                <h5>Fecha: {userRoute.date}</h5>
+                <h5>Hora inicio: {userRoute.hour}</h5>
+                <hr />
               </div>
             );
           })}
@@ -210,15 +215,23 @@ export default class YourRoutes extends Component {
             Mostrar todas tus rutas
           </button>
         </div>
+
         <div id="stops-container">
+          <h3>Itinerario:</h3>
           {this.state.showRouteData.restaurants.map(
             (restaurantOfRoute, index) => {
               return (
                 <div className="each-stop-container">
                   <img src={restaurantOfRoute.restaurantPhoto} />
                   <h2>
-                    Parada {index + 1}: {restaurantOfRoute.restaurantName}
+                    <img src="./images/ImportedLayers.png" alt="" /> {index + 1}
+                    : {restaurantOfRoute.restaurantName}
                   </h2>
+                  <h4>
+                    Puntuación: {restaurantOfRoute.rating}, {" "}Precio:{" "}
+                    {restaurantOfRoute.price}, Teléfono:{" "}
+                    {restaurantOfRoute.phone}{" "}
+                  </h4>
                 </div>
               );
             }
@@ -233,9 +246,9 @@ export default class YourRoutes extends Component {
       <div className="yourRoutes-big-container">
         <h1>Tus rutas</h1>
         {showRouteData}
-
-        {<MapTest sendRouteData={this.state.showRouteData} />}
-
+        <div className="map">
+          {<MapTest sendRouteData={this.state.showRouteData} />}
+        </div>
         {/* Borrar componente TestMapasBorrar y archivo una vez echas las pruebas */}
         {/* {<TestMapasBorrar />}  */}
       </div>

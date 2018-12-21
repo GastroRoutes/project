@@ -31,9 +31,7 @@ export default class AllRoutes extends Component {
     .then((response)=> {
  return
     })
-
   }
-
   render() {
 
     const printAllRoutes = this.state.allRoutes ? (
@@ -60,12 +58,14 @@ export default class AllRoutes extends Component {
               return(
                 <div className="each-stop-on-target">
                 <hr></hr>
-                {/* <img src="./images/ImportedLayers.png" alt="" /> */}
+               
                 <div className="flex-space-between">
-                  <h4>{restaurant.restaurantName}</h4>
-                <h4>{restaurant.rating}</h4>
+                  <a href={restaurant.url}><h4><img src="./images/ImportedLayers.png" alt="" />{restaurant.restaurantName}</h4></a>
                 </div>
-                <p>{restaurant.location.city}</p>
+                <div  className="restaurant-detail-container">
+                <h5> Puntuación: {restaurant.rating}</h5>
+                <h5>{restaurant.location.city}</h5>
+                  </div>
                 </div>
               )
             })}

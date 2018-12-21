@@ -2,6 +2,7 @@
 /* global google */
 import React, { Component } from "react";
 import { FaAnchor } from "react-icons/fa";
+import "./Map.css"
 
 import { compose, withProps, lifecycle } from "recompose";
 import {
