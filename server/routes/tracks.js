@@ -27,7 +27,7 @@ trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
     })
     .populate({
       path: "creatorID",
-      model: "User",
+      model: "Tracks",
     })
     // .populate("savedRoutes")
     .then(track => {
@@ -96,7 +96,7 @@ trackRouter.post(
         duration: duration,
         image: image,
         restaurants: arrayOfIds,
-        creatorID: _id
+        creatorID: [_id]
       });
 
       newTrack.save().then(track => {
@@ -151,6 +151,8 @@ trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
 
   // Promise.all()
   Track.find()
+    .populate("creatorID")
+    .populate("restaurants")
     .then(track => track)
     .catch(err => console.log(err))
     .then(track => {

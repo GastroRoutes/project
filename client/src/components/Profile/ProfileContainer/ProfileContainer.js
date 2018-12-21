@@ -20,7 +20,6 @@ export default class Profile extends Component {
       showUpdateProfileButton: null,
       yourRoutes: true
     };
-    console.log(this.state.user.savedRoutes);
   }
 
   handleFormSubmit = e => {
@@ -35,7 +34,6 @@ export default class Profile extends Component {
     if (name === "photo") {
       user[name] = e.target.files[0];
       this.setState({ ...this.state, user });
-      console.log(this.state.user);
     } else {
       user[name] = value;
       this.setState({ ...this.state, user });
@@ -60,8 +58,9 @@ export default class Profile extends Component {
   createRouteButton = () => {
     this.state.createRoutesToggle
       ? this.setState({ ...this.state, createRoutesToggle: null })
-      : this.setState({ ...this.state, createRoutesToggle: true });
-    console.log(this.state.user);
+      : 
+        this.setState({ ...this.state, createRoutesToggle: true });
+        this.scrollToRecipe()
   };
 
   createRoutes = route => {
@@ -78,13 +77,24 @@ export default class Profile extends Component {
     this.state.yourRoutes
       ? this.setState({ ...this.state, yourRoutes: null })
       : this.setState({ ...this.state, yourRoutes: true });
+      this.scrollToRecipe()
   };
-
+  scrollToRecipe = () => {
+    window.scrollBy({
+      top: document.querySelector("body").clientHeight, // could be negative value
+      left: 0,
+      behavior: "smooth"
+    });
+  };
+  componentDidMount(){
+    this.scrollToRecipe()
+  }
   render() {
     const showRoutesType = this.state.yourRoutes ? (
       <div>
         <button className="align-buttoms" onClick={this.changeRoutes}>Rutas Guardadas</button>
         <YourRoutes
+          scrollToRecipe={this.scrollToRecipe}
           userRoutes={this.userRoutes}
           createRoutes={this.props.createRoutes}
           handleFormSubmit={this.handleFormSubmit}
@@ -93,7 +103,7 @@ export default class Profile extends Component {
       </div>
     ) : (
       <div>
-        <button onClick={this.changeRoutes}>Tus publicaciones</button>
+        <button className="align-buttoms" onClick={this.changeRoutes}>Tus publicaciones</button>
         <SavedRoutes user={this.state.user} />
       </div>
     );
@@ -101,6 +111,7 @@ export default class Profile extends Component {
       <section className="routes-from-profile">
         <button className="align-buttoms" onClick={this.createRouteButton}>Tus rutas</button>
         <CreateRoutes
+          scrollToRecipe={this.scrollToRecipe}
           createRoutes={this.createRoutes}
           getRoutes={this.getRoutes}
           state={this.state}

@@ -23,7 +23,6 @@ export default class YourRoutes extends Component {
     };
     this.routes = [];
     this.getUserRoutes();
-    console.log(this.state.userRoutes);
   }
 
   // PETICIÓN DE TODAS LAS RUTAS DEL USUARIO
@@ -31,7 +30,6 @@ export default class YourRoutes extends Component {
     return this.service
       .get("/")
       .then(response => {
-        console.log(response.data.track);
         let userRoutesArr = response.data.track.createdTrack;
         this.setState({ ...this.state, userRoutes: userRoutesArr });
         return response;
@@ -112,12 +110,16 @@ export default class YourRoutes extends Component {
   // };
   showRoutesDetails = route => {
     this.setState({ ...this.state, showRouteData: route });
+    this.props.scrollToRecipe()
   };
 
   showAllYourRoutes = () => {
     this.setState({ ...this.state, showRouteData: null });
   };
 
+  componentDidMount(){
+    this.props.scrollToRecipe()
+  }
   render() {
     console.log(this.state.showRouteData);
 

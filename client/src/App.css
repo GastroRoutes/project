@@ -46,17 +46,19 @@ input[type=file]{
   font-weight: bold;
   width: 30%;
 }
-input[type=text]:focus, input[type=email]:focus, input[type=password]{ 
-  outline: 0px;
-  border-bottom: 1px solid #ff6100;
-  transition:width 1s
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=submit]:focus, input[type=date]:focus, input[type=time]:focus, input[type=file]:focus{ 
+  outline: none !important;
+
+  box-shadow: 0px 0px 5px #7a47cc;
+  /* -webkit-transition: .3s all ease; */
+  animation: 1s;
+  transition-duration: 1s;
 }
 
-input[type=text]:hover, input[type=email]:hover, input[type=password]{
+/* input[type=text]:hover, input[type=email]:hover, input[type=password]{
   transition: 1s;
   animation-duration: 1s;
-
-}
+} */
 h2{
   margin:0;
   font-size: 1.7em;
@@ -74,8 +76,9 @@ h1{
 
 
 /* HOLA PISTACHITOS */
-button, input[type="submit"] {
+button, input[type="submit"]{
   background: #fff;
+    outline: none;
     color: #7a47cc!important;
     padding: 14px 38px!important;
     font-size: 13px!important;
@@ -97,24 +100,30 @@ button, input[type="submit"] {
 }
 
 button:active, input[type="submit"]:active {
-  outline: none;
+  outline: 0px;
 }
 
 button:hover, input[type="submit"]:hover {
   background: #7a47cc;
-    color: #fff!important;
-    opacity: 1!important;
-    -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
-    box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
+  color: #fff!important;
+  opacity: 1!important;
+  -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
+  box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
+}
+
+input[type="file"]{
+  width: 12%;
 }
 .center-form-yelp{
-
   display: flex;
   padding: 10px;
   border: none;
   border-bottom: 2px;
   width: 100%;
   justify-content: center;
+}
+.align-center{
+  text-align: center;
 }
 .center-form{
 
@@ -132,14 +141,12 @@ button:hover, input[type="submit"]:hover {
   align-items: center;
 }
 
-input[type="file"]{
-  width: 12%;
-}
-
 .align-buttoms{
  margin:0.5rem 5rem;
 }
-
+.padding-container{
+  padding:4rem 0;
+}
 .routes-from-profile{
   margin: -2rem 0;
 }
@@ -172,9 +179,46 @@ margin: 1%;
 }
 
 #orange-text{
-  color: #FF6100 !important;
+  color: #7a47cc !important;
   font-weight: bold;
 }
 .register-containerp{
   margin: 1%;
   }
+
+.flex-space-between{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.route-details{
+  background-color: rgba(255,255,255,0.9);
+  background-size: cover; 
+  top:-5rem;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+  padding: .5rem;
+}
+.show-user-on-routes{
+  background-color: rgba(255,255,255,0.9);
+  background-size: cover; 
+  top:-5rem;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  alignt-content: center;
+
+}
+
+.show-user-on-routes img{
+  padding: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.yourRoutes-big-container{
+  background-color: #EFEFEF;
+  text-align:center;
+  padding-bottom: 5%;
+}

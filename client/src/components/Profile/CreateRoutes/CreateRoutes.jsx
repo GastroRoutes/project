@@ -87,24 +87,26 @@ export default class CreateRoutes extends Component {
 
   render() {
     const restaurants = this.state.restaurant ? (
-      this.state.restaurant.map(restaurant => {
-        return (
-          <div className="yourRoutes-container">
-            <div
-              className="each-Route"
-              style={{ backgroundImage: `url(${restaurant.e.image_url})` }}
-            />
-            <div className="form-container">
-              <h3>{restaurant.e.name}</h3>
-              <p>{restaurant.e.location.address1}</p>
-              <p>{restaurant.e.price}</p>
-              <button onClick={() => this.addRestaurant(restaurant)}>
-                Añadir parada
-              </button>
+      <div className="show-route-container">
+        {this.state.restaurant.map(restaurant => {
+          return (
+            <div className="yourRoutes-container">
+              <div
+                className="each-Route"
+                style={{ backgroundImage: `url(${restaurant.e.image_url})` }}
+              />
+              <div className="form-container">
+                <h3>{restaurant.e.name}</h3>
+                <p>{restaurant.e.location.address1}</p>
+                <p>{restaurant.e.price}</p>
+                <button onClick={() => this.addRestaurant(restaurant)}>
+                  Añadir parada
+                </button>
+              </div>
             </div>
-          </div>
-        );
-      })
+          );
+        })}
+      </div>
     ) : (
       <div>{/* <h3>Aún no has añadido paradas</h3> */}</div>
     );
@@ -118,76 +120,80 @@ export default class CreateRoutes extends Component {
     }
 
     return (
-      <div className="yourRoutes-big-container">
-        <div className="center-form">
-          <h1>Crear rutas</h1>
+      <div>
+        <div className="yourRoutes-big-container">
 
-          <InputYelp
-            getRestaurants={this.getRestaurants}
-            restaurants={this.props.restaurants}
-            handleFormSubmit={this.handleFormSubmit}
-            handleChange={this.handleChange}
-          />
-          <div className="center-form">
-            <label>Restaurantes añadidos:</label>
-            <label>{selectedRestaurants}</label>
-          </div>
-          <form
-            className="center-form"
-            onSubmit={e => this.handleFormSubmit(e)}
-          >
-            <div clasName="form-inputs">
-              <input
-                type="text"
-                name="routesName"
-                onChange={e => this.handleChangeCREATE(e)}
-                placeholder="Nombre de la ruta"
-                autoComplete="off"
-              />
-              <input
-                type="text"
-                name="category"
-                onChange={e => this.handleChangeCREATE(e)}
-                placeholder="Categoría"
-                autoComplete="off"
-              />
-              {/* <label htmlFor="">Fecha: </label> */}
-              <input
-                type="date"
-                name="date"
-                onChange={e => this.handleChangeCREATE(e)}
-                placeholder="Fecha"
-                autoComplete="off"
-              />
-              {/* <label htmlFor="">Hora: </label> */}
-              <input
-                type="time"
-                name="hour"
-                onChange={e => this.handleChangeCREATE(e)}
-                placeholder="Hora de inicio"
-                autoComplete="off"
-              />
-              <input
-                type="text"
-                name="duration"
-                onChange={e => this.handleChangeCREATE(e)}
-                placeholder="Duración"
-                autoComplete="off"
-              />
+            <h1>Crear rutas</h1>
 
-              <input
-                type="file"
-                name="photo"
-                onChange={e => this.handleChangeCREATE(e)}
-              />
+            <InputYelp
+              scrollToRecipe={this.props.scrollToRecipe}
+              getRestaurants={this.getRestaurants}
+              restaurants={this.props.restaurants}
+              handleFormSubmit={this.handleFormSubmit}
+              handleChange={this.handleChange}
+            />
+            <div className="center-form">
+              <label>Restaurantes añadidos:</label>
+              <label>{selectedRestaurants}</label>
             </div>
-            <div className="form-inputs">
-              <input value="Crear ruta" type="submit" />
-            </div>
-          </form>
-          <div />
+            <form
+              className="center-form"
+              onSubmit={e => this.handleFormSubmit(e)}
+            >
+              <div clasName="form-inputs">
+                <input
+                  type="text"
+                  name="routesName"
+                  onChange={e => this.handleChangeCREATE(e)}
+                  placeholder="Nombre de la ruta"
+                  autoComplete="off"
+                />
+                <input
+                  type="text"
+                  name="category"
+                  onChange={e => this.handleChangeCREATE(e)}
+                  placeholder="Categoría"
+                  autoComplete="off"
+                />
+                {/* <label htmlFor="">Fecha: </label> */}
+                <input
+                  type="date"
+                  name="date"
+                  onChange={e => this.handleChangeCREATE(e)}
+                  placeholder="Fecha"
+                  autoComplete="off"
+                />
+                {/* <label htmlFor="">Hora: </label> */}
+                <input
+                  type="time"
+                  name="hour"
+                  onChange={e => this.handleChangeCREATE(e)}
+                  placeholder="Hora de inicio"
+                  autoComplete="off"
+                />
+                <input
+                  type="text"
+                  name="duration"
+                  onChange={e => this.handleChangeCREATE(e)}
+                  placeholder="Duración"
+                  autoComplete="off"
+                />
+
+                <input
+                  type="file"
+                  name="photo"
+                  onChange={e => this.handleChangeCREATE(e)}
+                />
+              </div>
+              <div className="form-inputs">
+                <input value="Crear ruta" type="submit" />
+              </div>
+            </form>
+            <div />
+
+
+          {restaurants}
         </div>
-        <div className="yourRoutes-big-container">{restaurants}</div>
       </div>
     );
   }
