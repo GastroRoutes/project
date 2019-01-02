@@ -11,11 +11,11 @@ export default class NavBar extends Component {
             <div>
 
             </div>
-            <div class="navbar">
+            <div className="navbar">
             <div>
               <img className="logo" src="./images/logo.png"/>
             </div>
-            <div>
+            <div className="navbar-images">
             <Link to="/profile"><img src="./images/manifest.png" alt="profile"/></Link>
             <Link to="/allRoutes"><img src="./images/ruta.svg" alt="profile"/></Link>
             <img src="./images/logout.png" alt="logout"onClick={this.props.logout}/>
