@@ -13,12 +13,11 @@ width: 100%;
 
 }
 .register button{
-    border-radius:  5px;
+
     width: 10rem;
     padding: .7rem 1rem;
     text-align: center;
     background-color: rgba(255,255,255);
-    margin: 1px;
     
 }
 
@@ -36,10 +35,9 @@ width: 100%;
 }
 .register-buttons{
     position: absolute;
-    padding: 10px;
     border-radius: 5px;
-    right: 13%;
-    margin-top: 11%;
+    right: 4.1rem;
+    margin-top: -1.1rem;
     font-size: 14px;
 }
 

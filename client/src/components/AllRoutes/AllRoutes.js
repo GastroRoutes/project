@@ -7,7 +7,6 @@ export default class AllRoutes extends Component {
     super();
     this.state = {
       allRoutes: null,
-      showGreenTickOk: null
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/tracks`,
@@ -41,6 +40,7 @@ export default class AllRoutes extends Component {
 
   render() {
     const printAllRoutes = this.state.allRoutes ? (
+
       this.state.allRoutes.map(element => {
         return (
           <div className="show-route-container">
@@ -75,9 +75,20 @@ export default class AllRoutes extends Component {
 
         );
       })
+
     ) : (
-      <h1>Cargando...</h1>
+      <h1></h1>
     );
-    return <div>{printAllRoutes}</div>;
+    return (
+      <div>
+        <h1 className="align-center">Todas las rutas</h1>
+      <div className="yourRoutes-big-container">
+      <div className="show-route-container">
+
+        {printAllRoutes}
+      </div>
+      </div>
+      </div>
+    );
   }
 }

@@ -23,7 +23,6 @@ export default class YourRoutes extends Component {
     };
     this.routes = [];
     this.getUserRoutes();
-    console.log(this.state.userRoutes);
   }
 
   // PETICIÓN DE TODAS LAS RUTAS DEL USUARIO
@@ -31,7 +30,6 @@ export default class YourRoutes extends Component {
     return this.service
       .get("/")
       .then(response => {
-        console.log(response.data.track);
         let userRoutesArr = response.data.track.createdTrack;
         this.setState({ ...this.state, userRoutes: userRoutesArr });
         return response;
@@ -112,12 +110,16 @@ export default class YourRoutes extends Component {
   // };
   showRoutesDetails = route => {
     this.setState({ ...this.state, showRouteData: route });
+    this.props.scrollToRecipe()
   };
 
   showAllYourRoutes = () => {
     this.setState({ ...this.state, showRouteData: null });
   };
 
+  componentDidMount(){
+    this.props.scrollToRecipe()
+  }
   render() {
     console.log(this.state.showRouteData);
 
@@ -125,15 +127,12 @@ export default class YourRoutes extends Component {
       <div className="show-route-container">
         {this.state.userRoutes.map((track, index) => {
           return (
-            <div
-              className="yourRoutes-container"
-              onClick={() => this.showRoutesDetails(track)}
-              key={track._id}
-            >
+            <div className="yourRoutes-container" key={track._id}>
               <div>
                 <div
                   className="each-Route"
-                        style={{ backgroundImage: `url(${track.image})`}}
+                  onClick={() => this.showRoutesDetails(track)}
+                  style={{ backgroundImage: `url(${track.image})` }}
                 >
                   <div className="route-details">
                     <h3>{track.routesName}</h3>
@@ -174,17 +173,15 @@ export default class YourRoutes extends Component {
         /> */}
                 <input type="submit" />
                 {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
-                <br />
-                <br />
-                <br />
               </form>
               {/* <img src={`${track.image_url}`} style={{ width: "10%" }} /> */}
-              <br />
-              <form onSubmit={e => this.deleteRoute(e, track._id)}>
-                <input value="DELETE" type="submit" />
+
+              <form
+                className="form-delete"
+                onSubmit={e => this.deleteRoute(e, track._id)}
+              >
+                <input value="X" type="submit" />
               </form>
-              <br />
-              <br />
             </div>
           );
         })}
@@ -195,8 +192,9 @@ export default class YourRoutes extends Component {
 
     const showRouteDetails = this.state.showRouteData;
     const showRouteData = showRouteDetails ? (
-      <div className="yourRoutes-container">
-        <div classNAme="menu-routes-container">
+      <div className="menu-half-routes">
+        <div className="menu-routes-container">
+          <h3>Rutas:</h3>
           {this.state.userRoutes.map(userRoute => {
             console.log(userRoute);
             return (
@@ -204,8 +202,12 @@ export default class YourRoutes extends Component {
                 className="each-route-container"
                 onClick={() => this.showRoutesDetails(userRoute)}
               >
-                <h3>{userRoute.routesName}</h3>
-                <h4>{userRoute.date}</h4>
+                <h4>{userRoute.routesName}</h4>
+                <h5>Categoría :{userRoute.category}</h5>
+                <h5>Duración: {userRoute.duration}</h5>
+                <h5>Fecha: {userRoute.date}</h5>
+                <h5>Hora inicio: {userRoute.hour}</h5>
+                <hr />
               </div>
             );
           })}
@@ -213,15 +215,23 @@ export default class YourRoutes extends Component {
             Mostrar todas tus rutas
           </button>
         </div>
+
         <div id="stops-container">
+          <h3>Itinerario:</h3>
           {this.state.showRouteData.restaurants.map(
             (restaurantOfRoute, index) => {
               return (
                 <div className="each-stop-container">
                   <img src={restaurantOfRoute.restaurantPhoto} />
                   <h2>
-                    Parada {index + 1}: {restaurantOfRoute.restaurantName}
+                    <img src="./images/ImportedLayers.png" alt="" /> {index + 1}
+                    : {restaurantOfRoute.restaurantName}
                   </h2>
+                  <h4>
+                    Puntuación: {restaurantOfRoute.rating}, {" "}Precio:{" "}
+                    {restaurantOfRoute.price}, Teléfono:{" "}
+                    {restaurantOfRoute.phone}{" "}
+                  </h4>
                 </div>
               );
             }
@@ -233,18 +243,12 @@ export default class YourRoutes extends Component {
     );
 
     return (
-      <div>
-        <hr />
+      <div className="yourRoutes-big-container">
         <h1>Tus rutas</h1>
-
-        <br />
-        <br />
-        <br />
-
         {showRouteData}
-
-        {<MapTest sendRouteData={this.state.showRouteData} />}
-
+        <div className="map">
+          {<MapTest sendRouteData={this.state.showRouteData} />}
+        </div>
         {/* Borrar componente TestMapasBorrar y archivo una vez echas las pruebas */}
         {/* {<TestMapasBorrar />}  */}
       </div>

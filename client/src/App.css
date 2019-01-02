@@ -6,14 +6,17 @@ body{
   margin: 0;
   padding:0;
   font-family: Lato, Roboto, "Helvetica Neue", Helvetica, Arial;
+
 }
 form {
   padding: 10px;
   border: none;
   border-bottom: 2px;
 }
-
-input[type=text], input[type=email]{
+p,h1,h2,h3,h4,h5{
+  opacity: .5;
+}
+input[type=text], input[type=email], input[type=password], input[type=submit], input[type=date], input[type=time]{
   border: none;
   border-bottom: 1px solid rgba(0,0,0,0.2);
   margin : 1%;
@@ -22,23 +25,179 @@ input[type=text], input[type=email]{
   box-shadow: 1px 1px 5px rgba(255,255,255,0.1);
   border-radius: 20px;
   padding: 10px;
+
+  /* hola pistachitos one more time */
+    box-shadow: 0px 2px 33px 0px rgba(0,0,0,0.1);
+    padding: 16px;
+    border-width: 0;
+    font-weight: 600;
+    font-size: 13px;
+    color: #bcbcbc!important;
+    text-align: left;
+}
+input[type=submit]{
+  color: #ECB84C;
+  font-weight: bold;
+  border: 1px solid rgba(0,0,0,0.5);
+  width: 30%;
 }
 
-input[type=text]:focus, input[type=email]:focus{ 
-  outline: 0px;
-  border-bottom: 1px solid rgba(0,0,0,0.6);
-  transition:width 1s
-
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=submit]:focus, input[type=date]:focus, input[type=time]:focus, input[type=file]:focus{ 
+  outline: none !important;
+  box-shadow: 0px 0px 5px #ECB84C;
+  /* -webkit-transition: .3s all ease; */
+  animation: 1s;
+  transition-duration: 1s;
 }
-
-input[type=text]:hover, input[type=email]:hover{
+input[type=file]{
+  max-width: 80% !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  overflow: hidden !important;
+  padding: 0.625rem 1.25rem !important;
+}
+/* input[type=text]:hover, input[type=email]:hover, input[type=password]{
   transition: 1s;
   animation-duration: 1s;
-
-}
+} */
 h2{
   margin:0;
   font-size: 1.7em;
+}
+h1{
+  font-size: 2em;
+}
+.form-container label {
+  text-transform: uppercase;
+  text-align: left;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  opacity: .5;
+}
+
+
+/* HOLA PISTACHITOS */
+button, input[type="submit"]{
+  background: #fff;
+    outline: none;
+    color: #ECB84C!important;
+    padding: 14px 38px!important;
+    font-size: 13px!important;
+    letter-spacing: 2px!important;
+    font-weight: 700!important;
+    text-transform: uppercase;
+    text-align: center;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    border-radius: 30px;
+    -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.15);
+    box-shadow: 0 10px 50px rgba(50,50,93,.15);
+    -webkit-animation: fadein 5s;
+    animation: fadein 5s;
+    cursor: pointer;
+    border: none;
+    width: fit-content;
+}
+
+button:active, input[type="submit"]:active {
+  outline: 0px;
+}
+
+button:hover, input[type="submit"]:hover {
+  background: #ECB84C;
+  color: #fff!important;
+  opacity: 1!important;
+  -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
+  box-shadow: 0 10px 50px rgba(50,50,93,.25)!important;
+}
+.input-fix{
+  background: #fff;
+    outline: none;
+    color: #ECB84C!important;
+    font-size: 13px!important;
+    letter-spacing: 2px!important;
+    font-weight: 700!important;
+    text-transform: uppercase;
+    text-align: center;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    border-radius: 30px;
+    -webkit-box-shadow: 0 10px 50px rgba(50,50,93,.15);
+    box-shadow: 0 10px 50px rgba(50,50,93,.15);
+    -webkit-animation: fadein 5s;
+    animation: fadein 5s;
+    cursor: pointer;
+    border: none;
+    width: fit-content;
+}
+input[type="file"]{
+  width: 8rem;
+}
+.center-form-yelp{
+  display: flex;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px;
+  width: 100%;
+  justify-content: center;
+}
+.flex-row{
+  display: flex;
+  border: none;
+  border-bottom: 2px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.fix-button{
+  margin-top: 3rem !important;
+}
+.align-center{
+  text-align: center;
+}
+hr{
+  margin: 0 auto;
+}
+.profile-hr{
+  margin: 0 auto;
+  max-width: 40%;
+}
+.center-form{
+
+    display: flex;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.form-inputs{
+  align-items: center;
+}
+
+.align-buttoms{
+ margin:0.5rem 5rem;
+}
+.padding-container{
+  padding:4rem 0;
+}
+.routes-from-profile{
+  margin: -2rem 0;
+}
+
+.component-container{
+  width:100%;
 }
 
 label{
@@ -49,13 +208,16 @@ button{
 }
 .register-container{
     position: absolute;
-    padding: 10px;
+    padding: 1rem 3rem;
     border-radius: 5px;
     right: 13%;
-    margin-top: 11%;
+    margin-top: -2rem;
     font-size: 16px;
-    background-color: rgba(255,255,255, 0.6);
+    background-color: rgba(255,255,255, 0.9);
     text-align: center
+}
+.adjust-login-container{
+  right: -4rem;
 }
 .register-container p{
 margin: 1%;
@@ -65,7 +227,7 @@ margin: 1%;
 }
 
 #orange-text{
-  color: #FF6100 !important;
+  color: #ECB84C !important;
   font-weight: bold;
 }
 .register-containerp{
@@ -150,3 +312,66 @@ input[type=text]:hover, input[type=email]:hover, input[type=password]{
   animation-duration: 1s;
 
 }
+.flex-space-between{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.flex-space-between img{
+  width: 20px;
+}
+.flex-space-between a, h4, h5{
+  text-decoration: none;
+  opacity: .5%;
+  color: black;
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+
+}
+.logo{
+  height: 3rem !important;
+
+}
+.restaurant-detail-container{
+  margin-top: -1.2rem;
+  margin-bottom: 0.rem;
+  color: black;
+  opacity: 0.4%;
+}
+.flex-space-between h4{
+  font-size: 1.3rem;
+}
+.route-details{
+  background-color: rgba(255,255,255,0.9);
+  background-size: cover; 
+  top:-5rem;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+  padding: .5rem;
+}
+.show-user-on-routes{
+  background-color: rgba(255,255,255,0.9);
+  background-size: cover; 
+  top:-5rem;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.show-user-on-routes img{
+  padding: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.yourRoutes-big-container{
+  background-color: #EFEFEF;
+  text-align:center;
+  padding-bottom: 5%;
+}
+ .main-menu-flex{
+display: flex;
+flex-direction: row;
+  }

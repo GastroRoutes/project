@@ -27,7 +27,7 @@ trackRouter.get("/", ensureLoggedIn(), (req, res, next) => {
     })
     .populate({
       path: "creatorID",
-      model: "User",
+      model: "Tracks",
     })
     // .populate("savedRoutes")
     .then(track => {
@@ -54,7 +54,7 @@ trackRouter.post(
 
     let totalRestaurants = JSON.parse(selectedRestaurants);
 
-    console.log("OJO DATA SERVER", totalRestaurants);
+
 
     let restaurantsArray = totalRestaurants.map(restaurant => {
       return {
@@ -96,7 +96,7 @@ trackRouter.post(
         duration: duration,
         image: image,
         restaurants: arrayOfIds,
-        creatorID: _id
+        creatorID: [_id]
       });
 
       newTrack.save().then(track => {
@@ -113,7 +113,6 @@ trackRouter.post(
 );
 
 trackRouter.post("/:id/delete", (req, res, next) => {
-  console.log("Estoy en delete, en back");
   Track.findByIdAndRemove(req.params.id)
     .then(track => res.status(200).json(track))
     .catch(error => next(error));
@@ -152,6 +151,8 @@ trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
 
   // Promise.all()
   Track.find()
+    .populate("creatorID")
+    .populate("restaurants")
     .then(track => track)
     .catch(err => console.log(err))
     .then(track => {
@@ -171,13 +172,12 @@ trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
 trackRouter.post("/:id/followRoutes", (req, res, next) => {
   const routeID = req.params.id;
   const _id = req.user.id;
-  console.log(routeID);
-  console.log(_id);
+
 
   User.findByIdAndUpdate({ _id }, { $push: { savedRoutes: routeID } })
     .populate("savedRoutes")
     .then(user => {
-      console.log(track)
+
       res.status(200).json(user);
     })
     .catch(err => {

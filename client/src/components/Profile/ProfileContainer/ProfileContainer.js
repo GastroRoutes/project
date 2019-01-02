@@ -17,10 +17,9 @@ export default class Profile extends Component {
       user: this.props.user,
       userRoutes: this.props.user,
       createRoutesToggle: null,
-      showUpdateProfileButton: null,
+      showUpdateProfileButton: true,
       yourRoutes: true
     };
-    console.log(this.state.user.savedRoutes);
   }
 
   handleFormSubmit = e => {
@@ -35,7 +34,6 @@ export default class Profile extends Component {
     if (name === "photo") {
       user[name] = e.target.files[0];
       this.setState({ ...this.state, user });
-      console.log(this.state.user);
     } else {
       user[name] = value;
       this.setState({ ...this.state, user });
@@ -61,7 +59,7 @@ export default class Profile extends Component {
     this.state.createRoutesToggle
       ? this.setState({ ...this.state, createRoutesToggle: null })
       : this.setState({ ...this.state, createRoutesToggle: true });
-    console.log(this.state.user);
+    this.scrollToRecipe();
   };
 
   createRoutes = route => {
@@ -78,14 +76,26 @@ export default class Profile extends Component {
     this.state.yourRoutes
       ? this.setState({ ...this.state, yourRoutes: null })
       : this.setState({ ...this.state, yourRoutes: true });
+    this.scrollToRecipe();
   };
-
+  scrollToRecipe = () => {
+    window.scrollBy({
+      top: document.querySelector("body").clientHeight, // could be negative value
+      left: 0,
+      behavior: "smooth"
+    });
+  };
+  componentDidMount() {
+    this.scrollToRecipe();
+  }
   render() {
     const showRoutesType = this.state.yourRoutes ? (
       <div>
-        <button onClick={this.changeRoutes}>Rutas Guardadas</button>
-        
+        <button className="align-buttoms" onClick={this.changeRoutes}>
+          Rutas Guardadas
+        </button>
         <YourRoutes
+          scrollToRecipe={this.scrollToRecipe}
           userRoutes={this.userRoutes}
           createRoutes={this.props.createRoutes}
           handleFormSubmit={this.handleFormSubmit}
@@ -94,14 +104,19 @@ export default class Profile extends Component {
       </div>
     ) : (
       <div>
-        <button onClick={this.changeRoutes}>Tus publicaciones</button>
+        <button className="align-buttoms" onClick={this.changeRoutes}>
+          Tus publicaciones
+        </button>
         <SavedRoutes user={this.state.user} />
       </div>
     );
     const createRoutesOrShowRoutes = this.state.createRoutesToggle ? (
       <section className="routes-from-profile">
-        <button onClick={this.createRouteButton}>Tus rutas</button>
+        <button className="align-buttoms fix-button" onClick={this.createRouteButton}>
+          Tus rutas
+        </button>
         <CreateRoutes
+          scrollToRecipe={this.scrollToRecipe}
           createRoutes={this.createRoutes}
           getRoutes={this.getRoutes}
           state={this.state}
@@ -109,36 +124,52 @@ export default class Profile extends Component {
       </section>
     ) : (
       <div>
-        <button onClick={this.createRouteButton}>Crear Ruta</button>
+        <button className="align-buttoms" onClick={this.createRouteButton}>
+          Crear Ruta
+        </button>
         {showRoutesType}
       </div>
     );
 
     const showUpdateProfile = this.state.showUpdateProfileButton ? (
       <div>
-        <button onClick={this.showUpdateProfileButton}>Volver</button>
-        <form onSubmit={e => this.handleFormSubmit(e)}>
-          <input
-            type="text"
-            name="username"
-            value={this.state.user.username}
-            autoComplete="off"
-            onChange={e => this.handleChange(e)}
-          />
-          <input
-            type="email"
-            name="email"
-            value={this.state.user.email}
-            autoComplete="off"
-            onChange={e => this.handleChange(e)}
-          />
-          <input
-            type="file"
-            name="photo"
-            onChange={e => this.handleChange(e)}
-          />
-          <input type="submit" value="Update Profile" />
-        </form>
+        {/* <button onClick={this.showUpdateProfileButton}>Volver</button> */}
+        <div>
+          <form  className="flex-row" onSubmit={e => this.handleFormSubmit(e)}>
+            <input
+              type="text"
+              name="username"
+              value={this.state.user.username}
+              autoComplete="off"
+              onChange={e => this.handleChange(e)}
+            />
+            <input
+              type="email"
+              name="email"
+              value={this.state.user.email}
+              autoComplete="off"
+              onChange={e => this.handleChange(e)}
+            />
+            <input
+              type="text"
+              name="taste"
+              autoComplete="off"
+              value="Tus gustos"
+            />
+            <div className="input-fix">
+
+            <input
+              type="file"
+              name="photo"
+              onChange={e => this.handleChange(e)}
+            />
+            </div>
+            <br />
+            <div>
+              <input type="submit" value="Actualizar" />
+            </div>
+          </form>
+        </div>
       </div>
     ) : (
       <button onClick={this.showUpdateProfileButton}>Editar perfil</button>
@@ -149,9 +180,11 @@ export default class Profile extends Component {
           <img id="profile-photo" src={this.state.user.imgPath} alt="" />
           <div id="profile-details-container">
             <h1>{this.state.user.username}</h1>
+            <h4>{this.state.user.email}</h4>
             {showUpdateProfile}
           </div>
         </div>
+
 
         {createRoutesOrShowRoutes}
         {/* {createRoute} */}

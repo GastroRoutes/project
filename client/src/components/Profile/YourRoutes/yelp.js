@@ -25,6 +25,7 @@ class InputYelp extends Component {
       console.log(restaurant)
       this.props.getRestaurants(restaurant)
       this.setState({...this.state, })
+      
       // this.props.getRestaurant(restaurant.name) /// hay que tratarlo. Llega como array
     });
   }
@@ -51,18 +52,20 @@ class InputYelp extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={e => this.handleFormSubmit(e, this.props.state)}>
+        <form className="center-form-yelp" onSubmit={e => this.handleFormSubmit(e, this.props.state)}>
           <input
             type="text"
             name="term"
             placeholder="Buscar restaurantes"
             onChange={e => this.handleChange(e)}
+            autoComplete="off"
           />
           <input
             type="text"
             name="location"
             placeholder="Ubicación"
             onChange={e => this.handleChange(e)}
+            autoComplete="off"
           />
           <input type="submit"/>
           {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
