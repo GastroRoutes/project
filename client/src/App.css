@@ -421,7 +421,13 @@ border-radius: 100px;
 .sticky{
   position: -webkit-sticky;
   position: sticky;
+  bottom:0;
   top: 0;
   z-index: 1;
   background-color: rgba(255,255,255,0.7);
+}
+.user-photo{
+  width: 20%;
+  height: 30%;
+  object-fit: contain;
 }

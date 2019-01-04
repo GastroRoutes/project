@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./AllRoutes.css";
+import { Link } from "react-router-dom";
+
 export default class AllRoutes extends Component {
   constructor() {
     super();
@@ -22,12 +24,10 @@ export default class AllRoutes extends Component {
   };
 
   followTrack = (e, id) => {
-    // debugger
     e.preventDefault();
     return this.service
       .post(`/${id}/followRoutes`, id) //le paso la id del track
       .then(response => {
-        console.log("entra");
         this.setState({ ...this.state, followMessage: true });
       })
       .then(() => {
@@ -54,12 +54,14 @@ export default class AllRoutes extends Component {
               className="each-Route"
               style={{ backgroundImage: `url(${element.image})` }}
             >
-              <div className="show-user-on-routes">
-                <img src={element.creatorID[0].imgPath} />
-                <label className="margin-user-creator">
-                  {element.creatorID[0].username}
-                </label>
-              </div>
+              <Link to={`/usersRoutes/${element.creatorID[0]._id}`}>
+                <div className="show-user-on-routes">
+                  <img src={element.creatorID[0].imgPath} />
+                  <label className="margin-user-creator">
+                    {element.creatorID[0].username}
+                  </label>
+                </div>
+              </Link>
             </div>
             <div className="form-container margin-bottom-container-routes">
               <h3>{element.routesName}</h3>

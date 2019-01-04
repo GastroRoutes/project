@@ -8,8 +8,10 @@
 }
 #profile-photo{
     width: 20%;
+    height: 30%;
     object-fit: contain;
 }
+
 #profile-details-container{
     width: 60%;
     height: 60%;
