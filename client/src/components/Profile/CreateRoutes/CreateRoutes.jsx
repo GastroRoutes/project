@@ -12,11 +12,12 @@ export default class CreateRoutes extends Component {
         routesType: ""
       },
       restaurant: null,
-      restaurants: []
+      restaurants: [],
+      preload: false
     };
 
     this.service = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}/tracks`,
+      baseURL: `${process.env.REACT_APP_API_URL}`,
       withCredentials: true
     });
   }
@@ -30,11 +31,12 @@ export default class CreateRoutes extends Component {
       hour,
       duration
     } = this.state.createRoutes;
+    this.setState({...this.state, preload: true})
     this.getRoute({ routesName, category, photo, date, hour, duration }).then(
       route => {
         //   let id = route.data._id;
         this.props.createRoutes(route.data);
-        this.setState({ ...this.props.state, createRoutes: null });
+        this.setState({ ...this.props.state, createRoutes: null,preload:false });
         // this.setState({ ...this.state, id }); /// hay que tratarlo. Llega como array
       }
     );
@@ -62,18 +64,19 @@ export default class CreateRoutes extends Component {
     );
 
     return this.service
-      .post("/createTrack", formData, {
+      .post("/tracks/createTrack", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       })
       .then(response => {
+
         //  this.props.getUser(response.data)
         return response;
       });
   };
   // Función que recibe los datos de yelp.js
-  getRestaurants = restaurant => {
+  sendRestaurants = restaurant => {
     this.setState({ ...this.state, restaurant: restaurant });
   };
 
@@ -83,6 +86,18 @@ export default class CreateRoutes extends Component {
     restaurants.push(restaurant.e);
 
     this.setState({ ...this.state, restaurants });
+  };
+
+  // Función que envía los datos al back, a la ruta /yelp
+  getRestaurants = (term, location) => {
+    this.setState({ ...this.state, preload: true });
+    return this.service.post("/yelp/yelp", { term, location })
+    .then(response => {
+      this.setState({ ...this.props.state, preload: false });
+      return response.data.map(e => {
+        return { e };
+      });
+    });
   };
 
   render() {
@@ -118,20 +133,29 @@ export default class CreateRoutes extends Component {
         return <p>- {restaurant.name}</p>;
       });
     }
-
+    const preload = this.state.preload ? (
+      <div className="preload-container">
+        <img className="preload" src="/images/gif-preload.gif" />
+      </div>
+    ) : (
+      <div />
+    );
     return (
       <div>
+        {preload}
         <div className="yourRoutes-big-container">
           <h1>Crear rutas</h1>
 
           <InputYelp
+            state={this.state}
             scrollToRecipe={this.props.scrollToRecipe}
+            sendRestaurants={this.sendRestaurants}
             getRestaurants={this.getRestaurants}
             restaurants={this.props.restaurants}
             handleFormSubmit={this.handleFormSubmit}
             handleChange={this.handleChange}
           />
-          <div className="center-form">
+          <div className="center-form sticky">
             <label>Restaurantes añadidos:</label>
             <label>{selectedRestaurants}</label>
           </div>
@@ -177,7 +201,6 @@ export default class CreateRoutes extends Component {
                 placeholder="Duración"
                 autoComplete="off"
               />
-
               <input
                 className="file-input"
                 type="file"

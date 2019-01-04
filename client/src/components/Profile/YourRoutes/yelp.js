@@ -4,55 +4,44 @@ import axios from "axios";
 class InputYelp extends Component {
   constructor(props) {
     super(props);
-    this.service = axios.create({
-      baseURL:`${process.env.REACT_APP_API_URL}/yelp`,
-      withCredentials: true
-    });
     this.state = {
       restaurant: {
         term: "",
         location: ""
       },
-
+      preload: false
     };
-
   }
   handleFormSubmit = e => {
     e.preventDefault();
-    const { term, location} = this.state.restaurant;
-    this.getRestaurants( {term, location })
-    .then(restaurant =>{
-      console.log(restaurant)
-      this.props.getRestaurants(restaurant)
-      this.setState({...this.state, })
-      
+    const { term, location } = this.state.restaurant;
+    this.props.getRestaurants({ term, location }).then(restaurant => {
+      this.props.sendRestaurants(restaurant);
       // this.props.getRestaurant(restaurant.name) /// hay que tratarlo. Llega como array
     });
-  }
+  };
 
   handleChange = e => {
     const { name, value } = e.target;
 
     let searchRestaurant = this.state.restaurant;
     searchRestaurant[name] = value;
-    this.setState({...this.state, restaurant: searchRestaurant});
-  };
-
-  // Función que envía los datos al back, a la ruta /yelp
-  getRestaurants = (term, location) => {
-    return this.service.post("/yelp", {term, location})
-    .then(response =>
-        {
-        return response.data.map((e)=>{
-        return {e} 
-           })
+    this.setState({
+      ...this.state,
+      restaurant: searchRestaurant,
     });
   };
 
+
   render() {
+    
     return (
       <div>
-        <form className="center-form-yelp" onSubmit={e => this.handleFormSubmit(e, this.props.state)}>
+
+        <form
+          className="center-form-yelp"
+          onSubmit={e => this.handleFormSubmit(e, this.props.state)}
+        >
           <input
             type="text"
             name="term"
@@ -67,7 +56,7 @@ class InputYelp extends Component {
             onChange={e => this.handleChange(e)}
             autoComplete="off"
           />
-          <input type="submit"/>
+          <input value="Buscar restaurantes" type="submit" />
           {/* <input type="text" name="location" onChange={e => this.handleChange(e)} /> */}
         </form>
       </div>
