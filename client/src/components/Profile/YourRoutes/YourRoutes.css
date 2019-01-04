@@ -80,7 +80,6 @@ width: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
     margin: 0 auto;
     flex-wrap: wrap;
 }
@@ -93,7 +92,16 @@ width: 30px;
     height: 14rem;
     margin: -1rem 0;
     overflow: hidden;
+    background-size: cover;
 }
+
+
+.each-Route img{
+    object-fit: cover;
+  }
+  
+
+  
 .form-container{
     padding-top: 10%;
     display: flex;

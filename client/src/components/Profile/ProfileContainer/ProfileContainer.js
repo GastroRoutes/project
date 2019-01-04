@@ -156,14 +156,15 @@ export default class Profile extends Component {
               autoComplete="off"
               value="Tus gustos"
             />
-            <div className="input-fix">
+         
 
             <input
+            className="file-input"
               type="file"
               name="photo"
               onChange={e => this.handleChange(e)}
             />
-            </div>
+
             <br />
             <div>
               <input type="submit" value="Actualizar" />

@@ -122,75 +122,74 @@ export default class CreateRoutes extends Component {
     return (
       <div>
         <div className="yourRoutes-big-container">
+          <h1>Crear rutas</h1>
 
-            <h1>Crear rutas</h1>
+          <InputYelp
+            scrollToRecipe={this.props.scrollToRecipe}
+            getRestaurants={this.getRestaurants}
+            restaurants={this.props.restaurants}
+            handleFormSubmit={this.handleFormSubmit}
+            handleChange={this.handleChange}
+          />
+          <div className="center-form">
+            <label>Restaurantes añadidos:</label>
+            <label>{selectedRestaurants}</label>
+          </div>
+          <form
+            className="center-form"
+            onSubmit={e => this.handleFormSubmit(e)}
+          >
+            <div clasName="form-inputs">
+              <input
+                type="text"
+                name="routesName"
+                onChange={e => this.handleChangeCREATE(e)}
+                placeholder="Nombre de la ruta"
+                autoComplete="off"
+              />
+              <input
+                type="text"
+                name="category"
+                onChange={e => this.handleChangeCREATE(e)}
+                placeholder="Categoría"
+                autoComplete="off"
+              />
+              {/* <label htmlFor="">Fecha: </label> */}
+              <input
+                type="date"
+                name="date"
+                onChange={e => this.handleChangeCREATE(e)}
+                placeholder="Fecha"
+                autoComplete="off"
+              />
+              {/* <label htmlFor="">Hora: </label> */}
+              <input
+                type="time"
+                name="hour"
+                onChange={e => this.handleChangeCREATE(e)}
+                placeholder="Hora de inicio"
+                autoComplete="off"
+              />
+              <input
+                type="text"
+                name="duration"
+                onChange={e => this.handleChangeCREATE(e)}
+                placeholder="Duración"
+                autoComplete="off"
+              />
 
-            <InputYelp
-              scrollToRecipe={this.props.scrollToRecipe}
-              getRestaurants={this.getRestaurants}
-              restaurants={this.props.restaurants}
-              handleFormSubmit={this.handleFormSubmit}
-              handleChange={this.handleChange}
-            />
-            <div className="center-form">
-              <label>Restaurantes añadidos:</label>
-              <label>{selectedRestaurants}</label>
+              <input
+                className="file-input"
+                type="file"
+                name="photo"
+                onChange={e => this.handleChangeCREATE(e)}
+              />
             </div>
-            <form
-              className="center-form"
-              onSubmit={e => this.handleFormSubmit(e)}
-            >
-              <div clasName="form-inputs">
-                <input
-                  type="text"
-                  name="routesName"
-                  onChange={e => this.handleChangeCREATE(e)}
-                  placeholder="Nombre de la ruta"
-                  autoComplete="off"
-                />
-                <input
-                  type="text"
-                  name="category"
-                  onChange={e => this.handleChangeCREATE(e)}
-                  placeholder="Categoría"
-                  autoComplete="off"
-                />
-                {/* <label htmlFor="">Fecha: </label> */}
-                <input
-                  type="date"
-                  name="date"
-                  onChange={e => this.handleChangeCREATE(e)}
-                  placeholder="Fecha"
-                  autoComplete="off"
-                />
-                {/* <label htmlFor="">Hora: </label> */}
-                <input
-                  type="time"
-                  name="hour"
-                  onChange={e => this.handleChangeCREATE(e)}
-                  placeholder="Hora de inicio"
-                  autoComplete="off"
-                />
-                <input
-                  type="text"
-                  name="duration"
-                  onChange={e => this.handleChangeCREATE(e)}
-                  placeholder="Duración"
-                  autoComplete="off"
-                />
-
-                <input
-                  type="file"
-                  name="photo"
-                  onChange={e => this.handleChangeCREATE(e)}
-                />
-              </div>
-              <div className="form-inputs">
-                <input value="Crear ruta" type="submit" />
-              </div>
-            </form>
-            <div />
-
+            <div className="form-inputs">
+              <input value="Crear ruta" type="submit" />
+            </div>
+          </form>
+          <div />
 
           {restaurants}
         </div>
