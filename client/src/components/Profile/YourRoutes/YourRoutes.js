@@ -110,15 +110,15 @@ export default class YourRoutes extends Component {
   // };
   showRoutesDetails = route => {
     this.setState({ ...this.state, showRouteData: route });
-    this.props.scrollToRecipe()
+    this.props.scrollToRecipe();
   };
 
   showAllYourRoutes = () => {
     this.setState({ ...this.state, showRouteData: null });
   };
 
-  componentDidMount(){
-    this.props.scrollToRecipe()
+  componentDidMount() {
+    this.props.scrollToRecipe();
   }
   render() {
     console.log(this.state.showRouteData);
@@ -228,7 +228,7 @@ export default class YourRoutes extends Component {
                     : {restaurantOfRoute.restaurantName}
                   </h2>
                   <h4>
-                    Puntuación: {restaurantOfRoute.rating}, {" "}Precio:{" "}
+                    Puntuación: {restaurantOfRoute.rating}, Precio:{" "}
                     {restaurantOfRoute.price}, Teléfono:{" "}
                     {restaurantOfRoute.phone}{" "}
                   </h4>
@@ -236,6 +236,9 @@ export default class YourRoutes extends Component {
               );
             }
           )}
+          <div className="map">
+            {<MapTest sendRouteData={this.state.showRouteData} />}
+          </div>
         </div>
       </div>
     ) : (
@@ -246,9 +249,6 @@ export default class YourRoutes extends Component {
       <div className="yourRoutes-big-container">
         <h1>Tus rutas</h1>
         {showRouteData}
-        <div className="map">
-          {<MapTest sendRouteData={this.state.showRouteData} />}
-        </div>
         {/* Borrar componente TestMapasBorrar y archivo una vez echas las pruebas */}
         {/* {<TestMapasBorrar />}  */}
       </div>

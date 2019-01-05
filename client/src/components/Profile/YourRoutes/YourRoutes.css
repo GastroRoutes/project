@@ -80,7 +80,6 @@ width: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
     margin: 0 auto;
     flex-wrap: wrap;
 }
@@ -93,7 +92,16 @@ width: 30px;
     height: 14rem;
     margin: -1rem 0;
     overflow: hidden;
+    background-size: cover;
 }
+
+
+.each-Route img{
+    object-fit: cover;
+  }
+  
+
+  
 .form-container{
     padding-top: 10%;
     display: flex;
@@ -139,10 +147,14 @@ p{
 }
 
 .map{
-width: 80%;
-margin: 0 auto;
+width: 100%;
+
+margin: 0 5%;
 }
 .map:hover{
-    box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 20px rgba(0,0,0,0.5);
     transform: translate(0, -4px);
+    animation: 0.5s;
+    transition: 0.5s;
+
     }

@@ -9,6 +9,7 @@ import Profile from "./components/Profile/ProfileContainer/ProfileContainer";
 import InputYelp from "./components/Profile/YourRoutes/yelp";
 import NavBar from "./components/Navbar/NavBar";
 import AllRoutes from "./components/AllRoutes/AllRoutes"
+import RoutesFrmOotherUsers from "./components/AllRoutes/RoutesFromOtherUsers/RoutesFromOtherUsers"
 
 
 class App extends Component {
@@ -56,13 +57,17 @@ class App extends Component {
     const welcome = this.state.user ? (
       <div>
         <NavBar logout={this.logout}></NavBar>
+      <Switch>
 
         <Route
           path="/profile"
           render={() => <Profile getUser={this.getUser} user ={this.state.user} createRoutes={this.createRoutes} />}
-        />
+          />
         <Route path="/allRoutes" render={()=> <AllRoutes getUser={this.getUser}/>}></Route>
-
+        <Route path="/usersRoutes/:id" 
+        component={RoutesFrmOotherUsers}
+        render={()=> <RoutesFrmOotherUsers />}/>
+          </Switch>
       </div>
     ) : (
       <Route

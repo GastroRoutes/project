@@ -30,5 +30,7 @@ img{
 }
 .margin-bottom-container-routes{
     margin-bottom: 1rem;
-   
+}
+.follow-button:active{
+    background-color: white;
 }

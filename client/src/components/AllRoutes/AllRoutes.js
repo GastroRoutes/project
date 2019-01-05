@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./AllRoutes.css";
+<<<<<<< HEAD
+=======
+import { Link } from "react-router-dom";
+>>>>>>> master
 
 export default class AllRoutes extends Component {
   constructor() {
     super();
     this.state = {
       allRoutes: null,
+<<<<<<< HEAD
+=======
+      followMessage: false
+>>>>>>> master
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/tracks`,
@@ -22,72 +30,92 @@ export default class AllRoutes extends Component {
   };
 
   followTrack = (e, id) => {
-    // debugger
     e.preventDefault();
     return this.service
       .post(`/${id}/followRoutes`, id) //le paso la id del track
       .then(response => {
-        console.log(response);
-        // this.props.getUser()
-        if (response.data.followed) {
-          this.setState({ ...this.state, showGreenTickOk: true });
-          console.log(this.state.showGreenTickOk);
-        } else {
-          this.setState({ ...this.state, showGreenTickOk: true });
-        }
+        this.setState({ ...this.state, followMessage: true });
+      })
+      .then(() => {
+        setTimeout(() => {
+          this.setState({ ...this.state, followMessage: false });
+        }, 1500);
       });
   };
-
   render() {
+    const followMessage = this.state.followMessage ? (
+      <div className="followMessage">
+        <div className="MessageContainer">
+          <h3>La ruta se ha guardado correctamente</h3>
+        </div>
+      </div>
+    ) : (
+      <div />
+    );
     const printAllRoutes = this.state.allRoutes ? (
-
       this.state.allRoutes.map(element => {
         return (
           <div className="show-route-container">
           <div className="yourRoutes-container">
-          <div className="each-Route">
-              <img src={element.image} alt="" />
-              </div>
-            <h4>{element.routesName}</h4>
-            <h5>{element.category}</h5>
-            <h5>{element.date}</h5>
-            <h5>{element.hour}</h5>
-            <h5>{element.duration}</h5>
+            <div
+              className="each-Route"
+              style={{ backgroundImage: `url(${element.image})` }}
+            >
+              <Link to={`/usersRoutes/${element.creatorID[0]._id}`}>
+                <div className="show-user-on-routes">
+                  <img src={element.creatorID[0].imgPath} />
+                  <label className="margin-user-creator">
+                    {element.creatorID[0].username}
+                  </label>
+                </div>
+              </Link>
+            </div>
+            <div className="form-container margin-bottom-container-routes">
+              <h3>{element.routesName}</h3>
+              {/* <h3>{element.routesType}</h3> */}
+              {/* <h4>{element.category}</h4> */}
+              {element.restaurants.map(restaurant => {
+                return (
+                  <div className="each-stop-on-target">
+                    <hr />
 
-
-             
-            <div>
-              </div>
-              {!this.state.showGreenTickOk ? (
-                <button className="orange-text" onClick={e => this.followTrack(e, element._id)}>
-                  follow
-                </button>
-              ) : (
-                <button className="follow-button"
-                  style={{ backgroundColor: "green" }}
-                  onClick={e => this.followTrack(e, element._id)}
-                >
-                  follow
-                </button>
-              )}
+                    <div className="flex-space-between">
+                      <a href={restaurant.url}>
+                        <h4>
+                          <img src="./images/ImportedLayers.png" alt="" />
+                          {restaurant.restaurantName}
+                        </h4>
+                      </a>
+                    </div>
+                    <div className="restaurant-detail-container">
+                      <h5> Puntuación: {restaurant.rating}</h5>
+                      <h5>{restaurant.location.city}</h5>
+                    </div>
+                  </div>
+                );
+              })}
+              {/* <p>{element.creatorID[0].username}</p> */}
+              <button
+                className="follow-button"
+                onClick={e => this.followTrack(e, element._id)}
+              >
+                Guardar
+              </button>
             </div>
           </div>
 
         );
       })
-
     ) : (
-      <h1></h1>
+      <div />
     );
     return (
       <div>
+        {followMessage}
         <h1 className="align-center">Todas las rutas</h1>
-      <div className="yourRoutes-big-container">
-      <div className="show-route-container">
-
-        {printAllRoutes}
-      </div>
-      </div>
+        <div className="yourRoutes-big-container">
+          <div className="show-route-container">{printAllRoutes}</div>
+        </div>
       </div>
     );
   }
