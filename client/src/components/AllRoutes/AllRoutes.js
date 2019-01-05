@@ -49,7 +49,6 @@ export default class AllRoutes extends Component {
     const printAllRoutes = this.state.allRoutes ? (
       this.state.allRoutes.map(element => {
         return (
-          <div className="show-route-container">
           <div className="yourRoutes-container">
             <div
               className="each-Route"
@@ -97,7 +96,6 @@ export default class AllRoutes extends Component {
               </button>
             </div>
           </div>
-
         );
       })
     ) : (
@@ -108,11 +106,9 @@ export default class AllRoutes extends Component {
         {followMessage}
         <h1 className="align-center">Todas las rutas</h1>
         <div className="yourRoutes-big-container">
-          <div className="show-route-container">{printAllRoutes}
-          </div>
+          <div className="show-route-container">{printAllRoutes}</div>
         </div>
       </div>
-      </div>
     );
-    }
   }
+}
