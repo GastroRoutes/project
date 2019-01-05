@@ -1,20 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./AllRoutes.css";
-<<<<<<< HEAD
-=======
 import { Link } from "react-router-dom";
->>>>>>> master
 
 export default class AllRoutes extends Component {
   constructor() {
     super();
     this.state = {
       allRoutes: null,
-<<<<<<< HEAD
-=======
       followMessage: false
->>>>>>> master
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/tracks`,
