@@ -108,9 +108,11 @@ export default class AllRoutes extends Component {
         {followMessage}
         <h1 className="align-center">Todas las rutas</h1>
         <div className="yourRoutes-big-container">
-          <div className="show-route-container">{printAllRoutes}</div>
+          <div className="show-route-container">{printAllRoutes}
+          </div>
         </div>
       </div>
+      </div>
     );
+    }
   }
-}
