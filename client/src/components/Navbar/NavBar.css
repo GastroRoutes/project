@@ -8,8 +8,8 @@
     margin: 1em 2rem;
     
 }
-.navbar img{
-    height:1.5rem;
+.navbar-images img{
+    width:1.5rem;
     padding: 0 10px;
     cursor: pointer;
 }
