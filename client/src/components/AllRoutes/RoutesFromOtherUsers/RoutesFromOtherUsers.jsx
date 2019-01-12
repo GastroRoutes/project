@@ -5,11 +5,12 @@ export default class RoutesFrmOotherUsers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      followMessage: false
     };
     // this.getAllRoutesFromAUser()
     this.service = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}/users`,
+      baseURL: `${process.env.REACT_APP_API_URL}`,
       withCredentials: true
     });
   }
@@ -18,12 +19,35 @@ export default class RoutesFrmOotherUsers extends Component {
   }
   getAllRoutesFromAUser = () => {
     const { params } = this.props.match;
-    this.service.get(`/${params.id}/users`).then(response => {
+    this.service.get(`/users/${params.id}/users`).then(response => {
       console.log(response.data);
       this.setState({ ...this.state, user: response.data });
     });
   };
+  followTrack = (e, id) => {
+    e.preventDefault();
+    return this.service
+      .post(`/tracks/${id}/followRoutes`, id) 
+      .then(response => {
+        this.setState({ ...this.state, followMessage: true });
+      })
+      .then(() => {
+        setTimeout(() => {
+          this.setState({ ...this.state, followMessage: false });
+
+        }, 1500);
+      });
+  };
   render() {
+    const followMessage = this.state.followMessage ? (
+      <div className="followMessage">
+        <div className="MessageContainer">
+          <h3>La ruta se ha guardado correctamente</h3>
+        </div>
+      </div>
+    ) : (
+      <div />
+    );
     const user = this.state.user;
     const showUser = user ? (
       <div>
@@ -80,6 +104,11 @@ export default class RoutesFrmOotherUsers extends Component {
     ) : (
       <div />
     );
-    return <div>{showUser}</div>;
+    return (
+    <div>
+    {followMessage}
+    {showUser}
+    </div>
+    )
   }
 }

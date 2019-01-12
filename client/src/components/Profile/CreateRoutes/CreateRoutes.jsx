@@ -135,7 +135,10 @@ export default class CreateRoutes extends Component {
     }
     const preload = this.state.preload ? (
       <div className="preload-container">
-        <img className="preload" src="/images/gif-preload.gif" />
+      <div className="preload">
+        <img src="/images/gif-preload.gif" />
+
+      </div>
       </div>
     ) : (
       <div />
@@ -146,6 +149,10 @@ export default class CreateRoutes extends Component {
         <div className="yourRoutes-big-container">
           <h1>Crear rutas</h1>
 
+          <div className="center-form sticky">
+            <label>Restaurantes añadidos:</label>
+            <label>{selectedRestaurants}</label>
+          </div>
           <InputYelp
             state={this.state}
             scrollToRecipe={this.props.scrollToRecipe}
@@ -155,10 +162,6 @@ export default class CreateRoutes extends Component {
             handleFormSubmit={this.handleFormSubmit}
             handleChange={this.handleChange}
           />
-          <div className="center-form sticky">
-            <label>Restaurantes añadidos:</label>
-            <label>{selectedRestaurants}</label>
-          </div>
           <form
             className="center-form"
             onSubmit={e => this.handleFormSubmit(e)}

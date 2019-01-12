@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./reset.css"
 import "./App.css";
-import Message from "./components/Message";
+// import Message from "./components/Message";
 import AuthService from "./components/Home/auth/AuthService";
 import { Route, Link, Redirect, Switch } from "react-router-dom";
 import Home from "./components/Home/Home";
@@ -65,8 +65,7 @@ class App extends Component {
           />
         <Route path="/allRoutes" render={()=> <AllRoutes getUser={this.getUser}/>}></Route>
         <Route path="/usersRoutes/:id" 
-        component={RoutesFrmOotherUsers}
-        render={()=> <RoutesFrmOotherUsers />}/>
+        component={RoutesFrmOotherUsers}/>
           </Switch>
       </div>
     ) : (

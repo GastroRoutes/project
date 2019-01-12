@@ -112,7 +112,10 @@ export default class Profile extends Component {
     );
     const createRoutesOrShowRoutes = this.state.createRoutesToggle ? (
       <section className="routes-from-profile">
-        <button className="align-buttoms fix-button" onClick={this.createRouteButton}>
+        <button
+          className="align-buttoms fix-button"
+          onClick={this.createRouteButton}
+        >
           Tus rutas
         </button>
         <CreateRoutes
@@ -135,7 +138,7 @@ export default class Profile extends Component {
       <div>
         {/* <button onClick={this.showUpdateProfileButton}>Volver</button> */}
         <div>
-          <form  className="flex-row" onSubmit={e => this.handleFormSubmit(e)}>
+          <form className="flex-row" onSubmit={e => this.handleFormSubmit(e)}>
             <input
               type="text"
               name="username"
@@ -156,10 +159,9 @@ export default class Profile extends Component {
               autoComplete="off"
               value="Tus gustos"
             />
-         
 
             <input
-            className="file-input"
+              className="file-input"
               type="file"
               name="photo"
               onChange={e => this.handleChange(e)}
@@ -178,14 +180,15 @@ export default class Profile extends Component {
     return (
       <div>
         <div id="profile-details">
-          <img id="profile-photo" src={this.state.user.imgPath} alt="" />
+          <div  className="profile-photo">
+            <img src={this.state.user.imgPath} alt="" />
+          </div>
           <div id="profile-details-container">
             <h1>{this.state.user.username}</h1>
             <h4>{this.state.user.email}</h4>
             {showUpdateProfile}
           </div>
         </div>
-
 
         {createRoutesOrShowRoutes}
         {/* {createRoute} */}

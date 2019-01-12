@@ -156,6 +156,10 @@ input[type="submit"]:hover {
 input[type="file"] {
   width: 8rem;
 }
+.inputError{
+  border-radius: 0;
+  box-shadow: 0 0 10px red !important;
+}
 .center-form-yelp {
   display: flex;
   padding: 10px;
@@ -383,22 +387,27 @@ h5 {
 }
 .preload {
 z-index: 2;
-position:sticky;
+position:absolute;
 border-radius: 100px;
+box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+overflow: hidden;
 }
+
 .preload-container {
-  position: absolute;
+  margin-top: -37rem;
+  width: 100vw;
+  height: 101vh;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -30px;
-  background-color: rgba(255, 255, 255, 0.8);
-  width: 100vw;
-  height: 100vh;
+  z-index: 2;
 }
 .followMessage {
+  margin-top: -4.4rem;
   width: 100vw;
-  height: 100vh;
+  height: 150vh;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.6);
   animation: 0.5s;
@@ -407,6 +416,7 @@ border-radius: 100px;
   justify-content: center;
   z-index: 2;
 }
+
 .MessageContainer {
   width: 30%;
   height: 10%;
@@ -424,7 +434,11 @@ border-radius: 100px;
   bottom:0;
   top: 0;
   z-index: 1;
-  background-color: rgba(255,255,255,0.7);
+  background-color: #EFEFEF;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 30px;
 }
 .user-photo{
   width: 20%;

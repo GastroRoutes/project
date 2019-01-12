@@ -50,7 +50,12 @@ trackRouter.post(
       hour,
       duration
     } = req.body;
-    const image = req.file.url;
+    let image = "";
+    if (req.file) {
+      image = req.file.url;
+    } else {
+      image = req.user.imgPath;
+    }
 
     let totalRestaurants = JSON.parse(selectedRestaurants);
 
@@ -95,8 +100,9 @@ trackRouter.post(
       });
 
       newTrack.save().then(track => {
-        User.findByIdAndUpdate(_id, { $push: { createdTrack: track._id } })
-        .then(user => {
+        User.findByIdAndUpdate(_id, {
+          $addToSet: { createdTrack: track._id }
+        }).then(user => {
           res.status(200).json({ track, user });
           // }
           // );
@@ -142,7 +148,6 @@ trackRouter.post("/:id/update", (req, res, next) => {
 });
 
 trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
-  // Promise.all()
   Track.find()
     .populate("creatorID")
     .populate("restaurants")
@@ -157,22 +162,28 @@ trackRouter.get("/allRoutes", ensureLoggedIn(), (req, res, next) => {
     });
 });
 
-// trackRouter.get('/allRoutes', ensureLoggedIn(), (req,res,next)=>{
-//     User.find()
-//     .populate('savedRoutes')
-//     .then(track => res.status(200).json( {track}))
-//   })
 trackRouter.post("/:id/followRoutes", (req, res, next) => {
   const routeID = req.params.id;
   const _id = req.user.id;
 
-  User.findByIdAndUpdate({ _id }, { $push: { savedRoutes: routeID } })
+  User.findByIdAndUpdate({ _id }, { $addToSet: { savedRoutes: routeID } })
     .populate("savedRoutes")
     .then(user => {
       res.status(200).json(user);
     })
     .catch(err => {
-      console.log(err);
+      res.status(500).json({ message: err });
     });
+});
+
+trackRouter.post("/qualification", (req, res) => {
+
+  const { qualification, _id} = req.body;
+  Track.findByIdAndUpdate(
+    { _id },
+    { $push: { qualification: qualification } }
+  )
+    .then(track => res.status(200).json({ message: track }))
+    .catch(e => res.status(200).json({ message: e.message}));
 });
 module.exports = trackRouter;
