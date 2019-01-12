@@ -6,10 +6,16 @@
     margin-bottom: 2rem;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
 }
-#profile-photo{
-    width: 20%;
-    height: 30%;
+.profile-photo{
+    width: 15rem;
     object-fit: contain;
+    margin: 5rem 10rem;
+    margin-right: 0;
+    overflow: hidden;
+}
+.profile-photo img{
+    width:100%;
+    border-radius: 10px;
 }
 
 #profile-details-container{
