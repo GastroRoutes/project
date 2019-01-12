@@ -194,15 +194,15 @@ export default class YourRoutes extends Component {
     const showRouteData = showRouteDetails ? (
       <div className="menu-half-routes">
         <div className="menu-routes-container">
-          <h3>Rutas:</h3>
+          <h1 className="rutasTitle">Rutas:</h1>
           {this.state.userRoutes.map(userRoute => {
             console.log(userRoute);
             return (
               <div
-                className="each-route-container"
+                className="each-route-container pointer"
                 onClick={() => this.showRoutesDetails(userRoute)}
               >
-                <h4>{userRoute.routesName}</h4>
+                <h3>{userRoute.routesName}</h3>
                 <h5>Categoría :{userRoute.category}</h5>
                 <h5>Duración: {userRoute.duration}</h5>
                 <h5>Fecha: {userRoute.date}</h5>
@@ -217,7 +217,7 @@ export default class YourRoutes extends Component {
         </div>
 
         <div id="stops-container">
-          <h3>Itinerario:</h3>
+          <h3 className="rutasTitle">Itinerario:</h3>
           {this.state.showRouteData.restaurants.map(
             (restaurantOfRoute, index) => {
               return (

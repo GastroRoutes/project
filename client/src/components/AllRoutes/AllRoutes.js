@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./AllRoutes.css";
 import { Link } from "react-router-dom";
-import EachRoute from "./EachRoute/EachRoute"
+import EachRoute from "./EachRoute/EachRoute";
 
 export default class AllRoutes extends Component {
   constructor() {
@@ -28,43 +28,30 @@ export default class AllRoutes extends Component {
   followTrack = (e, id) => {
     e.preventDefault();
     return this.service
-    .post(`/${id}/followRoutes`, id)
-    .then(response => {
-        this.setState({ ...this.state, followMessage: true });
-      })
-      .catch(e=> console.log(e))
-      .then(() => {
-        setTimeout(() => {
-          this.setState({ ...this.state, followMessage: false });
-        }, 1500);
-      });
+      .post(`/${id}/followRoutes`, id)
+      .catch(e => console.log(e));
   };
 
-  assessRoute = (e, _id) => {
-    const qualification = e.target.value;
+  sendRating = (rating, _id) => {
+    console.log(rating, _id)
     return this.service
-      .post(`/qualification`, { qualification, _id })
+      .post(`/qualification`, { rating, _id })
       .then(response => {
         console.log(response.data.message);
       })
       .catch(e => console.log(e.data));
   };
   render() {
-    const followMessage = this.state.followMessage ? (
-      <div className="followMessage">
-      
-        <div className="MessageContainer">
-          <h3>La ruta se ha guardado correctamente</h3>
-        </div>
-      </div>
-    ) : (
-      <div />
-    );
+
     const printAllRoutes = this.state.allRoutes ? (
       this.state.allRoutes.map(element => {
         return (
           <div className="yourRoutes-container">
-              <EachRoute element={element} followTrack={this.followTrack} assessRoute={this.assessRoute}/>
+            <EachRoute
+              element={element}
+              followTrack={this.followTrack}
+              sendRating={this.sendRating}
+            />
           </div>
         );
       })
@@ -73,9 +60,8 @@ export default class AllRoutes extends Component {
     );
     return (
       <div>
-        {followMessage}
-        <h1 className="align-center">Todas las rutas</h1>
         <div className="yourRoutes-big-container">
+        <h1 className="align-center">Todas las rutas</h1>
           <div className="show-route-container">{printAllRoutes}</div>
         </div>
       </div>

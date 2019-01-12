@@ -4,12 +4,40 @@ import { Link } from "react-router-dom";
 export default class EachRoute extends Component {
   constructor(props) {
     super(props);
-
+      this.state = {
+        buttonShow: true
+      }
     
-  }
-  render() {
+    }
+    changeButtonState = () => {
+      this.setState({...this.state, buttonShow: false})
+    }
 
+
+  render() {
+const saveButton = this.state.buttonShow ? (
+  <button
+  className="follow-button"
+  onClick={e => {
+    this.props.followTrack(e, element._id)
+    this.changeButtonState()}}
+>
+  Añadir
+</button>
+) : (
+  <button
+  className="follow-button savedRouteButton"
+>
+  Ruta añadida
+</button>
+)
     const element = this.props.element;
+    let rating = element.qualification.reduce((a,b)=> a+b)/element.qualification.length
+    let fixedRating = rating.toFixed(1)
+     
+     let separatedDecimalsArr = fixedRating.toString().split(".")
+     let decimalsRating = separatedDecimalsArr[1]
+     let integerRating = separatedDecimalsArr[0]
     return (
       <div>
         <div
@@ -25,10 +53,17 @@ export default class EachRoute extends Component {
             </div>
           </Link>
         </div>
-        <div className="form-container margin-bottom-container-routes">
-          <h3>{element.routesName}</h3>
-          {/* <h3>{element.routesType}</h3> */}
-          {/* <h4>{element.category}</h4> */}
+        <div className="form-container margin-bottom-container-routes align-center">
+          <h3>{element.routesName}</h3><br/>
+          <h5 className="rating">Puntuación:</h5>
+          <h1 className="rating">{integerRating}<sup className="superindex">'{decimalsRating}</sup></h1>
+          <div className= "burgerImageContainer">
+          <img onClick={()=>this.props.sendRating(1, element._id)} className="burgerImage" src="images/hamburger.png"/>
+          <img onClick={()=>this.props.sendRating(2, element._id)} className="burgerImage" src="images/hamburger.png"/>
+          <img onClick={()=>this.props.sendRating(3, element._id)} className="burgerImage" src="images/hamburger.png"/>
+          <img onClick={()=>this.props.sendRating(4, element._id)} className="burgerImage" src="images/hamburger.png"/>
+          <img onClick={()=>this.props.sendRating(5, element._id)} className="burgerImage" src="images/hamburger.png"/>
+          </div>
           {element.restaurants.map(restaurant => {
             return (
               <div className="each-stop-on-target">
@@ -49,17 +84,12 @@ export default class EachRoute extends Component {
               </div>
             );
           })}
-          {/* <p>{element.creatorID[0].username}</p> */}
-          <button
-            className="follow-button"
-            onClick={e => this.props.followTrack(e, element._id)}
-          >
-            Guardar
-          </button>
+          
+          {saveButton}
           <form>
             <select
               name="qualification"
-              onChange={e => this.props.assessRoute(e, element._id)}
+              onChange={e => this.props.sendRating(e, element._id)}
             >
               <option value="1">1</option>
               <option value="2">2</option>

@@ -178,10 +178,10 @@ trackRouter.post("/:id/followRoutes", (req, res, next) => {
 
 trackRouter.post("/qualification", (req, res) => {
 
-  const { qualification, _id} = req.body;
+  const { rating, _id} = req.body;
   Track.findByIdAndUpdate(
     { _id },
-    { $push: { qualification: qualification } }
+    { $push: { qualification: rating } }
   )
     .then(track => res.status(200).json({ message: track }))
     .catch(e => res.status(200).json({ message: e.message}));

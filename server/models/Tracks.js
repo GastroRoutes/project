@@ -12,7 +12,7 @@ const TracksSchema = new Schema(
     date: String,
     hour: String,
     duration: String,
-    qualification: [String],
+    qualification: { type: [Number], default: 0 },
     image: {
       type: String,
       default:
