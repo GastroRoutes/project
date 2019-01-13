@@ -73,7 +73,6 @@ trackRouter.post(
           latitude: restaurant.coordinates.latitude,
           longitude: restaurant.coordinates.longitude
         },
-
         location: {
           city: restaurant.location.city,
           country: restaurant.location.country,

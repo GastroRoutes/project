@@ -9,7 +9,8 @@ export default class AllRoutes extends Component {
     super();
     this.state = {
       allRoutes: null,
-      followMessage: false
+      followMessage: false,
+      showRouteData: null
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/tracks`,
@@ -32,27 +33,22 @@ export default class AllRoutes extends Component {
       .catch(e => console.log(e));
   };
 
-  sendRating = (rating, _id) => {
-    console.log(rating, _id)
-    return this.service
-      .post(`/qualification`, { rating, _id })
-      .then(response => {
-        console.log(response.data.message);
-      })
-      .catch(e => console.log(e.data));
+  showRoutesDetails = route => {
+    this.setState({ ...this.state, showRouteData: route });
+    this.props.scrollToRecipe();
   };
   render() {
-
     const printAllRoutes = this.state.allRoutes ? (
       this.state.allRoutes.map(element => {
         return (
-          <div className="yourRoutes-container">
+          
             <EachRoute
+              showRoutesDetails={this.props.showRouteData}
+              getAllRoutes={this.getAllRoutes}
               element={element}
               followTrack={this.followTrack}
-              sendRating={this.sendRating}
             />
-          </div>
+
         );
       })
     ) : (
@@ -61,7 +57,7 @@ export default class AllRoutes extends Component {
     return (
       <div>
         <div className="yourRoutes-big-container">
-        <h1 className="align-center">Todas las rutas</h1>
+          <h1 className="align-center">Todas las rutas</h1>
           <div className="show-route-container">{printAllRoutes}</div>
         </div>
       </div>

@@ -73,7 +73,7 @@ export default class YourRoutes extends Component {
     e.preventDefault();
     const { routesName, category, routesType } = this.state.createRoutes;
     this.updateRoute({ routesName, category, routesType }, id).then(route => {
-      console.log(route.data.routesName);
+
       this.getUserRoutes();
       // this.props.getRoute(route.data.routesName) /// hay que tratarlo. Llega como array
     });
@@ -83,7 +83,7 @@ export default class YourRoutes extends Component {
     const { name, value } = e.target;
     let newRoute = this.state.createRoutes;
     newRoute[name] = value;
-    console.log(newRoute);
+
     this.setState({ ...this.state, createRoutes: newRoute });
   };
 
@@ -102,12 +102,6 @@ export default class YourRoutes extends Component {
     });
   };
 
-  // showRoutesDetails = route => {
-  //   console.log("entra");
-  //   this.state.showRouteData
-  //     ? this.setState({ ...this.state, showRouteData: null })
-  //     : this.setState({ ...this.state, showRouteData: route });
-  // };
   showRoutesDetails = route => {
     this.setState({ ...this.state, showRouteData: route });
     this.props.scrollToRecipe();
@@ -116,12 +110,8 @@ export default class YourRoutes extends Component {
   showAllYourRoutes = () => {
     this.setState({ ...this.state, showRouteData: null });
   };
-
-  componentDidMount() {
-    this.props.scrollToRecipe();
-  }
+  
   render() {
-    console.log(this.state.showRouteData);
 
     const userRoutes = this.state.userRoutes ? (
       <div className="show-route-container">
@@ -130,7 +120,7 @@ export default class YourRoutes extends Component {
             <div className="yourRoutes-container" key={track._id}>
               <div>
                 <div
-                  className="each-Route"
+                  className="each-Route pointer"
                   onClick={() => this.showRoutesDetails(track)}
                   style={{ backgroundImage: `url(${track.image})` }}
                 >
@@ -196,7 +186,6 @@ export default class YourRoutes extends Component {
         <div className="menu-routes-container">
           <h1 className="rutasTitle">Rutas:</h1>
           {this.state.userRoutes.map(userRoute => {
-            console.log(userRoute);
             return (
               <div
                 className="each-route-container pointer"

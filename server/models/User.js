@@ -8,8 +8,10 @@ const userSchema = new Schema(
     password: { type: String, required: true},
     imgPath:{ type: String, default: "https://profiles.utdallas.edu/img/default.png"},
     // city: String,
-    createdTrack: [{ type : Schema.Types.ObjectId, ref: "Tracks" }],
-    savedRoutes: [{ type : Schema.Types.ObjectId, ref: "Tracks" }]
+    createdTrack: [{ type : Schema.Types.ObjectId, ref: "Tracks", default: [{}] }],
+    savedRoutes: [{ type : Schema.Types.ObjectId, ref: "Tracks" }],
+    rating: {type: Number},
+    rankingPosition: {type: Number, default: 0}
   },
   {
     timestamps: {

@@ -10,6 +10,7 @@ import InputYelp from "./components/Profile/YourRoutes/yelp";
 import NavBar from "./components/Navbar/NavBar";
 import AllRoutes from "./components/AllRoutes/AllRoutes"
 import RoutesFrmOotherUsers from "./components/AllRoutes/RoutesFromOtherUsers/RoutesFromOtherUsers"
+import Ranking from "./components/ranking/Ranking"
 
 
 class App extends Component {
@@ -28,13 +29,14 @@ class App extends Component {
   // mantener al usuario loggeado incluso al refrescar ¿?
   fetchUser = () => {
     this.authService
-      .loggedin()
-      .then(user => this.setState({ ...this.state, user }));
+    .loggedin()
+    .then(user => this.setState({ ...this.state, user }));
   };
-
+  
   //todo: setUser instead of getuser
   getUser = user => {
     this.setState({ ...this.state, user });
+
   };
 
   logout = () => {
@@ -58,12 +60,18 @@ class App extends Component {
       <div>
         <NavBar logout={this.logout}></NavBar>
       <Switch>
-
+      <Route
+        path="/"
+        render={() => (
+          <Profile getUser={this.getUser} user ={this.state.user} createRoutes={this.createRoutes} />
+        )}
+      />
         <Route
           path="/profile"
           render={() => <Profile getUser={this.getUser} user ={this.state.user} createRoutes={this.createRoutes} />}
           />
         <Route path="/allRoutes" render={()=> <AllRoutes getUser={this.getUser}/>}></Route>
+        <Route path="/ranking" render={()=> <Ranking getUser={this.getUser}/>}></Route>
         <Route path="/usersRoutes/:id" 
         component={RoutesFrmOotherUsers}/>
           </Switch>

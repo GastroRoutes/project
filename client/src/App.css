@@ -156,7 +156,7 @@ input[type="submit"]:hover {
 input[type="file"] {
   width: 8rem;
 }
-.inputError{
+.inputError {
   border-radius: 0;
   box-shadow: 0 0 10px red !important;
 }
@@ -172,7 +172,7 @@ input[type="file"] {
   display: flex;
   border: none;
   border-bottom: 2px;
-  width: 100%;
+  width: 93%;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -272,7 +272,8 @@ h5 {
   margin-bottom: 0.9rem;
 }
 .logo {
-  height: 3rem !important;
+  width: 10rem;
+  margin-left: 0.6rem;
 }
 .restaurant-detail-container {
   margin-top: -1.2rem;
@@ -386,11 +387,11 @@ h5 {
   animation: 1s;
 }
 .preload {
-z-index: 2;
-position:absolute;
-border-radius: 100px;
-box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
-overflow: hidden;
+  z-index: 2;
+  position: absolute;
+  border-radius: 100px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .preload-container {
@@ -428,52 +429,270 @@ overflow: hidden;
   animation: 0.5s;
   margin-top: 10rem;
 }
-.sticky{
+.sticky {
   position: -webkit-sticky;
   position: sticky;
-  bottom:0;
+  bottom: 0;
   top: 0;
   z-index: 1;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
   width: 100%;
   margin: 0 auto;
   border-radius: 30px;
 }
-.user-photo{
+.user-photo {
   width: 20%;
   height: 30%;
   object-fit: contain;
 }
-.savedRouteButton{
+.savedRouteButton {
   background-color: #ecb84c;
   transition: 1s;
   color: white !important;
 }
 
-.superindex{
+.superindex {
   font-size: 1.5rem;
 }
-
-.rating{
+.superindex-profile{
+  font-size: 1rem; 
+}
+.rating {
   padding: 0 !important;
   margin: 0;
 }
-.rutasTitle{
+.rutasTitle {
   padding: 0 !important;
-  margin: 1rem 0; 
+  margin: 1rem 0;
   font-size: 2.5rem !important;
 }
-.pointer{
+.pointer {
   cursor: pointer;
 }
-.burgerImage{
-  width:1.2rem;
+.burgerImage {
+  width: 1.2rem;
   margin: 0 auto;
-  padding: .1rem;
+  padding: 0.1rem;
   cursor: pointer;
+}
+.burgerImageSelected {
+  width: 1.5rem;
+  margin: 0 auto;
+  padding: 0.1rem;
+  cursor: pointer;
+  transition: 0.1s;
 }
 
-.burgerImageContainer{
+.burgerImageContainer {
   margin: 1rem auto;
+  display: flex;
+}
+
+.user-ranking {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50rem;
+  background-color: white;
+  border-radius: 15px;
+  margin: 1.5rem;
+  box-shadow: 0px 1px 6px 0px rgba(50, 50, 50, 0.2);
+  transition: all 0.4s ease-in-out;
+  margin: 1rem auto;
+}
+.user-ranking-container {
+  display: flex;
+  flex-direction: column;
+}
+.user-ranking:hover {
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+  transform: translate(0, -4px);
+}
+
+.user-ranking img {
+  padding: 1rem;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 30px;
+}
+
+.user-ranking h2 {
+  padding: 0.5rem;
+}
+.btn-right {
+  align-content: right;
+  padding: 0;
+}
+.ranking {
+  padding: 1rem !important;
+}
+.link {
+  text-decoration: none;
+
+  color: black;
+}
+.social-position {
+  display: flex;
+  flex-direction: row;
+  height: 4rem;
+  flex-wrap: nowrap;
+}
+
+.center-column {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: -1rem;
+  width: 6rem;
+}
+.center-column h2 {
+  margin: 0 auto;
+}
+.center-column p {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.limitHeight {
+  height: 30rem;
+  transition: 1s;
+  overflow: hidden;
+  animation: heightEfect;
+  animation-duration: 1s;
+  border-radius: 15px;
+}
+@keyframes heightEfect {
+  0% {
+    height: 100%;
+  }
+  100% {
+    height: 30rem;
+  }
+}
+.noLimitHeight {
+  height: 100%;
+  transition: 1s;
+  overflow: hidden;
+  animation: heightEfect;
+  animation-duration: 1s;
+}
+@keyframes heightEfect {
+  0% {
+    height: 30rem;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+.borderRadius {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.trophy-img {
+  width: 1rem !important;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.fix-h1 {
+  margin: 0;
+}
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+  flex-wrap: wrap;
+  width: 70%;
+}
+.name-and-rating {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+justify-content: center;
+  flex-wrap: wrap;
+}
+
+.center-block {
+  display: block;
+  margin: 2rem auto;
+}
+
+.appear {
+
+  overflow: hidden;
+  animation: appear;
+  transition: 1s;
+  animation-duration: 0.5s;
+
+}
+  @keyframes appear {
+    0% {
+      height:0;
+      overflow:hidden;
+      opacity: 0;
+    }
+    100% {
+      height: 100%;
+      opacity: 100%;
+    }
+  }
+.noLimitHeight {
+  height: 100%;
+  transition: 1s;
+  overflow: hidden;
+  animation: heightEfect;
+  animation-duration: 1s;
+}
+@keyframes heightEfect {
+  0% {
+    height: 30rem;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+.showMore{
+margin-top:1rem
+}
+
+
+
+.eachRoute-container{
+  width: 22rem;
+  background-color: white;
+  border-radius: 15px;
+  margin: 1.5rem;
+  box-shadow: 0px 1px 6px 0px rgba(50, 50, 50, 0.2);
+  transition: all 0.4s ease-in-out;
+}
+.eachRoute-container:hover {
+  box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+  transform: translate(0, -4px);
+}
+.eachRoute-containershowing{
+  height: 33rem;
+  width: 22rem;
+  background-color: white;
+  border-radius: 15px;
+  margin: 1.5rem;
+  box-shadow: 0px 1px 6px 0px rgba(50, 50, 50, 0.2);
+  transition: all 0.4s ease-in-out;
+}
+.eachRoute-containershowing:hover {
+  box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+  transform: translate(0, -4px);
+}
+
+.adjust-container h2{
+text-align: center;
+padding: 2rem 0;
+
 }

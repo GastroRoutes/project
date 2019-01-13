@@ -17,6 +17,7 @@ export default class NavBar extends Component {
             <div className="navbar-images">
             <Link to="/profile"><img src="./images/manifest.png" alt="profile"/></Link>
             <Link to="/allRoutes"><img src="./images/ruta.svg" alt="profile"/></Link>
+            <Link to="/ranking"><img className="trophy-img"src="./images/trophy-2707775.png" alt="ranking"/></Link>
             <img src="./images/logout.png" alt="logout"onClick={this.props.logout}/>
             </div>
             </div>

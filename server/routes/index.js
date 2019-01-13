@@ -12,5 +12,6 @@ router.use('/api/tracks', require('./tracks'));
 router.use('/api/users', require('./users'));
 
 router.use('/api/mapDirections', require('./mapDirections'));
+router.use('/api/ranking', require('./ranking'));
 
 module.exports = router;
