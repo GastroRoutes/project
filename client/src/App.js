@@ -60,12 +60,7 @@ class App extends Component {
       <div>
         <NavBar logout={this.logout}></NavBar>
       <Switch>
-      <Route
-        path="/"
-        render={() => (
-          <Profile getUser={this.getUser} user ={this.state.user} createRoutes={this.createRoutes} />
-        )}
-      />
+
         <Route
           path="/profile"
           render={() => <Profile getUser={this.getUser} user ={this.state.user} createRoutes={this.createRoutes} />}
@@ -74,6 +69,10 @@ class App extends Component {
         <Route path="/ranking" render={()=> <Ranking getUser={this.getUser}/>}></Route>
         <Route path="/usersRoutes/:id" 
         component={RoutesFrmOotherUsers}/>
+        <Route
+          path="/"
+          render={() => <Profile getUser={this.getUser} user ={this.state.user} createRoutes={this.createRoutes} />}
+          />
           </Switch>
       </div>
     ) : (
