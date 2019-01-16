@@ -38,7 +38,7 @@ export default class Ranking extends Component {
     
     const ranking = this.state.everyUsers ? (
       this.state.everyUsers.map((user, index) => {
-        console.log(this.state.everyUsers)
+  
         const userRating = user.rating
         let fixedRating
         let separatedDecimalsArr

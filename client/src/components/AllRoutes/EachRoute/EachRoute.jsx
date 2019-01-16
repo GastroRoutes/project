@@ -49,14 +49,22 @@ export default class EachRoute extends Component {
       <button className="follow-button savedRouteButton">Ruta añadida</button>
     );
     const element = this.props.element;
-    let rating =
+    let rating
+    let fixedRating
+    let separatedDecimalsArr
+    let decimalsRating
+    let integerRating
+    let votes 
+    if(element.qualification.length>0){
+      rating=
       element.qualification.reduce((a, b) => a + b) /
       element.qualification.length;
-    let fixedRating = rating.toFixed(1);
-    let separatedDecimalsArr = fixedRating.toString().split(".");
-    let decimalsRating = separatedDecimalsArr[1];
-    let integerRating = separatedDecimalsArr[0];
-    let votes = element.qualification.length - 1;
+      fixedRating = rating.toFixed(1);
+      separatedDecimalsArr = fixedRating.toString().split(".");
+      decimalsRating = separatedDecimalsArr[1];
+ integerRating = separatedDecimalsArr[0];
+    }
+
     return (
       <div className="yourRoutes-container">
         <div>
